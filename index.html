@@ -48,6 +48,15 @@
             Save.saveGame()
         }, 250);
         
+        function addPlayer() {
+            entitys.push(new Player(v(120,100), {
+                "moveLeft":"ArrowLeft",
+                "moveRight":"ArrowRight",
+                "jump":"ArrowUp",
+                "duck":"ArrowDown",
+            }))
+        }
+        
     </script>
 </body>
 </html>
