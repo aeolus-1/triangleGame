@@ -2,7 +2,7 @@ var spawnPos = v(100,100)
 
 var fakeGround = Matter.Bodies.rectangle(2910, -3190, 300, 20, {
     render:{
-        fillStyle:"#15051a",
+        fillStyle:"#EE964B",
     },
     friction:0.05,
 })
@@ -26,7 +26,7 @@ class Levels {
             let newRect = Matter.Bodies.rectangle(ob.x, ob.y, ob.width, ob.height,{
                 isStatic:true,
                 render:{
-                    fillStyle:"#15051a",
+                    fillStyle:"#EE964B",
                 },
                 angle:ob.angle,
             })
