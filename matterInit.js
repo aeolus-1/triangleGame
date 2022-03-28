@@ -169,3 +169,4 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.restore()
     renderButtons()
 })
+Matter.Common.set(render, "options.background", "#FAF0CA")
