@@ -18,7 +18,7 @@ var render = Render.create({
   engine: engine,
   options: {
       wireframes:false,
-      background:"#1d5956"
+      background:"#FAF0CA"
   },
   
 });
