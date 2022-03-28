@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yayhsbdj</title>
+    <style>
+        body {
+            margin: 0%;
+            overflow: hidden;
+        }
+    </style>
+    <script src="matter.js"></script>
+</head>
+<body>
+    <script src="channels.js"></script>
+    <script src="imgs.js"></script>
+    <script src="spawners.js"></script>
+    <script src="matterInit.js"></script>
+
+    <script src="chunks.js"></script>
+    <script src="save.js"></script>
+
+
+    <script src="controls.js"></script>
+    <script src="level.js"></script>
+    <script src="levels.js"></script>
+    <script src="buttons.js"></script>
+
+
+
+    <script src="player.js"></script>
+
+    <script>
+        //Levels.loadData(levelDat["basic"])
+        Chunks.loadLevelDat(levelDat["start"])
+        entitys.push(new Player(v(120,100), {
+            
+            "moveLeft":"a",
+            "moveRight":"d",
+            "jump":"w",
+            "duck":"s",
+        }))
+
+        //Save.loadGame()
+
+        setInterval(() => {
+            Save.saveGame()
+        }, 250);
+        
+    </script>
+</body>
+</html>
