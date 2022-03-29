@@ -26,7 +26,7 @@ class Levels {
             let newRect = Matter.Bodies.rectangle(ob.x, ob.y, ob.width, ob.height,{
                 isStatic:true,
                 render:{
-                    fillStyle:"#EE964B",
+                    fillStyle:colorTheme.platforms,
                 },
                 angle:ob.angle,
             })
