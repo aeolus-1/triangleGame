@@ -142,14 +142,14 @@ class Player extends Entity {
             }
             Matter.Body.setAngularVelocity(this.body, this.body.angularVelocity-speed)
         }
-        if (keys[this.keyset["jump"]] && !preKeys[this.keyset["jump"]] && this.jumpTime > 0) {
+        if (testKeys(this.keyset["jump"], keys) && !testKeys(this.keyset["jump"], preKeys) && this.jumpTime > 0) {
             Matter.Body.setVelocity(this.body, v(this.body.velocity.x,-jump))
             Matter.Body.translate(this.body, v(0,-5))
             this.jumpTime = 0
 
             if (sfxButton.on) new Audio("jump.wav").play()
         }
-        if (keys[this.keyset["jump"]] && this.jumpTime > -15) {
+        if (testKeys(this.keyset["jump"], keys) && this.jumpTime > -15) {
             Matter.Body.setVelocity(this.body, v(this.body.velocity.x,this.body.velocity.y-(jump*0.025)))
         }
 
