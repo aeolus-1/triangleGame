@@ -120,8 +120,8 @@ class Player extends Entity {
         }
         
         function testKey(keys, set) {
-            for(let jk=0, jk<keys.length, jk++) {
-                if (set[keys[jk]]) {
+            keys.forEach((key) => {
+                if (set[key]) {
                     return true
                 }
             }
