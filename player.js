@@ -123,13 +123,13 @@ class Player extends Entity {
 
         if (keys[this.keyset["moveRight"]] && onGround) {
             if (Math.sign(this.body.angularVelocity) == -1) {
-                Matter.Body.setAngularVelocity(this.body, this.body.angularVelocity*-0.5)
+                Matter.Body.setAngularVelocity(this.body, this.body.angularVelocity*0.5)
             }
             Matter.Body.setAngularVelocity(this.body, this.body.angularVelocity+speed)
         }
         if (keys[this.keyset["moveLeft"]] && onGround) {
             if (Math.sign(this.body.angularVelocity) == 1) {
-                Matter.Body.setAngularVelocity(this.body, this.body.angularVelocity*-0.5)
+                Matter.Body.setAngularVelocity(this.body, this.body.angularVelocity*0.5)
             }
             Matter.Body.setAngularVelocity(this.body, this.body.angularVelocity-speed)
         }
