@@ -153,10 +153,10 @@ class Player extends Entity {
         }
 
 
-        if (keys[this.keyset["duck"]] && !preKeys[this.keyset["duck"]]) {
+        if (testKey(this.keyset["duck"], keys) && !testKey(this.keyset["duck"], preKeys)) {
             scaleBody(this.body, 2/3, 2/3)
         }
-        if (!keys[this.keyset["duck"]] && preKeys[this.keyset["duck"]]) {
+        if (!testKey(this.keyset["duck"], keys) && testKey(this.keyset["duck"], preKeys)) {
             scaleBody(this.body, 1.5, 1.5)
         }
         this.jumpTime -= 1
