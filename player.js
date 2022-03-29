@@ -119,15 +119,20 @@ class Player extends Entity {
 
         }
         
+        function testKey(keys, set) {
+            for(let i=0, i<keys.length, i++) {
+                if (set[keys[i]]) return true
+            }
+            return false
+        }
 
-
-        if (keys[this.keyset["moveRight"]] && onGround) {
+        if (testKey(this.keyset["moveRight"], keys) && onGround) {
             if (Math.sign(this.body.angularVelocity) == -1) {
                 Matter.Body.setAngularVelocity(this.body, this.body.angularVelocity*0.5)
             }
             Matter.Body.setAngularVelocity(this.body, this.body.angularVelocity+speed)
         }
-        if (keys[this.keyset["moveLeft"]] && onGround) {
+        if (testKey(this.keyset["moveLeft"], keys) && onGround) {
             if (Math.sign(this.body.angularVelocity) == 1) {
                 Matter.Body.setAngularVelocity(this.body, this.body.angularVelocity*0.5)
             }
