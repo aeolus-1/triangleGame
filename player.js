@@ -91,7 +91,7 @@ class Player extends Entity {
 
         if (this.collisions.length > changeNum && sfxButton.on) {
             let aud = new Audio(`hit${Math.floor(Math.random()*5)+1}.wav`)
-            aud.volume = getDst(this.body.velocity, v(0,0))/10
+            aud.volume = getDst(this.body.velocity, v(0,0))/8
             aud.play()
         }
 
