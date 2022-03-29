@@ -48,10 +48,10 @@
         Chunks.loadLevelDat(levelDat["start"])
         entitys.push(new Player(v(120,100), {
             
-            "moveLeft":"a",
-            "moveRight":"d",
-            "jump":"w",
-            "duck":"s",
+            "moveLeft":["a","ArrowLeft"],
+                "moveRight":["d","ArrowRight"],
+                "jump":[" ","w","ArrowUp"],
+                "duck":["s","ArrowDown"],
         }))
 
         //Save.loadGame()
