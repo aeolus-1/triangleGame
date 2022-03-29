@@ -119,13 +119,15 @@ class Player extends Entity {
 
         }
         
-        function testKey(keys, set) {
+         function testKey(keys, set) {
+     let ret = false
             keys.forEach((key) => {
-                if (set[key]) {
-                    return true
+                console.log(Object.keys(set).includes(key))
+                if (Object.keys(set).includes(key)) {
+                    ret = true
                 }
             })
-            return false
+            return ret
         }
 
         if (testKey(this.keyset["moveRight"], keys) && onGround) {
