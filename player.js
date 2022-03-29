@@ -5,7 +5,7 @@ class Entity {
             restitution:0.1,
             friction:0.7,
             render:{
-                fillStyle:"#0D3B66"
+                fillStyle:"#F4D35E"
             }
         })
 
