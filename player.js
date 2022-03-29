@@ -122,7 +122,6 @@ class Player extends Entity {
          function testKey(keys, set) {
      let ret = false
             keys.forEach((key) => {
-                console.log(Object.keys(set).includes(key))
                 if (Object.keys(set).includes(key)) {
                     ret = true
                 }
