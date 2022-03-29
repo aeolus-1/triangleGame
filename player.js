@@ -124,7 +124,7 @@ class Player extends Entity {
                 if (set[key]) {
                     return true
                 }
-            }
+            })
             return false
         }
 
