@@ -50,16 +50,18 @@ sfxButton.on = true
 
 buttons.push(sfxButton)
 
-var musicButton = new Button(67,10, "musicOn.png", function(){
+var musicButton = new Button(67,10, "musicOff.png", function(){
     this.on = !this.on
     if (this.on) {
         this.img = document.createElement("img")
         this.img.src = "musicOn.png"
+        music.play()
     } else {
         this.img = document.createElement("img")
         this.img.src = "musicOff.png"
+        music.pause()
     }
 })
-musicButton.on = true
+musicButton.on = false
 
 buttons.push(musicButton)
