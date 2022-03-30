@@ -1,4 +1,10 @@
-# triangleGame.github.io
+# parkouringTriangles
+
+idk what to call it
+
+basic platforming game similar to getting over it
+pretty cool to work on
+dont read the code it's to complecated for anyone in the world to understand
 
 
 demo here - https://aeolus-1.github.io/parkouringTriangles.github.io/
