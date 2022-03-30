@@ -173,3 +173,4 @@ Matter.Events.on(render, "afterRender", function() {
 var music = new Audio("musicTrack1.mp3")
 
 music.volume = 0.2
+music.loop = true
