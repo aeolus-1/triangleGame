@@ -169,3 +169,7 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.restore()
     renderButtons()
 })
+
+var music = new Audio("musicTrack1.mp3")
+
+music.volume = 0.2
