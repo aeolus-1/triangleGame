@@ -1,7 +1,7 @@
 # triangleGame.github.io
 
 
-demo here - https://aeolus-1.github.io/triangleGame.github.io/
+demo here - https://aeolus-1.github.io/parkouringTriangles.github.io/
 
 WR - 2m 8s 630ms / 128.63s 
 
