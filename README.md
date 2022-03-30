@@ -7,7 +7,7 @@ pretty cool to work on
 dont read the code it's to complecated for anyone in the world to understand
 
 
-demo here - https://aeolus-1.github.io/parkouringTriangles.github.io/
+demo here - https://aeolus-1.github.io/triangleGame.github.io/
 
 WR - 2m 8s 630ms / 128.63s 
 
