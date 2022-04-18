@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <style>
+        textarea {
+            width: 450px;
+            height: 600px;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <textarea id="output"></textarea><br>
+    <button onclick="(function(){
+        drawMap()
+        return false;
+    })();return false;"> draw map</button>
+    <button onclick="(function(){
+        document.getElementById('largeMap').height = 0
+        return false;
+    })();return false;"> close map</button>
+    <input type="text" id="currentTextInpt" onchange="(function(){
+        currentText = document.getElementById('currentTextInpt').value
+        return false;
+    })();return false;">
+    <canvas id="largeMap" width=1400 height=0 style="border: solid black 1px;"></canvas>
+    <script>
+
+        var currentText = ""
+        function v(x, y) { return { x: x, y: y } }
+        var mod = { x: -100, y: -100 };
+
+        var texts = new Array()
+
+        var ctx = canvas.getContext("2d");
+
+        var type = "wall";
+        toggle = 1;
+
+        var mouse = { x: 0, y: 0, down: false },
+            lastMouse = { x: 0, y: 0 };
+
+        var spawn = { x: 100, y: 100 },
+            spawners = [];
+
+        var selectedRect = undefined;
+
+        function mainloop() {
+            render();
+        }
+        var ctx2 = document.getElementById("largeMap").getContext("2d")
+        function drawMap() {
+
+            document.getElementById("largeMap").height = 1600
+
+            var bounds = {
+                min:v(Infinity,Infinity),
+                max:v(-Infinity,-Infinity),
+            }
+
+            for (let i = 0; i < rects.length; i++) {
+                const rect = rects[i];
+
+                if (rect.x < bounds.min.x) bounds.min.x = rect.x
+                if (rect.x > bounds.max.x) bounds.max.x = rect.x
+                if (rect.y < bounds.min.y) bounds.min.y = rect.y
+                if (rect.y > bounds.max.y) bounds.max.y = rect.y
+
+            }
+            console.log(bounds)
+
+            var scale = 0.2,
+                translateX = -bounds.min.x+500,
+                translateY = -bounds.min.y+500
+
+            var xScale = bounds.max.x/document.getElementById("largeMap").width,
+                yScale = bounds.max.y/document.getElementById("largeMap").height
+
+            scale = Math.min(xScale, yScale)
+            console.log(scale)
+
+            ctx2.save()
+
+            ctx2.scale(scale, scale)
+            ctx2.translate(translateX, translateY)
+
+            ctx2.fillStyle = "#00f"
+            for (let i = 0; i < rects.length; i++) {
+                const rect = rects[i];
+
+                ctx2.save()
+
+                ctx2.translate(rect.x, rect.y)
+                ctx2.rotate(rect.angle)
+                ctx2.translate(-rect.x, -rect.y)
+
+                
+                ctx2.fillRect(rect.x-(rect.width/2), rect.y-(rect.height/2), rect.width, rect.height)
+
+
+                ctx2.restore()
+
+            }
+            ctx2.restore()
+
+        }
+        setTimeout(() => {
+            //drawMap()
+
+        }, 1);
+        function render() {
+            ctx.save();
+            ctx.translate(-mod.x, -mod.y);
+
+            ctx.fillStyle = "#000000";
+            ctx.fillRect(mod.x, mod.y, canvas.width, canvas.height);
+            let i = 0
+            
+            for (let rect of rects) {
+                if (!rect.deleted) {
+                    ctx.save();
+                    if (rect.type == "laser") ctx.fillStyle = "#F15946";
+                    if (rect.type == "wall") ctx.fillStyle = "#ffffff";
+                    if (rect.type == "slipWall") ctx.fillStyle = "#6969ff";
+                    if (rect.type == "bounceWall") ctx.fillStyle = "#6900ff";
+                    if (rect.type == "button") ctx.fillStyle = "#3DDC97";
+                    if (rect.type == "platform") ctx.fillStyle = "#2D3047";
+
+                    if (rect.selected) ctx.globalAlpha = 0.8;
+
+                    ctx.strokeStyle = "#777";
+
+                    ctx.strokeRect(
+                        rect.x - rect.width / 2,
+                        rect.y - rect.height / 2,
+                        rect.width,
+                        rect.height
+                    );
+
+                    if (rect.angle != undefined) {
+                        ctx.translate(rect.x, rect.y);
+                        ctx.rotate(rect.angle);
+                        ctx.translate(-rect.x, -rect.y);
+                    }
+
+                    ctx.fillRect(
+                        rect.x - rect.width / 2,
+                        rect.y - rect.height / 2,
+                        rect.width,
+                        rect.height
+                    );
+                    ctx.restore();
+                } else {
+                    rects.splice(i, 1)
+                    i -= 1
+                }
+                i+=1
+            }
+
+            if (mouse.down && mouseInside) {
+                ctx.fillStyle = "#ff0000";
+                ctx.fillRect(
+                    mouse.x,
+                    mouse.y,
+                    -(mouse.x - lastMouse.x),
+                    -(mouse.y - lastMouse.y)
+                );
+            }
+
+            spawners.forEach((spawner) => {
+                ctx.beginPath();
+                ctx.arc(spawner.x, spawner.y, round / 4, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fillStyle = "#f70";
+                ctx.fill();
+            });
+
+            texts.forEach(text => {
+                ctx.fillStyle = "#fff"
+                ctx.fillText(text.text, text.x, text.y);
+                //console.log("ayy")
+            });
+            
+
+
+            ctx.beginPath();
+            ctx.arc(spawn.x, spawn.y, round / 4, 0, Math.PI * 2);
+            ctx.closePath();
+            ctx.fillStyle = "#0f0";
+            ctx.fill();
+
+            ctx.fillText(type, 10 + mod.x, 10 + mod.y);
+            ctx.fillText(toggle, 10 + mod.x, 20 + mod.y);
+
+            ctx.strokeStyle = "#777";
+            ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+            ctx.beginPath();
+            ctx.arc(mouse.x, mouse.y, round / 4, 0, Math.PI * 2);
+            ctx.closePath();
+            ctx.fillStyle = "#ff0000";
+            ctx.fill();
+
+
+            let chunkPos = v(Math.round((mod.x+400) / chunkSize), Math.round((mod.y+300) / chunkSize))
+            ctx.strokeStyle = "#0f0";
+
+            ctx.strokeRect((chunkPos.x) * chunkSize, (chunkPos.y) * chunkSize, chunkSize, chunkSize);
+            ctx.strokeRect((chunkPos.x - 1) * chunkSize, (chunkPos.y) * chunkSize, chunkSize, chunkSize);
+            ctx.strokeRect((chunkPos.x) * chunkSize, (chunkPos.y - 1) * chunkSize, chunkSize, chunkSize);
+            ctx.strokeRect((chunkPos.x - 1) * chunkSize, (chunkPos.y - 1) * chunkSize, chunkSize, chunkSize);
+
+
+
+            ctx.restore();
+        }
+        var rects = new Array();
+        var round = 20;
+
+        function mousedown(e) {
+            mouse.down = true;
+            if (mouseInside) {
+                lastMouse = {
+                    x: Math.round(e.offsetX / round) * round + mod.x,
+                    y: Math.round(e.offsetY / round) * round + mod.y,
+                };
+            }
+        }
+        var lastThing = "wall";
+        function mouseup(e) {
+            mouse.down = false;
+
+            if (mouseInside) {
+                if (type == "wall" || type == "slipWall" || type=="bounceWall") {
+                    e.offsetX = Math.round(e.offsetX / round) * round + mod.x;
+                    e.offsetY = Math.round(e.offsetY / round) * round + mod.y;
+
+                    let width =
+                        lastMouse.x - (Math.round(e.offsetX / round) * round + mod.x);
+                    let height =
+                        lastMouse.y - (Math.round(e.offsetY / round) * round + mod.y);
+
+                    let x = lastMouse.x - width / 2;
+                    let y = lastMouse.y - height / 2;
+
+                    let mouseX = Math.round(e.offsetX / round) * round + mod.x,
+                        mouseY = Math.round(e.offsetY / round) * round + mod.y;
+
+                    let string = `createObject(${x}, ${y}, ${width}, ${height}, "${type}", ${toggle});`;
+
+                    if (width != 0 && height != 0) {
+                        console.log(string);
+
+                        rects.push({
+                            x: Math.round(e.offsetX / round) * round + mod.x + width / 2,
+                            y: Math.round(e.offsetY / round) * round + mod.y + height / 2,
+                            width: Math.abs(width),
+                            height: Math.abs(height),
+                            type: type,
+
+                            angle: 0,
+                        });
+                        lastThing = "wall";
+
+                        mainloop();
+                        output.value = `var levelDat = {start:'${getObjects()}'}`
+                    } else {
+                        let check = false;
+                        rects.forEach((rect) => {
+                            if (
+                                mouseX <= rect.x + rect.width / 2 &&
+                                mouseX > rect.x - rect.width / 2 &&
+                                mouseY <= rect.y + rect.height / 2 &&
+                                mouseY > rect.y - rect.height / 2
+                            ) {
+                                if (selectedRect != undefined) selectedRect.selected = false;
+                                selectedRect = rect;
+                                rect.selected = true;
+                                check = true;
+                            }
+                        });
+                        if (!check) {
+                            if (selectedRect != undefined) selectedRect.selected = false;
+                            selectedRect = undefined;
+                        }
+                    }
+                } else if (type == "spawn") {
+                    e.offsetX = Math.round(e.offsetX / round) * round - mod.x;
+                    e.offsetY = Math.round(e.offsetY / round) * round - mod.y;
+
+                    spawn = {
+                        x: Math.round(e.offsetX / round) * round + mod.x,
+                        y: Math.round(e.offsetY / round) * round + mod.y,
+                    };
+
+                    output.value = `var levelDat = {start:'${getObjects()}'}`
+                } else if (type == "spawner") {
+                    e.offsetX = Math.round(e.offsetX / round) * round - mod.x;
+                    e.offsetY = Math.round(e.offsetY / round) * round - mod.y;
+                    lastThing = "spawner";
+                    spawners.push({
+                        x: Math.round(e.offsetX / round) * round + mod.x,
+                        y: Math.round(e.offsetY / round) * round + mod.y,
+                    });
+
+                    output.value = `var levelDat = {start:'${getObjects()}'}`
+                } else if (type == "texts") {
+                    e.offsetX = Math.round(e.offsetX / round) * round - mod.x;
+                    e.offsetY = Math.round(e.offsetY / round) * round - mod.y;
+                    lastThing = "texts";
+                    texts.push({
+                        x: Math.round(e.offsetX / round) * round + mod.x,
+                        y: Math.round(e.offsetY / round) * round + mod.y,
+                        text:currentText,
+                    });
+
+                }
+            }
+        }
+        function mousemove(e) {
+            if (mouseInside) {
+                mouse.x = Math.round(e.offsetX / round) * round + mod.x;
+                mouse.y = Math.round(e.offsetY / round) * round + mod.y;
+            }
+        }
+        function keydown(e) {
+            if (mouseInside) {
+                console.log(e.code);
+                if (e.code == "Digit1") type = "wall";
+                if (e.code == "Digit2") type = "slipWall";
+                if (e.code == "Digit3") type = "spawner";
+                if (e.code == "Digit4") type = "texts";
+                if (e.code == "Digit5") type = "bounceWall";
+
+                if (e.code == "Digit1") toggle = 1;
+                if (e.code == "Digit2") toggle = 2;
+                if (e.code == "Digit3") toggle = 3;
+                if (e.code == "Digit4") toggle = 4;
+                if (e.code == "Digit5") toggle = 5;
+
+                if (e.shiftKey) {
+                    if (selectedRect != undefined) {
+                        if (e.code == "ArrowRight") selectedRect.x += 10;
+                        if (e.code == "ArrowLeft") selectedRect.x -= 10;
+                        if (e.code == "ArrowDown") selectedRect.y += 10;
+                        if (e.code == "ArrowUp") selectedRect.y -= 10;
+                    }
+                } else {
+                    if (e.code == "ArrowRight") mod.x += 100;
+                    if (e.code == "ArrowLeft") mod.x -= 100;
+                    if (e.code == "ArrowDown") mod.y += 100;
+                    if (e.code == "ArrowUp") mod.y -= 100;
+                }
+
+                if (e.code == "Comma") selectedRect.angle += Math.PI * 2 * (5 / 360);
+                if (e.code == "Period") selectedRect.angle -= Math.PI * 2 * (5 / 360);
+
+                if (e.code == "KeyZ") {
+                    switch (lastThing) {
+                        case "wall":
+                            if (rects.length >= 1) {
+                                rects.pop();
+                            }
+                            output.value = `var levelDat = {start:'${getObjects()}'}`
+
+                            break;
+
+                        case "spawner":
+                            if (spawners.length >= 1) {
+                                spawners.pop();
+                            }
+                            output.value = `var levelDat = {start:'${getObjects()}'}`
+
+                            break;
+                        case "texts":
+                            if (texts.length >= 1) {
+                                texts.pop();
+                            }
+                            output.value = `var levelDat = {start:'${getObjects()}'}`
+
+                            break;
+
+                        default:
+                            break;
+                    }
+                    
+                }
+
+                if (e.code == "KeyC") {
+                    if (selectedRect != undefined) {
+                        rects.push({
+                            x: selectedRect.x,
+                            y: selectedRect.y,
+                            width: selectedRect.width,
+                            height: selectedRect.height,
+                            type: selectedRect.type,
+
+                            angle: selectedRect.angle,
+                        });
+
+                        selectedRect = rects[rects.length-1]
+                    }
+                }
+                if (e.code == "Backspace") {
+                    if (selectedRect != undefined) {
+                        selectedRect.deleted = true
+                    }
+                    output.value = `var levelDat = {start:'${getObjects()}'}`
+                }
+
+                if (e.code == "Equal") round += 10;
+                if (e.code == "Minus") round -= 10;
+            }
+            output.value = `var levelDat = {start:'${getObjects()}'}`
+        }
+
+        document.addEventListener("mousedown", mousedown);
+        document.addEventListener("mouseup", mouseup);
+        document.addEventListener("mousemove", mousemove);
+        document.addEventListener("keydown", keydown);
+        var mouseInside = false;
+
+        function exit() {
+            mouse.down = false;
+            mouseInside = false;
+        }
+        function enter() {
+            mouseInside = true;
+        }
+        canvas.onmouseover = enter;
+        canvas.onmouseleave = exit;
+        var chunkSize = 1000;
+        function getObjects() {
+            let level = {chunks:{}, texts:[]};
+
+            rects.forEach((rect) => {
+                let chunkPos = v(
+                    Math.floor(rect.x / chunkSize),
+                    Math.floor(rect.y / chunkSize)
+                ),
+                    chunkString = `${chunkPos.x},${chunkPos.y}`;
+
+                if (level.chunks[chunkString] == undefined) {
+                    level.chunks[chunkString] = {
+                        spawn: new Array(),
+                        rects: new Array(),
+                        spawners: new Array(),
+                    };
+                }
+
+                level.chunks[chunkString].rects.push(rect);
+            });
+            spawners.forEach((rect) => {
+                let chunkPos = v(
+                    Math.floor(rect.x / chunkSize),
+                    Math.floor(rect.y / chunkSize)
+                ),
+                    chunkString = `${chunkPos.x},${chunkPos.y}`;
+
+                if (level.chunks[chunkString] == undefined) {
+                    level.chunks[chunkString] = {
+                        spawn: new Array(),
+                        rects: new Array(),
+                        spawners: new Array(),
+                    };
+                }
+
+                level.chunks[chunkString].spawners.push(rect);
+            });
+            
+            texts.forEach((text) => {
+                level.texts.push(text)
+            });
+
+
+
+
+            return JSON.stringify(level);
+        }
+
+        function save() {
+            localStorage.setItem("save_cubeGame", btoa(JSON.stringify({objects:getObjects(), pos:mod})))
+        }
+        
+        setInterval(() => {
+            save()
+        }, 1000);
+        function load() {
+            if (localStorage.getItem("save_cubeGame") != null) {
+                let level = JSON.parse(atob(localStorage.getItem("save_cubeGame")))
+                mod = level.pos
+                loadLevel(level.objects)
+            }
+        }
+
+        function loadLevel(data) {
+            rects = new Array()
+            spawners = new Array()
+            let levelObject = JSON.parse(data),
+                chunks = Object.keys(levelObject.chunks)
+
+            texts = levelObject.texts
+
+
+            for (let i = 0; i < chunks.length; i++) {
+                const chunk = chunks[i];
+                levelObject.chunks[chunk].rects.forEach((ob) => {
+                    rects.push({
+                        x: ob.x,
+                        y: ob.y,
+                        width: ob.width,
+                        height: ob.height,
+                        type: ob.type,
+                        angle: ob.angle,
+                    });
+                });
+                levelObject.chunks[chunk].spawners.forEach((ob) => {
+                    spawners.push({
+                        x: ob.x,
+                        y: ob.y,
+                    });
+                });
+            }
+
+            save()
+
+
+        }
+
+        function compileData(data) {
+            var data = JSON.parse(data),
+                compiledData = {rects:new Array(),spawners:new Array()}
+            for (let i = 0; i < Object.keys(data.chunks).length; i++) {
+                const chunk = data.chunks[Object.keys(data.chunks)[i]];
+                for (let j = 0; j < chunk.rects.length; j++) {
+                    const rect = chunk.rects[j];
+                    if (rect.x != null && rect.y != null && rect.width != null && rect.height != null) {
+                        compiledData.rects.push(`rect/${rect.x}/${rect.y}/${rect.width}/${rect.height}/${rect.angle}`)
+                    }
+                }                
+            }
+            for (let i = 0; i < Object.keys(data.chunks).length; i++) {
+                const chunk = data.chunks[Object.keys(data.chunks)[i]];
+                for (let j = 0; j < chunk.spawners.length; j++) {
+                    const rect = chunk.spawners[j];
+                    if (rect.x != null && rect.y != null) {
+                        compiledData.spawners.push(`spawner/${rect.x}/${rect.y}`)
+                    }
+                }                
+            }
+            console.log(`compiled with ${compiledData.rects.length} rects`)
+            return compiledData
+        }
+        function cleanData() {
+
+            var data = getObjects()
+
+            var compiledString = compileData(data),
+                startingLength = compiledString.rects.length,
+                resultString = new Array()
+            console.log(`starting length ${startingLength}`)
+            var alreadyStatedRects = new Array()
+            for (let i = 0; i < compiledString.rects.length; i++) {
+                const string = compiledString.rects[i];
+                if (!resultString.includes(string)) {
+                    resultString.push(string)
+                }
+            }
+            for (let i = 0; i < compiledString.spawners.length; i++) {
+                const string = compiledString.spawners[i];
+                if (!resultString.includes(string)) {
+                    resultString.push(string)
+                }
+            }
+            console.log(`ending length ${resultString.length}, removed ${startingLength-resultString.length} rects`)
+
+            rects = new Array()
+            spawners = new Array()
+            for (let i = 0; i < resultString.length; i++) {
+                var rect = resultString[i];
+                var splitString = rect.split("/")
+                console.log(splitString)
+                if (splitString[0] == "rect") {
+                    var rect = {
+                        angle:parseFloat(splitString[5]),
+                        x:parseInt(splitString[1]),
+                        y:parseInt(splitString[2]),
+                        width:parseInt(splitString[3]),
+                        height:parseInt(splitString[4]),
+                        type: "wall",
+                    }
+                    rects.push(rect)
+                } else if (splitString[0] == "spawner") {
+                    var spawner = {
+                        x:parseInt(splitString[1]),
+                        y:parseInt(splitString[2]),
+                    }
+                    spawners.push(spawner)
+                }
+                
+
+                //console.log(rect)
+            }
+            
+        }
+
+        load()
+
+        setInterval(mainloop, 1);
+    </script>
+</body>
+
+</html>
