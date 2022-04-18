@@ -16,7 +16,6 @@ s, ArrowDown = Duck
 
 Music by J. Rodgie
 
-WR - 2m 8s 630ms / 128.63s 
 
 Game map  
 
