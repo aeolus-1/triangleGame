@@ -10,9 +10,9 @@ dont read the code it's to complecated for anyone in the world to understand
 
 demo here - https://aeolus-1.github.io/triangleGame.github.io/
 
-s,d,ArrowLeft,ArrowRight = Move Left/Right
-w, Space, ArrowUp = Jump
-s, ArrowDown = Duck
+s,d,ArrowLeft,ArrowRight = Move Left/Right  
+w, Space, ArrowUp = Jump  
+s, ArrowDown = Duck  
 
 Music by J. Rodgie
 
