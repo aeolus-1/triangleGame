@@ -3,8 +3,8 @@
 idk what to call it
 put it on github so friends can see it
 
-basic platforming game similar to getting over it
-pretty cool to work on
+basic platforming game similar to getting over it 
+pretty cool to work on 
 dont read the code it's to complecated for anyone in the world to understand
 
 
