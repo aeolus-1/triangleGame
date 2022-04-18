@@ -18,9 +18,10 @@ Music by J. Rodgie
 
 WR - 2m 8s 630ms / 128.63s 
 
-Game map 
+Game map  
  |
-\/
+\/ 
+
 ![yay](gameMap.png "ur gay now").
 
 
