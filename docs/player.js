@@ -163,7 +163,7 @@ class Player extends Entity {
             if (this.body.angularVelocity > -0.3) this.applyAngularForce(-speed*(onGround?1:0.1))
         }
 
-        if (keys[this.keyset["jump"]] && !preKeys[this.keyset["jump"]] && (this.jumpTime > 0 || infinJump)) {
+        if (keys[this.keyset["jump"]] && (this.jumpTime > 0 || infinJump)) {
             this.applyForce(v((this.wallJump*1), -this.body.velocity.y-(jump*(Math.abs(this.wallJump)?0.75:1))))
             Matter.Body.translate(this.body, v(this.wallJump*5, 0))
 
