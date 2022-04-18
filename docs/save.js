@@ -37,7 +37,8 @@ class Save {
                 fillStyle:"#000"
               }
           })
-          }
+          
+        
         Matter.Body.set(newSpawn, "velocity", spawn.velocity)
         Matter.Body.set(newSpawn, "angularVelocity", spawn.angularVelocity)
 
@@ -45,6 +46,7 @@ class Save {
         
         Matter.Composite.add(spawns, newSpawn)
       });
+    }
       Matter.Body.set(entitys[0].body, "position", v(data.pos.x, data.pos.y));
       Matter.Body.set(entitys[0].body, "angle", data.angle);
 
