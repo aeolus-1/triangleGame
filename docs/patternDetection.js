@@ -3,7 +3,7 @@ var patternDetection = {
     patterns:[
         {
             label:"konmaiTpMenu",
-            keys:["arrowup","arrowup","arrowdown","arrowdown","arrowleft","arrowright","arrowleft","arrowright","a","b"],
+            keys:["arrowup","arrowup","arrowdown","arrowdown","arrowleft","arrowright","arrowleft","arrowright","b","e"],
             callback:function(){
                 var text = "Select Checkpoint\n"
 
