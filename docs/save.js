@@ -28,14 +28,16 @@ class Save {
   static loadGame() {
     if (localStorage.getItem("save_cubePlayer") != null) {
       let data = (JSON.parse(atob(localStorage.getItem("save_cubePlayer"))));
-      data.spawns.forEach(spawn => {
-        let newSpawn = Matter.Bodies.circle(spawn.pos.x,spawn.pos.y, 50, {
-            friction:0,
-            density:0.01,
-            render:{
-              fillStyle:"#000"
-            }
-        })
+      if (data.spawns != undefined) {
+        data.spawns.forEach(spawn => {
+          let newSpawn = Matter.Bodies.circle(spawn.pos.x,spawn.pos.y, 50, {
+              friction:0,
+              density:0.01,
+              render:{
+                fillStyle:"#000"
+              }
+          })
+          }
         Matter.Body.set(newSpawn, "velocity", spawn.velocity)
         Matter.Body.set(newSpawn, "angularVelocity", spawn.angularVelocity)
 
