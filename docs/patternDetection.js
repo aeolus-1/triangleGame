@@ -3,7 +3,7 @@ var patternDetection = {
     patterns:[
         {
             label:"konmaiTpMenu",
-            keys:["arrowleft","arrowleft","arrowright","arrowright","arrowup","arrowdown","arrowup","arrowdown","b","e"],            
+            keys:["arrowleft","arrowleft","arrowright","arrowright","arrowup","arrowdown","arrowup","arrowdown","b","e"],
             callback:function(){
                 var text = "Select Checkpoint\n"
 
@@ -21,7 +21,7 @@ var patternDetection = {
         },
         {
             label:"infinJump",
-            keys:["p","a","t","c","h"],
+            keys:["n","i","m","b","a","h"],
             callback:function(){
                 infinJump = true
             }
@@ -45,6 +45,23 @@ var patternDetection = {
             keys:["p","o","l"],
             callback:function(){
                 jumpPreCheckpoint()
+            }
+            
+        },
+        {
+            label:"ghost",
+            keys:["g","h","o","s","t"],
+            callback:function(){
+                window.preFilter = {...entitys[0].body.collisionFilter}
+                entitys[0].body.collisionFilter = {
+                    'group': -1,
+                    'category': 2,
+                    'mask': 0,
+                  };
+                  setTimeout(() => {
+                      entitys[0].body.collisionFilter = {...window.preFilter}
+                  }, 500);
+                  
             }
             
         }
