@@ -96,9 +96,8 @@ Matter.Events.on(runner, "beforeUpdate", function () {
 });
 var camera = v(0,0)
 Matter.Events.on(render, "beforeRender", function() {
-  
-    render.canvas.width = Matter.Common.clamp(window.innerWidth, 0, window.innerWidth)
-    render.canvas.height = Matter.Common.clamp(window.innerHeight, 0, window.innerHeight)
+    render.canvas.width = Matter.Common.clamp(window.innerWidth, 0, 1440)
+    render.canvas.height = Matter.Common.clamp(window.innerHeight, 0, 789)
     render.context.save()
     hero = entitys[0].body.position
 
@@ -180,7 +179,22 @@ Matter.Events.on(render, "afterRender", function() {
 
     render.context.restore()
     render.context.font = '20px Arial'
+  
+  var fps = 1;
+  var times = [];
+  var fpsLoop = function (timestamp) {
+    while (times.length > 0 && times[0] <= timestamp - 1000) {
+        times.shift();
+    }
+    times.push(timestamp);
+    fps = times.length;
+    
+    render.context.fillText(`FPS: ${fps}`,  10, 120)
     render.context.fillText(`Speed: ${Math.abs(Math.round(entitys[0].body.velocity.x * 100) / 100)}`,  10, 120)
+    requestAnimationFrame(fpsLoop);
+}
+
+requestAnimationFrame(fpsLoop);
     render.context.fillText(`${Math.round(Matter.Common.clamp((-entitys[0].body.position.y+10)/100, 0, Infinity))+2}m`,  10, 90)
 
     renderButtons()
