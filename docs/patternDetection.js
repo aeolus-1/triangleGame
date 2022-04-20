@@ -95,9 +95,8 @@ patternDetection = {...patternDetection,
                     completion = 0
                 
                 for (let l = 0; l < keys.length; l++) {
-                    const keyP = keys[l];
-                     console.log(keyP)
-                     console.log(log[j+l].key)
+                    const keyP = atob(keys[l])
+                     
                     if (log[j+l].key == keyP) {
                         completion += 1
                     }
