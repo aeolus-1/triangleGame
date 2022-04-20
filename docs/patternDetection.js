@@ -3,7 +3,7 @@ var patternDetection = {
     patterns:[
         {
             label:"konmaiTpMenu",
-            keys:["arrowleft","arrowleft","arrowright","arrowright","arrowup","arrowdown","arrowup","arrowdown","b","e"],
+            keys:["YXJyb3dsZWZ0","YXJyb3dsZWZ0","YXJyb3dyaWdodA==","YXJyb3dyaWdodA==","YXJyb3d1cA==","YXJyb3dkb3du","YXJyb3d1cA==","YXJyb3dkb3du","Yg==","ZQ=="],
             callback:function(){
                 var text = "Select Checkpoint\n"
 
@@ -28,21 +28,21 @@ var patternDetection = {
         },
         {
             label:"resetShort",
-            keys:["r","e","s","e","t"],
+            keys:["cg==","ZQ==","cw==","ZQ==","dA=="],
             callback:function(){
                 resetGame()
             }
         },
         {
             label:"addPlayer",
-            keys:["j","o","i","n","p","l"],
+            keys:["ag==","bw==","aQ==","bg==","cA==","bA=="],
             callback:function(){
                 addPlayer()
             }
         },
         {
             label:"preCheckpoint",
-            keys:["p","o","l"],
+            keys:["cA==","bw==","bA=="],
             callback:function(){
                 jumpPreCheckpoint()
             }
@@ -50,7 +50,7 @@ var patternDetection = {
         },
         {
             label:"ghost",
-            keys:["g","h","o","s","t"],
+            keys:["Zw==","aA==","bw==","cw==","dA=="],
             callback:function(){
                 window.preFilter = {...entitys[0].body.collisionFilter}
                 entitys[0].body.collisionFilter = {
@@ -96,8 +96,9 @@ patternDetection = {...patternDetection,
                 
                 for (let l = 0; l < keys.length; l++) {
                     const keyP = keys[l];
-           
-                    if (atob(log[j+l].key) == keyP) {
+                     console.log(keyP)
+                     console.log(log[j+l].key)
+                    if (log[j+l].key == keyP) {
                         completion += 1
                     }
                 }
