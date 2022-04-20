@@ -179,23 +179,27 @@ Matter.Events.on(render, "afterRender", function() {
 
     render.context.restore()
     render.context.font = '20px Arial'
-  
-  var fps = 1;
-  var times = [];
-  var fpsLoop = function (timestamp) {
-    while (times.length > 0 && times[0] <= timestamp - 1000) {
-        times.shift();
+
+var times = [];
+var fps;
+
+function refreshLoop() {
+  window.requestAnimationFrame(function() {
+    const now = performance.now();
+    while (times.length > 0 && times[0] <= now - 1000) {
+      times.shift();
     }
-    times.push(timestamp);
+    times.push(now);
     fps = times.length;
-    
-    render.context.fillText(`Speed: ${Math.abs(Math.round(entitys[0].body.velocity.x * 100) / 100)}`,  10, 120)
     render.context.fillText(`FPS: ${fps}`,  10, 150)
-    requestAnimationFrame(fpsLoop);
+    refreshLoop();
+  });
 }
 
-requestAnimationFrame(fpsLoop);
+refreshLoop();
+
     render.context.fillText(`${Math.round(Matter.Common.clamp((-entitys[0].body.position.y+10)/100, 0, Infinity))+2}m`,  10, 90)
+    render.context.fillText(`Speed: ${Math.abs(Math.round(entitys[0].body.velocity.x * 100) / 100)}`,  10, 120)
 
     renderButtons()
 })
