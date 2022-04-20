@@ -180,8 +180,8 @@ Matter.Events.on(render, "afterRender", function() {
 
     render.context.restore()
     render.context.font = '20px Arial'
-    render.context.fillText(`${Math.round(Matter.Common.clamp((-entitys[0].body.position.y+10)/100, 0, Infinity))+2}m`,  10, 90)
     render.context.fillText(`Speed: ${entitys[0].body.velocity.x}`,  10, 120)
+    render.context.fillText(`${Math.round(Matter.Common.clamp((-entitys[0].body.position.y+10)/100, 0, Infinity))+2}m`,  10, 90)
 
     renderButtons()
 })
