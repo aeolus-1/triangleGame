@@ -1,6 +1,7 @@
 # untitled triangle game
 
 idk what to call it
+
 put it on github so friends can see it
 
 basic platforming game similar to getting over it  
