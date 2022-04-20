@@ -189,8 +189,8 @@ Matter.Events.on(render, "afterRender", function() {
     times.push(timestamp);
     fps = times.length;
     
-    render.context.fillText(`FPS: ${fps}`,  10, 120)
     render.context.fillText(`Speed: ${Math.abs(Math.round(entitys[0].body.velocity.x * 100) / 100)}`,  10, 120)
+    render.context.fillText(`FPS: ${fps}`,  10, 150)
     requestAnimationFrame(fpsLoop);
 }
 
