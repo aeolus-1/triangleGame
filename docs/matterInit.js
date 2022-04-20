@@ -192,6 +192,7 @@ function refreshLoop() {
     times.push(now);
     fps = times.length;
     render.context.fillText(`FPS: ${fps}`,  10, 150)
+    render.context.clearRect(20, 20, 10, 150);
     refreshLoop();
   });
 }
