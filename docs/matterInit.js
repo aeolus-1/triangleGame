@@ -190,7 +190,7 @@ function refreshLoop() {
       times.shift();
     }
     times.push(now);
-    fps = times.length;
+    var fps = times.length;
     refreshLoop();
   });
 }
