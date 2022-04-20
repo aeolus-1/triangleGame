@@ -2,6 +2,9 @@ function v(x, y) {
   return { x: x, y: y };
 }
 
+var times = [];
+var fps;
+
 var Engine = Matter.Engine,
   Render = Matter.Render,
   Runner = Matter.Runner,
@@ -180,8 +183,6 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.restore()
     render.context.font = '20px Arial'
 
-var times = [];
-var fps;
 
 function refreshLoop() {
   window.requestAnimationFrame(function() {
@@ -190,7 +191,7 @@ function refreshLoop() {
       times.shift();
     }
     times.push(now);
-    var fps = times.length;
+    fps = times.length;
     refreshLoop();
   });
 }
