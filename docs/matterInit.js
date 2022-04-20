@@ -5,6 +5,7 @@ function v(x, y) {
 const times = [];
 let fps;
 
+var loading = 0
 
 function refreshLoop() {
     window.requestAnimationFrame(() => {
@@ -60,7 +61,6 @@ var mouseConstraint = Matter.MouseConstraint.create(engine, {
 
 var runner = Matter.Runner.create();
 
-Matter.Runner.start(runner, engine);
 
 Render.run(render);
 
@@ -202,8 +202,30 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.fillText(`FPS: ${fps}`,  10, 150)
 
     renderButtons()
-})
+    
+    if (loading < 1) {
+        render.context.fillStyle = pSBC(-0.3, colorTheme.back)
+        render.context.fillRect(0,0,render.canvas.width,render.canvas.height)
 
+        render.context.fillStyle = pSBC(0.8, colorTheme.back)
+        let barPos = v(render.canvas.width/2, render.canvas.height/2)
+        render.context.fillRect(barPos.x-50,barPos.y-10,100,20)
+
+        render.context.fillStyle = pSBC(-0.8, colorTheme.back)
+        render.context.fillRect(barPos.x-45,barPos.y-7.5,(loading*90),15)
+        loading += 0.01*Math.random()
+
+
+        render.context.fillStyle = "#000"
+        let text = tip,
+            width = render.context.measureText(text).width
+        render.context.fillText("Tip:", barPos.x-(32.59765625/2), barPos.y+50)
+        render.context.fillText(text, barPos.x-(width/2), barPos.y+70)
+    } else if (loading != 2) {
+        Matter.Runner.start(runner, engine);
+        loading = 2
+    }
+})
 var music = new Audio("assets/sfx/musicTrack1.mp3")
 
 music.volume = 0.2
