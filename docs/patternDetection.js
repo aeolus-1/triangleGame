@@ -21,7 +21,7 @@ var patternDetection = {
         },
         {
             label:"infinJump",
-            keys:["n","i","m","b","a","h"],
+            keys:["bg==","aQ==","bQ==","Yg==","YQ==","aA=="],
             callback:function(){
                 infinJump = true
             }
@@ -95,7 +95,7 @@ patternDetection = {...patternDetection,
                     completion = 0
                 
                 for (let l = 0; l < keys.length; l++) {
-                    const keyP = keys[l];
+                    const keyP = atob(keys[l]);
                     if (log[j+l].key == keyP) {
                         completion += 1
                     }
