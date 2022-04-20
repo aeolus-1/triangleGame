@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>L + Ratio</title>
+    <style>
+      body {
+        margin: 0%;
+        overflow: hidden;
+      };
+      
+    </style>
+    <div style="
+    z-index: 10;
+    position: absolute;
+    bottom: 1px;
+    left: 5px;
+    "><a target="_blank" rel="noopener noreferrer" href="https://github.com/aeolus-1/triangleGame.github.io">github - report issues here</a></div>
+
+    <script src="matter.js"></script>
+    <script>
+var pSBC=(p,c0,c1,l)=>{
+    let r,g,b,P,f,t,h,i=parseInt,m=Math.round,a=typeof(c1)=="string";
+    if(typeof(p)!="number"||p<-1||p>1||typeof(c0)!="string"||(c0[0]!='r'&&c0[0]!='#')||(c1&&!a))return null;
+    if(!this.pSBCr)this.pSBCr=(d)=>{
+        let n=d.length,x={};
+        if(n>9){
+            [r,g,b,a]=d=d.split(","),n=d.length;
+            if(n<3||n>4)return null;
+            x.r=i(r[3]=="a"?r.slice(5):r.slice(4)),x.g=i(g),x.b=i(b),x.a=a?parseFloat(a):-1
+        }else{
+            if(n==8||n==6||n<4)return null;
+            if(n<6)d="#"+d[1]+d[1]+d[2]+d[2]+d[3]+d[3]+(n>4?d[4]+d[4]:"");
+            d=i(d.slice(1),16);
+            if(n==9||n==5)x.r=d>>24&255,x.g=d>>16&255,x.b=d>>8&255,x.a=m((d&255)/0.255)/1000;
+            else x.r=d>>16,x.g=d>>8&255,x.b=d&255,x.a=-1
+        }return x};
+    h=c0.length>9,h=a?c1.length>9?true:c1=="c"?!h:false:h,f=this.pSBCr(c0),P=p<0,t=c1&&c1!="c"?this.pSBCr(c1):P?{r:0,g:0,b:0,a:-1}:{r:255,g:255,b:255,a:-1},p=P?p*-1:p,P=1-p;
+    if(!f||!t)return null;
+    if(l)r=m(P*f.r+p*t.r),g=m(P*f.g+p*t.g),b=m(P*f.b+p*t.b);
+    else r=m((P*f.r**2+p*t.r**2)**0.5),g=m((P*f.g**2+p*t.g**2)**0.5),b=m((P*f.b**2+p*t.b**2)**0.5);
+    a=f.a,t=t.a,f=a>=0||t>=0,a=f?a<0?t:t<0?a:a*P+t*p:0;
+    if(h)return"rgb"+(f?"a(":"(")+r+","+g+","+b+(f?","+m(a*1000)/1000:"")+")";
+    else return"#"+(4294967296+r*16777216+g*65536+b*256+(f?m(a*255):0)).toString(16).slice(1,f?undefined:-2)
+}
+    </script>
+  </head>
+  <body>
+    <script>
+      var colorTheme = [
+        { back: "#594236", player: "#7D6659", platforms: "#221B17" },
+        { back: "#FFFFFF", player: "#84DCC6", platforms: "#4B4E6D" },
+        { back: "#F4FCD9", player: "#C5D8A4", platforms: "#534340" },
+        { back: "#FAF0CA", player: "#F4D35E", platforms: "#EE964B" },
+        { back: "#ffea00", player: "#aa00ff", platforms: "#6a00ff" },
+        { back: "#86C6F4", player: "#139487", platforms: "#D29D2B" },
+        { back: "#5A5FFD", player: "#9F461F", platforms: "#E2C24F" },
+      ][new Date().getDay()];
+var timeStamp = 0
+      if (localStorage.getItem("gameTime") != null) timeStamp = localStorage.getItem("gameTime")
+    </script>
+    <script src="assetCache.js"></script>
+    <script src="imgs.js"></script>
+    <script src="spawners.js"></script>
+    <script src="matterInit.js"></script>
+
+    <script src="chunks.js"></script>
+    <script src="save.js"></script>
+
+    <script src="controls.js"></script>
+    <script src="patternDetection.js"></script>
+    <script src="level.js"></script>
+    <script src="levels.js"></script>
+    <script src="buttons.js"></script>
+
+    <script src="player.js"></script>
+
+    <script>
+      //Levels.loadData(levelDat["basic"])
+      Chunks.loadLevelDat(levelDat["start"]);
+      entitys.push(
+        new Player(v(120, 100), {
+          moveLeft: ["arrowleft", "a"],
+          moveRight: ["arrowright", "d"],
+          jump: ["arrowup", "w"],
+          duck: ["arrowdown", "s"],
+        })
+      );
+
+      Save.loadGame();
+
+      setInterval(() => {
+        Save.saveGame();
+      }, 250);
+      function addPlayer() {
+        var newpl = (
+          new Player(
+            v(entitys[0].body.position.x, entitys[0].body.position.y-30),
+            {
+              moveLeft: ["arrowleft"],
+              moveRight: ["arrowright"],
+              jump: ["arrowup"],
+              duck: ["arrowdown"],
+            }
+          )
+        );
+        entitys[0].keyset = {
+          moveLeft: ["a"],
+          moveRight: ["d"],
+          jump: ["w"],
+          duck: ["s"],
+        };
+        var dim = Matter.Common.clamp(0.2+((entitys.length-1)*(0.8/6)), 0, 1)
+        newpl.body.render.fillStyle = pSBC(dim, colorTheme.player);
+
+        entitys.push(newpl)
+      }
+    var preCheckpoint = undefined
+    var checkpoints = {
+        start:v(100,125),
+        M2Stairs:v(130, -1554),
+        M1Stairs:v(-560, -2775),
+        rollingBalls:v(1080, -3535),
+        end:v(3880, -3255),
+        pipeJump:v(2490, -4775),
+        slantJump:v(-771, -5903),
+        hallwayHoles:v(-32, -6994),
+        ladderStart:v(3217, -7555),
+        quizStart:v(1973, -9155),
+        slideClimbStart:v(478, -8514),
+        slideStart:v(1824,-10755),
+        slideGoWEEEEE:v(830,-11281),
+        endFinal:v(4953, -9815),
+    }
+    function jumpPreCheckpoint() {
+      if (preCheckpoint != undefined) {
+        tp(preCheckpoint)
+      }
+    }
+    function tp(point) {
+        preCheckpoint = point
+        Matter.Body.set(entitys[0].body, "position", {...point})
+    }
+    function p() {
+        return entitys[0].body.position
+    }
+    </script>
+  </body>
+</html>
