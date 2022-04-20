@@ -96,6 +96,7 @@ Matter.Events.on(runner, "beforeUpdate", function () {
 });
 var camera = v(0,0)
 Matter.Events.on(render, "beforeRender", function() {
+  
     render.canvas.width = Matter.Common.clamp(window.innerWidth, 0, window.innerWidth)
     render.canvas.height = Matter.Common.clamp(window.innerHeight, 0, window.innerHeight)
     render.context.save()
