@@ -73,11 +73,11 @@ function getDst(a, b) {
     let yd = (a.y - b.y)
     return Math.sqrt(Math.pow(xd, 2) + Math.pow(yd, 2))
 }
-
+var nith = false
 Matter.Events.on(runner, "beforeUpdate", function () {
 
     patternDetection.updateLog()
-    patternDetection.findPatterns()
+    if (nith) patternDetection.findPatterns()
 
     Spawner.updateSpawns()
 
