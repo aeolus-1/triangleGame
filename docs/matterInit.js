@@ -108,7 +108,7 @@ Matter.Events.on(runner, "beforeUpdate", function () {
     } 
     if (timeStamp >= 0) timeStamp += engine.timing.lastDelta/(1000/60)*1.5
 
-
+  if (keys["|"]) nith = true
 
 });
 var camera = v(0,0)
