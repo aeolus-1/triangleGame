@@ -58,4 +58,5 @@ var tips = [
   "This is the gorbinos quest of GitHub games",
 ];
 
-var tip = tips[Math.floor(Math.random() * tips.length)];
+var tip = tips[Math.floor((new Date().getTime()/5000) % tips.length)];
+
