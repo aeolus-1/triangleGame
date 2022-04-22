@@ -27,7 +27,7 @@ class Spawner {
                 collisionFilter:{
                     category:2,
                     group:0,
-                    mask:4294967295,
+                    mask:-1,
                 }
             })
 
