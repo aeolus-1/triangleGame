@@ -23,7 +23,12 @@ class Spawner {
                 density:0.1,
                 render:{
                     fillStyle:"#000"
-                  }
+                  },
+                collisionFilter:{
+                    category:2,
+                    group:0,
+                    mask:4294967295,
+                }
             })
 
             newSpawn.halfLife = this.halfLife
