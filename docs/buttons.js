@@ -94,7 +94,7 @@ function resetGame() {
 }
 
 var resetButton = new Button(267,10, imgCache.resetIcon, function(){
-    if (confirm("Are you sure you want to reset?") && confirm("Are you SURE???") && confirm("100% sure?") && confirm("101% SURE?") && confirm("Theres only one way back") && confirm("I don't think you thinking this through") && confirm("Are you of sound mind and body when clicking this button?") && confirm("Alright here you go") && confirm("but seriuosly are REALLY SURE??????")  && confirm("fine")) {
+    if (confirm("Are you sure you want to reset?") && confirm("Are you SURE???")) {
         resetGame()
     }
 })
