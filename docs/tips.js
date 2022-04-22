@@ -99,7 +99,7 @@ var tips = [
 "No bitches?",
 "Andrew Garfield my beloved",
 "Im looking for one Seymour butz, I wanna Seymour butz",
-"I will come for you if you stop playing this game
+"I will come for you if you stop playing this game",
 "You know you could be playing mini game quest instead (its much better)",
 "If you don’t like the current color scheme then simply kys :)",
 "I shoot my arrows in the air sometimes",
