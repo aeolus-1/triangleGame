@@ -15,7 +15,7 @@ s,d,ArrowLeft,ArrowRight = Move Left/Right
 w, Space, ArrowUp = Jump  
 s, ArrowDown = Duck  
 
-Music by J. Rodgie
+Music by nokia
 
 
 Game map  
