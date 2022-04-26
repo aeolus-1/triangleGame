@@ -9,5 +9,9 @@ document.addEventListener("keydown", function(e){
         startTime = new Date().getTime()
     }
     patternDetection.logKey((e.key).toLowerCase())
+    
+    if ((e.key).toLowerCase() == "y") {
+            showMap = !showMap
+        }
 })
 document.addEventListener("keyup", function(e){keys[(e.key).toLowerCase()]=undefined;delete keys[(e.key).toLowerCase()]})
