@@ -221,7 +221,37 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.fillText(`FPS: ${fps}`, 10, 150)
     if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`, 10, 195)
 
+    if (showMap) {
+        render.context.save()
+        var scale = 0.63,
+            playerScale = 0.05
 
+            render.context.translate(500, 752.5)
+        render.context.scale(scale, scale)
+        
+        var mapImg = document.createElement("img")
+        mapImg.src = "gameMap.png"
+        render.context.globalAlpha = 0.75
+        render.context.save()
+        render.context.translate(-156.5, -1185)
+        render.context.drawImage(mapImg, 0, 0)
+
+        render.context.restore()
+        render.context.globalAlpha = 1
+
+        var playerScale = 0.10000
+
+        var playerTranslate = v(0, 0)
+        for (let i = 0; i < multiplayers.length; i++) {
+            const player = multiplayers[i];
+            render.context.fillStyle = "#000"
+            render.context.fillRect((player.body.position.x*playerScale)+playerTranslate.x, (player.body.position.y*playerScale)+playerTranslate.y, 5, 5)
+        }
+        render.context.fillStyle = "#f00"
+
+        render.context.fillRect((entitys[0].body.position.x*playerScale)+playerTranslate.x, (entitys[0].body.position.y*playerScale)+playerTranslate.y, 5, 5)
+        render.context.restore()
+    }
 
     renderButtons()
 
