@@ -51,14 +51,9 @@ class Player extends Entity {
             const body = engine.world.bodies[i];
             if (body.id != this.body.id && body.id != fakeGround.id) otherBodies.push(body)
         }
-        var multiplayerBodies = []
-        for (let i = 0; i < multiplayers.length; i++) {
-            let player = multiplayers[i];
-            multiplayerBodies.push(player.body)
-        } 
 
         let detector = ((Matter.Detector.collisions(Matter.Detector.create({
-                bodies: [this.body, ...Levels.getGroundBodies(), ...otherBodies, ...multiplayerBodies]
+                bodies: [this.body, ...Levels.getGroundBodies(), ...otherBodies]
             })))),
             detector2 = ((Matter.Detector.collisions(Matter.Detector.create({
                 bodies: [this.body, fakeGround]
@@ -178,7 +173,7 @@ class Player extends Entity {
         }
 
         if (testKey(this.keyset["jump"], keys) && (this.jumpTime > 0)) {
-            this.applyForce(v(0, -this.body.velocity.y - (jump * (Math.abs(0) ? 0.75 : 1))))
+            this.applyForce(v((this.wallJump * 1), -this.body.velocity.y - (jump * (Math.abs(this.wallJump) ? 0.75 : 1))))
             Matter.Body.translate(this.body, v(this.wallJump * 5, 0))
 
 
@@ -215,12 +210,12 @@ class Player extends Entity {
 }
 
 class Multiplayer extends Entity {
-    constructor(pos, keyset, multiId) {
+    constructor(pos, keyset, multiId, username) {
         var scale = 1
         super(pos, scale * 30)
         this.scale = scale
 
-
+        this.username = username
         this.multiId = multiId
         this.keyset = keyset
         this.jumpTime = 0

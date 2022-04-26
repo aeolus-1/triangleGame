@@ -1,5 +1,5 @@
 function v(x, y) {
-  return { x: x, y: y };
+    return { x: x, y: y };
 }
 
 const times = [];
@@ -21,10 +21,10 @@ function refreshLoop() {
 refreshLoop();
 
 var Engine = Matter.Engine,
-  Render = Matter.Render,
-  Runner = Matter.Runner,
-  Bodies = Matter.Bodies,
-  Composite = Matter.Composite;
+    Render = Matter.Render,
+    Runner = Matter.Runner,
+    Bodies = Matter.Bodies,
+    Composite = Matter.Composite;
 Composites = Matter.Composites;
 Constraint = Matter.Constraint;
 
@@ -32,13 +32,13 @@ var engine = Engine.create();
 
 
 var render = Render.create({
-  element: document.body,
-  engine: engine,
-  options: {
-      wireframes:false,
-      background:colorTheme.back
-  },
-  
+    element: document.body,
+    engine: engine,
+    options: {
+        wireframes: false,
+        background: colorTheme.back
+    },
+
 });
 
 initalRenderBounds = JSON.parse(JSON.stringify(render.bounds))
@@ -50,11 +50,11 @@ canvas.height = window.innerHeight;
 
 var mouse = Matter.Mouse.create(render.canvas);
 var mouseConstraint = Matter.MouseConstraint.create(engine, {
-  mouse: mouse,
-  constraint: {
-    stiffness: 1,
-    render: { visible: true },
-  },
+    mouse: mouse,
+    constraint: {
+        stiffness: 1,
+        render: { visible: true },
+    },
 });
 
 //Matter.Composite.add(engine.world, mouseConstraint);
@@ -64,7 +64,7 @@ var runner = Matter.Runner.create();
 
 Render.run(render);
 
-var chunksComp = Matter.Composite.create({label:"chunksComp"})
+var chunksComp = Matter.Composite.create({ label: "chunksComp" })
 
 Matter.Composite.add(engine.world, chunksComp)
 
@@ -74,7 +74,7 @@ function getDst(a, b) {
     return Math.sqrt(Math.pow(xd, 2) + Math.pow(yd, 2))
 }
 var nith = false
-Matter.Events.on(runner, "beforeUpdate", function () {
+Matter.Events.on(runner, "beforeUpdate", function() {
 
     patternDetection.updateLog()
     if (nith) patternDetection.findPatterns()
@@ -88,10 +88,10 @@ Matter.Events.on(runner, "beforeUpdate", function () {
         const entity = entitys[i];
         entity.update()
     }
-  
-    for (let i = 0; i <  multiplayers.length; i++) {
-        const  multiplayer =  multiplayers[i];
-         multiplayer.update()
+
+    for (let i = 0; i < multiplayers.length; i++) {
+        const multiplayer = multiplayers[i];
+        multiplayer.update()
     }
 
     for (let i = 0; i < spawners.length; i++) {
@@ -100,41 +100,41 @@ Matter.Events.on(runner, "beforeUpdate", function () {
     }
 
 
-    preKeys = {...keys}
+    preKeys = {...keys }
 
     let distance = getDst(entitys[0].body.position, v(2910, -3190))
     if (distance > 1000) {
-        
+
         Matter.Body.set(fakeGround, "position", v(2910, -3190))
         Matter.Body.set(fakeGround, "angle", 0)
         Matter.Body.set(fakeGround, "angularVelocity", 0)
         Matter.Body.set(fakeGround, "velocity", v(0, 0))
-        
-    } 
-    if (timeStamp >= 0) timeStamp += engine.timing.lastDelta/(1000/60)*1.5
 
-  if (keys["|"]) nith = true
+    }
+    if (timeStamp >= 0) timeStamp += engine.timing.lastDelta / (1000 / 60) * 1.5
+
+    if (keys["|"]) nith = true
 
 });
-var camera = v(0,0)
+var camera = v(0, 0)
 Matter.Events.on(render, "beforeRender", function() {
     render.canvas.width = Matter.Common.clamp(window.innerWidth, 0, 1440)
     render.canvas.height = Matter.Common.clamp(window.innerHeight, 0, 789)
     render.context.save()
     hero = entitys[0].body.position
 
-    let center = v(-render.canvas.width/4, -render.canvas.height/4)
+    let center = v(-render.canvas.width / 4, -render.canvas.height / 4)
 
-    let targetPos = v(0,0),
+    let targetPos = v(0, 0),
         scale = 1
     if (entitys.length > 1) {
-        let sizeX = Matter.Common.clamp(Math.abs(entitys[0].body.position.x-entitys[1].body.position.x), 400, Infinity),
-            scaleX = sizeX/400,
+        let sizeX = Matter.Common.clamp(Math.abs(entitys[0].body.position.x - entitys[1].body.position.x), 400, Infinity),
+            scaleX = sizeX / 400,
 
-            sizeY = Matter.Common.clamp(Math.abs(entitys[0].body.position.y-entitys[1].body.position.y), 400, Infinity),
-            scaleY = sizeY/400
+            sizeY = Matter.Common.clamp(Math.abs(entitys[0].body.position.y - entitys[1].body.position.y), 400, Infinity),
+            scaleY = sizeY / 400
 
-            scale = Math.max(scaleX, scaleY)*1.1
+        scale = Math.max(scaleX, scaleY) * 1.1
 
 
     }
@@ -147,19 +147,19 @@ Matter.Events.on(render, "beforeRender", function() {
     targetPos.x /= entitys.length
     targetPos.y /= entitys.length
 
-    let xDiff = targetPos.x-camera.x,
-        yDiff = targetPos.y-camera.y
+    let xDiff = targetPos.x - camera.x,
+        yDiff = targetPos.y - camera.y
 
     camera.x += xDiff * 0.1
     camera.y += yDiff * 0.1
 
     // Follow Hero at X-axis
-    render.bounds.min.x = (center.x*scale) + camera.x
-    render.bounds.max.x = (center.x*scale) + camera.x + ((initalRenderBounds.max.x*scale)/2)
+    render.bounds.min.x = (center.x * scale) + camera.x
+    render.bounds.max.x = (center.x * scale) + camera.x + ((initalRenderBounds.max.x * scale) / 2)
 
     // Follow Hero at Y-axis
-    render.bounds.min.y = (center.y*scale) + camera.y
-    render.bounds.max.y = (center.y*scale) + camera.y + ((initalRenderBounds.max.y*scale)/2)
+    render.bounds.min.y = (center.y * scale) + camera.y
+    render.bounds.max.y = (center.y * scale) + camera.y + ((initalRenderBounds.max.y * scale) / 2)
     Matter.Render.startViewTransform(render)
 })
 Matter.Events.on(render, "afterRender", function() {
@@ -185,48 +185,55 @@ Matter.Events.on(render, "afterRender", function() {
         console.log("yys")
     }
 
-    
+    for (var i = 0; i < multiplayers.length; i++) {
+
+        render.context.fillText(String(multiplayers[i].username), parseInt(multiplayers[i].body.position.x), parseInt(multiplayers[i].body.position.y))
+    }
+
+    var testPos = v(-446.0919022968253, 124.92979674760744)
 
     Levels.texts.forEach(text => {
         render.context.fillStyle = "#000"
         render.context.strokeStyle = "#000"
         render.context.font = "10px Arial"
-        render.context.fillText(text.text,  text.x, text.y)
-        render.context.strokeText(text.text,  text.x, text.y)
+        render.context.fillText(text.text, text.x, text.y)
+        render.context.strokeText(text.text, text.x, text.y)
     });
-    
+
 
     //render.context.fillText(`you get ${time}`,  camera.x-(window.innerWidth/4)+20, camera.y-(window.innerHeight/4)+20)
-    render.context.fillText(`you get ${Math.floor(-timeStamp)/100}s cookies`,  endPos.x, endPos.y)
+    render.context.fillText(`you get ${Math.floor(-timeStamp)/100}s cookies`, endPos.x, endPos.y)
 
     render.context.restore()
     render.context.font = '20px Arial'
 
-    render.context.fillText(`${Math.round(Matter.Common.clamp((-entitys[0].body.position.y+10)/100, 0, Infinity))+2}m`,  10, 90)
-    render.context.fillText(`Speed: ${Math.abs(Math.round(entitys[0].body.velocity.x * 100) / 100)}`,  10, 120)
-    render.context.fillText(`FPS: ${fps}`,  10, 150)
-    if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`,  10, 195)
+    render.context.fillText(`${Math.round(Matter.Common.clamp((-entitys[0].body.position.y+10)/100, 0, Infinity))+2}m`, 10, 90)
+    render.context.fillText(`Speed: ${Math.abs(Math.round(entitys[0].body.velocity.x * 100) / 100)}`, 10, 120)
+    render.context.fillText(`FPS: ${fps}`, 10, 150)
+    if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`, 10, 195)
+
+
 
     renderButtons()
-    
+
     if (loading < 1) {
         render.context.fillStyle = pSBC(-0.3, colorTheme.back)
-        render.context.fillRect(0,0,render.canvas.width,render.canvas.height)
+        render.context.fillRect(0, 0, render.canvas.width, render.canvas.height)
 
         render.context.fillStyle = pSBC(0.8, colorTheme.back)
-        let barPos = v(render.canvas.width/2, render.canvas.height/2)
-        render.context.fillRect(barPos.x-50,barPos.y-10,100,20)
+        let barPos = v(render.canvas.width / 2, render.canvas.height / 2)
+        render.context.fillRect(barPos.x - 50, barPos.y - 10, 100, 20)
 
         render.context.fillStyle = pSBC(-0.8, colorTheme.back)
-        render.context.fillRect(barPos.x-45,barPos.y-7.5,(loading*90),15)
-        loading += 0.01*Math.random()
+        render.context.fillRect(barPos.x - 45, barPos.y - 7.5, (loading * 90), 15)
+        loading += 0.01 * Math.random()
 
 
         render.context.fillStyle = "#000"
         let text = tip,
             width = render.context.measureText(text).width
-        render.context.fillText("Tip:", barPos.x-(32.59765625/2), barPos.y+50)
-        render.context.fillText(text, barPos.x-(width/2), barPos.y+70)
+        render.context.fillText("Tip:", barPos.x - (32.59765625 / 2), barPos.y + 50)
+        render.context.fillText(text, barPos.x - (width / 2), barPos.y + 70)
     } else if (loading != 2) {
         Matter.Runner.start(runner, engine);
         loading = 2
