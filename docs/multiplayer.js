@@ -64,7 +64,6 @@ if (confirm("Would you like to join multiplayer? /n /n multiplayer made by jake 
                     Matter.Body.set(multiplayers[i].body, "velocity", v(data[key].velX, data[key].velY));
                     Matter.Body.set(multiplayers[i].body, "angularVelocity", data[key].angVel);
                     multiplayers[i].scale = data[key].scale;
-                    render.context.fillText(data[key].username, data[key].x, data[key].y)
                 }
             }
             return true
