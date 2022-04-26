@@ -185,7 +185,7 @@ Matter.Events.on(render, "afterRender", function() {
         console.log("yys")
     }
 
-
+    var testPos = v(-446.0919022968253, 124.92979674760744)
 
     Levels.texts.forEach(text => {
         render.context.fillStyle = "#000"
@@ -207,7 +207,7 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.fillText(`FPS: ${fps}`, 10, 150)
     for (var i = 0; i < multiplayers.length; i++) {
 
-        render.context.fillText(String(multiplayers[i].username), -446.3175242821454, 124.92979674760744)
+        render.context.fillText(String(multiplayers[i].username), testPos.x, testPos.y)
     }
     if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`, 10, 195)
 
