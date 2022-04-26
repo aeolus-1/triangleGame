@@ -207,7 +207,7 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.fillText(`FPS: ${fps}`, 10, 150)
     for (var i = 0; i < multiplayers.length; i++) {
         console.log(multiplayers[i].username)
-        render.context.fillText(multiplayers[i].username, multiplayers[i].body.position.x, multiplayers[i].body.position.y)
+        render.context.fillText(String(multiplayers[i].username), parseInt(multiplayers[i].body.position.x), parseInt(multiplayers[i].body.position.y))
     }
     if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`, 10, 195)
 
