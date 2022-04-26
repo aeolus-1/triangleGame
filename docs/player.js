@@ -53,7 +53,7 @@ class Player extends Entity {
         }
 
         let detector = ((Matter.Detector.collisions(Matter.Detector.create({
-                bodies: [this.body, ...Levels.getGroundBodies(), ...otherBodies]
+                bodies: [this.body, ...Levels.getGroundBodies(), ...otherBodies, ...multiplayers]
             })))),
             detector2 = ((Matter.Detector.collisions(Matter.Detector.create({
                 bodies: [this.body, fakeGround]
