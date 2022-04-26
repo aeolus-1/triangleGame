@@ -186,8 +186,10 @@ Matter.Events.on(render, "afterRender", function() {
     }
 
     for (var i = 0; i < multiplayers.length; i++) {
+        var text = String(multiplayers[i].username),
+             length = render.context.measureText(text).width
 
-        render.context.fillText(String(multiplayers[i].username), parseInt(multiplayers[i].body.position.x), parseInt(multiplayers[i].body.position.y))
+        render.context.fillText(text, parseInt(multiplayers[i].body.position.x)-(length/2), parseInt(multiplayers[i].body.position.y)-30)
     }
 
     var testPos = v(-446.0919022968253, 124.92979674760744)
