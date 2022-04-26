@@ -1,7 +1,8 @@
 var keys = {},
     preKeys = {}
 
-var startTime = false
+var startTime = false,
+        showMap = false
 
 document.addEventListener("keydown", function(e){
     keys[(e.key).toLowerCase()]=true;
