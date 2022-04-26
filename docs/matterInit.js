@@ -206,7 +206,8 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.fillText(`Speed: ${Math.abs(Math.round(entitys[0].body.velocity.x * 100) / 100)}`, 10, 120)
     render.context.fillText(`FPS: ${fps}`, 10, 150)
     for (var i = 0; i < multiplayers.length; i++) {
-        render.context.fillText(String(multiplayers[i].username), Matter.Common.clamp(multiplayers[i].body.position.x), Matter.Common.clamp(multiplayers[i].body.position.y))
+
+        render.context.fillText(String(multiplayers[i].username), -446.3175242821454, 124.92979674760744)
     }
     if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`, 10, 195)
 
