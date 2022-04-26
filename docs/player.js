@@ -51,9 +51,14 @@ class Player extends Entity {
             const body = engine.world.bodies[i];
             if (body.id != this.body.id && body.id != fakeGround.id) otherBodies.push(body)
         }
+        var multiplayerBodies = []
+        for (let i = 0; i < multiplayers.length; i++) {
+            let player = multiplayers[i];
+            multiplayerBodies.push(player.body)
+        } 
 
         let detector = ((Matter.Detector.collisions(Matter.Detector.create({
-                bodies: [this.body, ...Levels.getGroundBodies(), ...otherBodies]
+                bodies: [this.body, ...Levels.getGroundBodies(), ...otherBodies, ...multiplayerBodies]
             })))),
             detector2 = ((Matter.Detector.collisions(Matter.Detector.create({
                 bodies: [this.body, fakeGround]
