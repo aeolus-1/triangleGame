@@ -211,6 +211,8 @@ Matter.Events.on(render, "afterRender", function() {
         render.context.fillText(multiplayers[i].username, multiplayers[i].body.position.x, multiplayers[i].body.position.y)
     }
 
+
+
     renderButtons()
 
     if (loading < 1) {
