@@ -188,6 +188,13 @@ Matter.Events.on(render, "afterRender", function() {
     for (var i = 0; i < multiplayers.length; i++) {
         var text = String(multiplayers[i].username),
              length = render.context.measureText(text).width
+        
+        var turn = (Math.floor(new Date().getTime()/500) % 2) == 0
+
+        if (text == "⇥⎋⇤") {
+            text = ((turn)?"☆★":"★☆")+ "ADMIN" + ((turn)?"★☆":"☆★")
+            render.context.fillStyle = "#f00"
+        }
 
         render.context.fillText(text, parseInt(multiplayers[i].body.position.x)-(length/2), parseInt(multiplayers[i].body.position.y)-30)
     }
