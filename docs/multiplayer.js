@@ -1,4 +1,4 @@
-if (confirm("Would you like to join multiplayer? \n \n multiplayer made by jake ahahahha self promo")) {
+if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by jake cause im cool")) {
     var inactive;
     const socket = io("https://triangle-game-server.herokuapp.com")
 
@@ -16,7 +16,7 @@ if (confirm("Would you like to join multiplayer? \n \n multiplayer made by jake 
         inactive = setTimeout(() => {
             socket.emit('inactive');
             alert("disconnected due to inactivity");
-        }, 600000)
+        }, 300000)
     }
 
     socket.on('connect', function() {
