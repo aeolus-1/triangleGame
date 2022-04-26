@@ -1,5 +1,19 @@
 var infinJump = false
 
+function getPlayerScale(player) {
+    var vt1 = player.body.vertices[0],
+        vt2 = player.body.vertices[1]
+
+    return Math.floor(getDst(vt1, vt2))/30
+}
+
+function setPlayerScale(player, scale) {
+    var ogScale = getPlayerScale(player),
+        targetScale = scale/ogScale
+
+    Matter.Body.scale(player.body, targetScale, targetScale)
+}
+
 
 class Entity {
     constructor(pos, scale) {
