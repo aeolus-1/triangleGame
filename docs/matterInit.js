@@ -208,7 +208,7 @@ Matter.Events.on(render, "afterRender", function() {
     if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`, 10, 195)
 
     for (var i = 0; i < multiplayers.length; i++) {
-        render.context.fillText(multiplayers[i].username, multiplayers[i].body.position.x, multiplayers[i].body.position.yS)
+        render.context.fillText(multiplayers[i].username, multiplayers[i].body.position.x, multiplayers[i].body.position.y)
     }
 
     renderButtons()
