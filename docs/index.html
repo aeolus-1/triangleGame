@@ -83,14 +83,14 @@ var timeStamp = 0
     <script>
       //Levels.loadData(levelDat["basic"])
       Chunks.loadLevelDat(levelDat["start"]);
-      entitys.push(
-        new Player(v(120, 100), {
-          moveLeft: ["arrowleft", "a"],
-          moveRight: ["arrowright", "d"],
-          jump: ["arrowup", "w"],
-          duck: ["arrowdown", "s"],
-        })
-      );
+      var newPl = new Player(v(120, 100), {
+                  moveLeft: ["arrowleft", "a"],
+                  moveRight: ["arrowright", "d"],
+                  jump: ["arrowup", "w"],
+                  duck: ["arrowdown", "s"],
+                })
+      newPl.body.render.fillStyle = pSBC(-0.3, colorTheme.player);
+      entitys.push(newPl)
 
       Save.loadGame();
 
