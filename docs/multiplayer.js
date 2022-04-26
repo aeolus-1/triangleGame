@@ -19,7 +19,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     });
 
     function coords() {
-        socket.emit('coords', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: entitys[0].scale });
+        socket.emit('coords', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: getPlayerScale(entitys[0]) });
         requestAnimationFrame(coords)
     }
 
@@ -31,7 +31,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     }
 
     socket.on('connect', function() {
-        socket.emit('playerJoin', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: entitys[0].scale });
+        socket.emit('playerJoin', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: getPlayerScale(entitys[0]) });
     });
 
     socket.on('createPlayer', function(data) {
@@ -63,6 +63,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
                     Matter.Body.set(multiplayers[i].body, "angle", data[key].angle);
                     Matter.Body.set(multiplayers[i].body, "velocity", v(data[key].velX, data[key].velY));
                     Matter.Body.set(multiplayers[i].body, "angularVelocity", data[key].angVel);
+                    setPlayerScale(multiplayers[i], data[key].scale)
                 }
             }
             return true
