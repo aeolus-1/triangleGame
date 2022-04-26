@@ -1,4 +1,4 @@
-if (confirm("Would you like to join multiplayer? /n /n multiplayer made by jake cause im cool")) {
+if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by jake cause im cool")) {
     var inactive;
     var username;
 
