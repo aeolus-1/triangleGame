@@ -88,6 +88,11 @@ Matter.Events.on(runner, "beforeUpdate", function () {
         const entity = entitys[i];
         entity.update()
     }
+  
+    for (let i = 0; i <  multiplayers.length; i++) {
+        const  multiplayer =  multiplayers[i];
+         multiplayer.update()
+    }
 
     for (let i = 0; i < spawners.length; i++) {
         const entity = spawners[i];
