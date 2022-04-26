@@ -1,4 +1,4 @@
-if (confirm("Would you like to join multiplayer?")) {
+if (confirm("Would you like to join multiplayer? \n \n multiplayer made by jake ahahahha self promo")) {
     var inactive;
     const socket = io("https://triangle-game-server.herokuapp.com")
 
