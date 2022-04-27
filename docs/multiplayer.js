@@ -82,7 +82,10 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
                             duck: [""],
                         }, key, data[key].username)
                     )
-                    multiplayers.push(newpl)
+                    if (newpl.username != undefined) {
+                        multiplayers.push(newpl)
+
+                    }
                 }
             }
             return true
