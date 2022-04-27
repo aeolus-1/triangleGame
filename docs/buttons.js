@@ -80,7 +80,6 @@ var addPlayerButton = new Button(167,10, imgCache.userPlus, function(){
 })
 addPlayerButton.on = false
 
-buttons.push(addPlayerButton)
 
 function resetGame() {
     alert("Reset player position")
