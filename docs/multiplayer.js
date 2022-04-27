@@ -36,7 +36,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     socket.on('createPlayer', function(data) {
         if (data.id != socket.id) {
-            if (data.id != "undefined") {
+            if (data.id != "undefined" && data.username != undefined) {
                 var newpl = (
                     new Multiplayer(v(data.x, data.y), {
                         moveLeft: [""],
@@ -45,9 +45,8 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
                         duck: [""],
                     }, data.id, data.username)
                 )
-                if (newpl.username != undefined) {
-                    multiplayers.push(newpl)
-                }
+                 multiplayers.push(newpl)
+                
                 console.log("adding playyer")
             }
         }
@@ -75,7 +74,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     socket.on('createExistingPlayers', function(data) {
         Object.keys(data).every(function(key) {
             if (key != socket.id) {
-                if (key != "undefined") {
+                if (key != "undefined" && data[key].username != undefined) {
                     var newpl = (
                         new Multiplayer(v(data[key].x, data[key].y), {
                             moveLeft: [""],
@@ -84,10 +83,9 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
                             duck: [""],
                         }, key, data[key].username)
                     )
-                    if (newpl.username != undefined) {
-                        multiplayers.push(newpl)
+                     multiplayers.push(newpl)
 
-                    }
+                    
                 }
             }
             return true
