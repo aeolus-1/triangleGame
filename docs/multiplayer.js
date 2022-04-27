@@ -11,6 +11,8 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
             } else {
                 username = user;
             }
+        } else {
+            askForUser()
         }
 
     }
