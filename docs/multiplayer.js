@@ -36,19 +36,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
         }, 600000)
     }
 
-    function kick(id, message) {
-        var modKey = localStorage.getItem("moderationKey")
-        var hash = CryptoJS.SHA256(modKey);
-        if (hash.toString() == hashedKey) {
-            if (message == undefined) {
-                message = "No reason Given"
-            }
-            socket.emit('kick', { id: id, message: message })
-        } else {
-            console.log("wrong mod key")
-        }
-
-    }
+    
 
     socket.on('connect', function() {
         socket.emit('playerJoin', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: getPlayerScale(entitys[0]) });
