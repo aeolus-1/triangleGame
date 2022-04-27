@@ -4,7 +4,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     function askForUser() {
         var user = prompt("Please enter a username");
-        if (user == null || user.length > 12) {
+        if (user == "" || user.length > 12) {
             askForUser();
         } else {
             username = user;
