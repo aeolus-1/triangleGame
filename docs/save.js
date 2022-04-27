@@ -1,5 +1,9 @@
 class Save {
   static saveGame() {
+    
+    localStorage.setItem("completedGame", completedGame)
+
+    
     let spawnsDat = []
     spawns.bodies.forEach(body => {
       spawnsDat.push({
