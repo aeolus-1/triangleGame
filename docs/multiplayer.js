@@ -121,7 +121,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     })
 
     socket.on('beenKicked', function(data) {
-        alert(` You have been kicked with the reason: ${data.message}`)
+        alert(` You have been kicked with the reason: ${data}`)
     })
 
     askForUser()
