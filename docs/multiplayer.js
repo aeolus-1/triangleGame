@@ -1,13 +1,19 @@
 if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by jake cause im cool")) {
     var inactive;
     var username;
+    var hashedKey = "244dc524b6bba33086418c1a68cb4bd95304a2562489c6c19d5c785979f48b7f"
 
     function askForUser() {
         var user = prompt("Please enter a username");
-        if (user == "" || user.length > 12) {
-            askForUser();
+        if (user != null) {
+            if (user == "" || user.length > 12) {
+                alert("Username is too long or invaild")
+                askForUser();
+            } else {
+                username = user;
+            }
         } else {
-            username = user;
+            askForUser()
         }
 
     }
@@ -30,6 +36,20 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
         }, 600000)
     }
 
+    function kick(id, message) {
+        var modKey = localStorage.getItem("moderationKey")
+        var hash = CryptoJS.SHA256(modKey);
+        if (hash.toString() == hashedKey) {
+            if (message == undefined) {
+                message = "No reason Given"
+            }
+            socket.emit('kick', { id: id, message: message })
+        } else {
+            console.log("wrong mod key")
+        }
+
+    }
+
     socket.on('connect', function() {
         socket.emit('playerJoin', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: getPlayerScale(entitys[0]) });
     });
@@ -45,8 +65,8 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
                         duck: [""],
                     }, data.id, data.username)
                 )
-                 multiplayers.push(newpl)
-                
+                multiplayers.push(newpl)
+
                 console.log("adding playyer")
             }
         }
@@ -83,9 +103,9 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
                             duck: [""],
                         }, key, data[key].username)
                     )
-                     multiplayers.push(newpl)
+                    multiplayers.push(newpl)
 
-                    
+
                 }
             }
             return true
@@ -100,6 +120,11 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
             }
         }
     })
+
+    socket.on('beenKicked', function(data) {
+        alert(` You have been kicked with the reason: ${data}`)
+    })
+
     askForUser()
     startTimer()
 }
