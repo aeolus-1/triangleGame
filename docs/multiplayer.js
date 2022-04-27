@@ -4,10 +4,13 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     function askForUser() {
         var user = prompt("Please enter a username");
-        if (user == "" || user.length > 12) {
-            askForUser();
-        } else {
-            username = user;
+        if (user != null) {
+            if (user == "" || user.length > 12) {
+                alert("Username is too long or invaild")
+                askForUser();
+            } else {
+                username = user;
+            }
         }
 
     }
@@ -45,8 +48,8 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
                         duck: [""],
                     }, data.id, data.username)
                 )
-                 multiplayers.push(newpl)
-                
+                multiplayers.push(newpl)
+
                 console.log("adding playyer")
             }
         }
@@ -83,9 +86,9 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
                             duck: [""],
                         }, key, data[key].username)
                     )
-                     multiplayers.push(newpl)
+                    multiplayers.push(newpl)
 
-                    
+
                 }
             }
             return true
