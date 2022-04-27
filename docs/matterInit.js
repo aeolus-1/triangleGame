@@ -5,7 +5,12 @@ function v(x, y) {
 const times = [];
 let fps;
 
-var loading = 0
+var loading = 0,
+    completedGame = localStorage.getItem("completedGame")
+
+if (completedGame == null) {
+    completedGame = false
+}
 
 function refreshLoop() {
     window.requestAnimationFrame(() => {
@@ -220,6 +225,14 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.fillText(`Speed: ${Math.abs(Math.round(entitys[0].body.velocity.x * 100) / 100)}`, 10, 120)
     render.context.fillText(`FPS: ${fps}`, 10, 150)
     if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`, 10, 195)
+    
+    if (completedGame) {
+        if (timeStamp < 0) {
+            render.context.fillText(`${Math.floor(-timeStamp/10)/10} cookies`, 10, 240)
+        } else {
+            render.context.fillText(`${Math.floor(timeStamp/10)/10} cookies`, 10, 240)
+        }
+    }
 
     if (showMap) {
         render.context.save()
