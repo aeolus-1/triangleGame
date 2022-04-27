@@ -40,11 +40,12 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
         var modKey = localStorage.getItem("moderationKey")
         var hash = CryptoJS.SHA256(modKey);
         if (hash.toString() == hashedKey) {
-            console.log("mod yes")
             if (message == undefined) {
-                message = "You were kicked from the server"
+                message = "No reason Given"
             }
             socket.emit('kick', { id: id, message: message })
+        } else {
+            console.log("wrong mod key")
         }
 
     }
