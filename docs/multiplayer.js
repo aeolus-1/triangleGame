@@ -45,7 +45,9 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
                         duck: [""],
                     }, data.id, data.username)
                 )
-                multiplayers.push(newpl)
+                if (newpl.username != undefined) {
+                    multiplayers.push(newpl)
+                }
                 console.log("adding playyer")
             }
         }
