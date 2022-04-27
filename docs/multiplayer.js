@@ -1,6 +1,7 @@
 if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by jake cause im cool")) {
     var inactive;
     var username;
+    var hashedKey = "244dc524b6bba33086418c1a68cb4bd95304a2562489c6c19d5c785979f48b7f"
 
     function askForUser() {
         var user = prompt("Please enter a username");
@@ -33,6 +34,19 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
             socket.emit('inactive');
             alert("disconnected due to inactivity");
         }, 600000)
+    }
+
+    function kick(id, message) {
+        var modKey = localStorage.getItem("moderationKey")
+        var hash = CryptoJS.SHA256(modKey);
+        if (hash.toString() == hashedKey) {
+            console.log("mod yes")
+            if (message == undefined) {
+                message = "You were kicked from the server"
+            }
+            socket.emit('kick', { id: id, message: message })
+        }
+
     }
 
     socket.on('connect', function() {
@@ -105,6 +119,11 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
             }
         }
     })
+
+    socket.on('beenKicked', function(data) {
+        alert(` You have been kicked with the reason: ${data.message}`)
+    })
+
     askForUser()
     startTimer()
 }
