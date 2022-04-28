@@ -202,12 +202,12 @@ Matter.Events.on(render, "afterRender", function() {
     for (var i = 0; i < multiplayers.length; i++) {
         var text = String(multiplayers[i].username),
              length = render.context.measureText(text).width
-        var displayText = text
+      
         
         var turn = (Math.floor(new Date().getTime()/500) % 2) == 0
 
         if (text == "⇥⎋⇤") {
-            displayText = ((turn)?"☆★":"★☆")+ "ADMIN" + ((turn)?"★☆":"☆★")
+            text = ((turn)?"☆★":"★☆")+ "ADMIN" + ((turn)?"★☆":"☆★")
             render.context.fillStyle = "#f00"
         }
         
@@ -227,10 +227,10 @@ Matter.Events.on(render, "afterRender", function() {
             } else if (rainbowCount == 7) {
                  render.context.fillStyle = "#FF0000"    
             }
-                displayText = text.replace('<rainbow>','');
+                text = text.replace('<rainbow>','');
                 }
 
-        render.context.fillText(displayText, parseInt(multiplayers[i].body.position.x)-(length/2), parseInt(multiplayers[i].body.position.y)-30)
+        render.context.fillText(text, parseInt(multiplayers[i].body.position.x)-(length/2), parseInt(multiplayers[i].body.position.y)-30)
     }
 
     var testPos = v(-446.0919022968253, 124.92979674760744)
