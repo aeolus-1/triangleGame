@@ -4,6 +4,15 @@ function v(x, y) {
 
 const times = [];
 let fps;
+var rainbowCount = 1
+
+setInterval(() => {
+if (rainbowCount == 7) {
+    rainbowCount = 1
+} else {
+    rainbowCount++
+}
+}, 200)
 
 var loading = 0,
     completedGame = localStorage.getItem("completedGame")
@@ -200,7 +209,27 @@ Matter.Events.on(render, "afterRender", function() {
             text = ((turn)?"☆★":"★☆")+ "ADMIN" + ((turn)?"★☆":"☆★")
             render.context.fillStyle = "#f00"
         }
+        
         render.context.fillStyle = "#000"
+        
+          if (text.startsWith("<rainbow>")) {
+            if (rainbowCount == 1) {
+                render.context.fillStyle = "#9400D3"
+            } else if (rainbowCount == 2) {
+                render.context.fillStyle = "#4B0082"
+            } else if (rainbowCount == 3) {
+                render.context.fillStyle = "#0000FF"
+            } else if (rainbowCount == 4) {
+                render.context.fillStyle = "#00FF00"
+            } else if (rainbowCount == 5) {
+                render.context.fillStyle = "#FFFF00"
+            } else if (rainbowCount == 6) {
+                render.context.fillStyle = "#FF7F00"
+            } else if (rainbowCount == 7) {
+                 render.context.fillStyle = "#FF0000"    
+            }
+                text = text.replace('<rainbow>','');
+                }
         render.context.fillText(text, parseInt(multiplayers[i].body.position.x)-(length/2), parseInt(multiplayers[i].body.position.y)-30)
     }
 
