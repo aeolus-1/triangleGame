@@ -49,7 +49,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     
     const socket = io("https://triangle-game-server.herokuapp.com")
 
-    document.addEventListener("keypress", function() {
+    document.addEventListener("keypress", function(e) {
         window.clearTimeout(inactive);
         startTimer()
          if (e.key === "Enter") {
