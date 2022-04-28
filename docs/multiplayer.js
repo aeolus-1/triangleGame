@@ -95,7 +95,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
                     Matter.Body.set(multiplayers[i].body, "angle", data[key].angle);
                     Matter.Body.set(multiplayers[i].body, "velocity", v(data[key].velX, data[key].velY));
                     Matter.Body.set(multiplayers[i].body, "angularVelocity", data[key].angVel);
-                    setPlayerScale(multiplayers[i], data[key].scale)
+                    setPlayerScale2(multiplayers[i], data[key].scale)
                 }
             }
             return true
