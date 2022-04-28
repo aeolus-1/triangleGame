@@ -289,6 +289,19 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.fillText(`Speed: ${Math.abs(Math.round(entitys[0].body.velocity.x * 100) / 100)}`, 10, 120)
     render.context.fillText(`FPS: ${fps}`, 10, 150)
     if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`, 10, 195)
+       var msgAmount = 0
+        var msgDist = 450
+    
+    
+    for (var i = 0; i < chatMsg.length; i++) {
+        render.context.fillText(`${chatMsg[i].username}: ${chatMsg[i].message}`, 10, msgDist)
+        msgDist += 30
+        msgAmount++
+        if (msgAmount == 11) {
+        chatMsg.shift()
+        msgAmount -= 1
+}
+    }
     
     if (completedGame) {
         if (timeStamp < 0) {
