@@ -269,14 +269,19 @@ Matter.Events.on(render, "afterRender", function() {
     for (let i = 0; i < multiChat.length; i++) {
         const msg = multiChat[i];
         
-        render.context.save()
-        render.context.fillStyle = pSBC(-0.8, colorTheme.back)
-        render.context.font = "10px Times New Roman"
-        render.context.globalAlpha = Matter.Common.clamp((msg.time/100)*10, 0, 1)
-        var length = render.context.measureText(msg.text).width
-        render.context.fillText(msg.text, msg.pos.x+(length/2), msg.pos.y)
-        render.context.globalAlpha = 1
-        render.context.restore()
+        if (msg.time < 0) {
+            multiChat.splice(i, 1)
+        } else {
+            render.context.save()
+            render.context.fillStyle = pSBC(-0.8, colorTheme.back)
+            render.context.font = "10px Times New Roman"
+            render.context.globalAlpha = Matter.Common.clamp((msg.time/100)*10, 0, 1)
+            var length = render.context.measureText(msg.text).width
+            render.context.fillText(msg.text, msg.pos.x+(length/2), msg.pos.y)
+            render.context.globalAlpha = 1
+            render.context.restore()
+        }
+        msg.time -= 0.25
         
 
 
