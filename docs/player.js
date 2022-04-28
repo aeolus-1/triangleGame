@@ -7,7 +7,7 @@ function getPlayerScale(player) {
     return Math.floor(getDst(vt1, vt2))/30
 }
 
-function setPlayerScale(player, scale) {
+function setPlayerScale2(player, scale) {
     var ogScale = getPlayerScale(player),
         targetScale = scale/ogScale
 
