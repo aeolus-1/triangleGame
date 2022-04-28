@@ -249,6 +249,7 @@ Matter.Events.on(render, "afterRender", function() {
     for (let i = 0; i < chat.length; i++) {
         const msg = chat[i];
         if (msg.time < 0) {
+            i -= 1
             chat.splice(i, 1)
         } else {
             render.context.save()
