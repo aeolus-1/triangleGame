@@ -17,6 +17,8 @@ s, ArrowDown = Duck
 
 Music by nokia
 
+networking by Jake Buji
+
 
 Game map  
 
