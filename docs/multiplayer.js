@@ -29,7 +29,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     function askForUser() {
         var user = prompt("Please enter a username");
         if (user != null) {
-            if (user == "" || (user.replace(" ", "").length > 30) {
+            if (user == "" || (user.replace(" ", "")).length > 30) {
                 alert("Username is too long or invaild")
                 askForUser();
             } else {
