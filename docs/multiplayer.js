@@ -2,6 +2,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     var inactive;
     var username;
     var hashedKey = "244dc524b6bba33086418c1a68cb4bd95304a2562489c6c19d5c785979f48b7f"
+    var chatMsg = new Array()
     var chatInput = document.getElementById("chatInput")
     function getMultiByUser(username){
         for (let i = 0; i < multiplayers.length; i++) {
@@ -142,6 +143,13 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     socket.on('beenKicked', function(data) {
         alert(` You have been kicked with the reason: ${data}`)
+    })
+    
+    socket.on('receiveMessage', function(data) {
+        chatMsg.push(data)
+        setTimeout(() => {
+            chatMsg.slice(0, 1);
+        }, 10000)
     })
 
     askForUser()
