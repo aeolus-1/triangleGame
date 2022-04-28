@@ -313,14 +313,7 @@ Matter.Events.on(render, "afterRender", function() {
         var msgDist = 450
     
     
-    for (var i = 0; i < chatMsg.length; i++) {
-        render.context.fillText(`${chatMsg[i].username}: ${chatMsg[i].message}`, 10, msgDist)
-        msgDist += 30
-        msgAmount++
-        if (msgAmount == 11) {
-        chatMsg.shift()
-        msgAmount -= 1
-}
+    
     }
     
     if (completedGame) {
