@@ -10,7 +10,6 @@ var textMsg = "",
 var chat = []
 
 document.addEventListener("keydown", function(e){
-    keys[(e.key).toLowerCase()]=true;
 
     var k = (e.key).toLowerCase()
     if (k == "enter") {
@@ -26,6 +25,8 @@ document.addEventListener("keydown", function(e){
     }
 
     if (!typing) {
+         keys[(e.key).toLowerCase()]=true;
+
 
         if (startTime == false) {
             startTime = new Date().getTime()
@@ -48,6 +49,7 @@ document.addEventListener("keydown", function(e){
 
         if (k == "p") {
             typing = true
+            keys = {}
         }
 
         
