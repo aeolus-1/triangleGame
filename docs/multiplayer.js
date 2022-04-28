@@ -47,7 +47,10 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     
     const socket = io("https://triangle-game-server.herokuapp.com")
 
-    
+      document.addEventListener("keypress", function() {
+        window.clearTimeout(inactive);
+        startTimer()
+    });
 
     function coords() {
         socket.emit('coords', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: getPlayerScale(entitys[0]), chat:chat });
