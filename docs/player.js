@@ -102,7 +102,7 @@ class Player extends Entity {
 
                 }
 
-                wallJumpT = (Math.abs(coll.normal.x) > 0.5) ? Math.sign(coll.normal.x) : wallJumpT
+                wallJumpT = 0
 
 
                 if (
