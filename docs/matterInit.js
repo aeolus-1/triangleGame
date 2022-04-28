@@ -246,19 +246,19 @@ Matter.Events.on(render, "afterRender", function() {
     });
     for (let i = 0; i < chat.length; i++) {
         const msg = chat[i];
-        if (msg.time < 0 {
+        if (msg.time < 0) {
             chat.splice(i, 1)
-    } else {
-        render.context.fillStyle = pSBC(-0.5, colorTheme.back)
-        render.context.font = "10px Times New Roman"
-        render.context.globalAlpha = Matter.Common.clamp((msg.time/100)*10, 0, 1)
-        var length = render.context.measureText(msg.text).width
-        render.context.fillText(msg.text, msg.pos.x+(length/2), msg.pos.y)
-        render.context.globalAlpha = 1
-    }
+        } else {
+            render.context.fillStyle = pSBC(-0.5, colorTheme.back)
+            render.context.font = "10px Times New Roman"
+            render.context.globalAlpha = Matter.Common.clamp((msg.time/100)*10, 0, 1)
+            var length = render.context.measureText(msg.text).width
+            render.context.fillText(msg.text, msg.pos.x+(length/2), msg.pos.y)
+            render.context.globalAlpha = 1
+        }
 
 
-        msg.time -= 0.25
+            msg.time -= 0.25
 
 
     }
