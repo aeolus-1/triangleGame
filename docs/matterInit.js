@@ -272,7 +272,13 @@ Matter.Events.on(render, "afterRender", function() {
     if (typing) {
         var text = textMsg,
             length = render.context.measureText(textMsg).width
+        
+        render.context.save()
+
+        render.context.font = "10px Times New Roman"
         render.context.fillText(textMsg+((((new Date().getTime()/1000)-Math.trunc((new Date().getTime()/1000)))*2>1) == 1?"|":""), entitys[0].body.position.x-(length/2), entitys[0].body.position.y-50)
+        render.context.restore()
+
     }
     //render.context.fillText(`you get ${time}`,  camera.x-(window.innerWidth/4)+20, camera.y-(window.innerHeight/4)+20)
     render.context.fillText(`you get ${Math.floor(-timeStamp)/100}s cookies`, endPos.x, endPos.y)
