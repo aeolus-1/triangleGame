@@ -16,12 +16,14 @@ document.addEventListener("keydown", function(e){
     if (k == "enter") {
         typing = false
         console.log(textMsg)
-        var length = render.context.measureText(textMsg).width
-        chat.push({
+        var length = render.context.measureText(textMsg).width,
+        msg = {
             text:textMsg,
             pos:v(entitys[0].body.position.x-(length/2), entitys[0].body.position.y-50),
             time:100,
-        })
+        }
+        submitChat(msg)
+        chat.push(msg)
         textMsg = ""
     }
 
