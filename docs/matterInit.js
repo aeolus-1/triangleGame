@@ -290,12 +290,12 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.fillText(`FPS: ${fps}`, 10, 150)
     if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`, 10, 195)
        var msgAmount = 0
-        var msgDist = 250
+        var msgDist = 350
     
     
     for (var i = 0; i < chatMsg.length; i++) {
-        render.context.fillText(`${chatMsg[i].username}:chatMsg[i].message}`, 10, msgDist)
-        msgDist += 20
+        render.context.fillText(`${chatMsg[i].username}: ${chatMsg[i].message}`, 10, msgDist)
+        msgDist += 50
         msgAmount++
         if (msgAmount == 5) {
         chatMsg.shift()
