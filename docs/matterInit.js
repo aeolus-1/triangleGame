@@ -229,7 +229,6 @@ Matter.Events.on(render, "afterRender", function() {
             }
                 text = text.replace('<rainbow>','');
                 }
-
         render.context.fillText(text, parseInt(multiplayers[i].body.position.x)-(length/2), parseInt(multiplayers[i].body.position.y)-30)
     }
 
