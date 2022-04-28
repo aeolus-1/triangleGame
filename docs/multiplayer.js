@@ -140,8 +140,8 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     })
     
     socket.on('receiveMessage', function(data) {
-        console.log(data)
-        multiChat.push(data)
+        console.log(`User:"${data.username}", Msg:"${data.message}"`)
+        multiChat.push(data.message)
     })
 
     askForUser()
