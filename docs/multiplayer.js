@@ -41,21 +41,13 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     }
     
-      function submitChat() {
-        message = chatInput.value
-        socket.emit("sendMessage", {message: message, username: username})
-        chatInput.value = ""
+      function submitChat(msg) {
+        socket.emit("sendMessage", {message: msg, username: username})
     }
     
     const socket = io("https://triangle-game-server.herokuapp.com")
 
-    document.addEventListener("keypress", function(e) {
-        window.clearTimeout(inactive);
-        startTimer()
-         if (e.key === "Enter") {
-            submitChat()
-        }
-    });
+    
 
     function coords() {
         socket.emit('coords', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: getPlayerScale(entitys[0]), chat:chat });
@@ -148,7 +140,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     })
     
     socket.on('receiveMessage', function(data) {
-        chatMsg.push(data)
+        multiMsg.push(data)
     })
 
     askForUser()
