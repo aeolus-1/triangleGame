@@ -7,7 +7,8 @@ var startTime = false,
 var textMsg = "",
     typing = false
 
-var chat = []
+var chat = [],
+    multiChat = []
 
 document.addEventListener("keydown", function(e){
 
