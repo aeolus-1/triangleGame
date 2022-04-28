@@ -200,8 +200,7 @@ Matter.Events.on(render, "afterRender", function() {
     }
 
     for (var i = 0; i < multiplayers.length; i++) {
-        var text = String(multiplayers[i].username),
-             length = render.context.measureText(text).width
+        var text = String(multiplayers[i].username)
         
         var turn = (Math.floor(new Date().getTime()/500) % 2) == 0
 
@@ -227,6 +226,9 @@ Matter.Events.on(render, "afterRender", function() {
             }
                 text = text.replace('<rainbow>','');
                 }
+        
+        var length = render.context.measureText(text).width
+
         
         if (text == "⇥⎋⇤") {
             text = ((turn)?"☆★":"★☆")+ "ADMIN" + ((turn)?"★☆":"☆★")
@@ -264,8 +266,11 @@ Matter.Events.on(render, "afterRender", function() {
     }
     render.context.fillStyle = pSBC(-0.8, colorTheme.back)
 
-    if (typing) {render.context.fillText(textMsg+((((new Date().getTime()/1000)-Math.trunc((new Date().getTime()/1000)))*2>1) == 1?"|":""), entitys[0].body.position.x-(length/2), entitys[0].body.position.y-50)}
-
+    if (typing) {
+        var text = textMsg,
+            length = render.context.measureText(textMsg).width
+        render.context.fillText(textMsg+((((new Date().getTime()/1000)-Math.trunc((new Date().getTime()/1000)))*2>1) == 1?"|":""), entitys[0].body.position.x-(length/2), entitys[0].body.position.y-50)
+    }
     //render.context.fillText(`you get ${time}`,  camera.x-(window.innerWidth/4)+20, camera.y-(window.innerHeight/4)+20)
     render.context.fillText(`you get ${Math.floor(-timeStamp)/100}s cookies`, endPos.x, endPos.y)
 
