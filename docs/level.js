@@ -40,7 +40,7 @@ class Levels {
             Matter.Composite.add(chunkComp, newRect)
         });
         levelObject.spawners.forEach(spawner => {
-            let s = new Spawner(v(spawner.x,spawner.y),200,400)
+            let s = new Spawner(v(spawner.x,spawner.y),133,400)
             s.chunkPos = chunkPos
             spawners.push(s)
         });
