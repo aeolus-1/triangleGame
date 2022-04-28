@@ -88,7 +88,6 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     socket.on('updatePlayers', function(data) {
         Object.keys(data).every(function(key) {
-            console.log(data[key])
 
             for (var i = 0; i < multiplayers.length; i++) {
                 if (key == multiplayers[i].multiId) {
