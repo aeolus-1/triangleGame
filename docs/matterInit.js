@@ -200,7 +200,7 @@ Matter.Events.on(render, "afterRender", function() {
             text = ((turn)?"☆★":"★☆")+ "ADMIN" + ((turn)?"★☆":"☆★")
             render.context.fillStyle = "#f00"
         }
-
+        render.context.fillStyle = "#000"
         render.context.fillText(text, parseInt(multiplayers[i].body.position.x)-(length/2), parseInt(multiplayers[i].body.position.y)-30)
     }
 
