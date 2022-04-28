@@ -205,10 +205,7 @@ Matter.Events.on(render, "afterRender", function() {
         
         var turn = (Math.floor(new Date().getTime()/500) % 2) == 0
 
-        if (text == "⇥⎋⇤") {
-            text = ((turn)?"☆★":"★☆")+ "ADMIN" + ((turn)?"★☆":"☆★")
-            render.context.fillStyle = "#f00"
-        }
+        
         
         render.context.fillStyle = "#000"
         
@@ -230,6 +227,11 @@ Matter.Events.on(render, "afterRender", function() {
             }
                 text = text.replace('<rainbow>','');
                 }
+        
+        if (text == "⇥⎋⇤") {
+            text = ((turn)?"☆★":"★☆")+ "ADMIN" + ((turn)?"★☆":"☆★")
+            render.context.fillStyle = "#f00"
+        }
         render.context.fillText(text, parseInt(multiplayers[i].body.position.x)-(length/2), parseInt(multiplayers[i].body.position.y)-30)
     }
 
@@ -242,6 +244,24 @@ Matter.Events.on(render, "afterRender", function() {
         render.context.fillText(text.text, text.x, text.y)
         render.context.strokeText(text.text, text.x, text.y)
     });
+    for (let i = 0; i < chat.length; i++) {
+        const msg = chat[i];
+        if (msg.time < 0 {
+            chat.splice(i, 1)
+    } else {
+        render.context.fillStyle = pSBC(-0.5, colorTheme.back)
+        render.context.font = "10px Times New Roman"
+        render.context.globalAlpha = Matter.Common.clamp((msg.time/100)*10, 0, 1)
+        var length = render.context.measureText(msg.text).width
+        render.context.fillText(msg.text, msg.pos.x+(length/2), msg.pos.y)
+        render.context.globalAlpha = 1
+    }
+
+
+        msg.time -= 0.25
+
+
+    }
     if (typing) render.context.fillText(textMsg+((((new Date().getTime()/1000)-Math.trunc((new Date().getTime()/1000)))*2>1) == 1?"|":""), entitys[0].body.position.x-(length/2), entitys[0].body.position.y-50)
 
     //render.context.fillText(`you get ${time}`,  camera.x-(window.innerWidth/4)+20, camera.y-(window.innerHeight/4)+20)
