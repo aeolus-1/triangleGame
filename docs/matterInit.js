@@ -252,6 +252,22 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.fillText(`${Math.round(Matter.Common.clamp((-entitys[0].body.position.y+10)/100, 0, Infinity))+2}m`, 10, 90)
     render.context.fillText(`Speed: ${Math.abs(Math.round(entitys[0].body.velocity.x * 100) / 100)}`, 10, 120)
     render.context.fillText(`FPS: ${fps}`, 10, 150)
+    
+    var msgAmount = 0
+    var msgDist = 250
+    
+    
+    for (var i = 0; i < chatMsg.length; i++) {
+        render.context.fillText(`${chatMsg[i].username}:chatMsg[i].message}`, 10, msgDist)
+        msgDist += 20
+        msgAmount++
+        if (msgAmount == 5) {
+        chatMsg.shift()
+        msgAmount -= 1
+}
+    }
+    
+    
     if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`, 10, 195)
     
     if (completedGame) {
