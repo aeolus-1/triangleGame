@@ -249,7 +249,7 @@ Matter.Events.on(render, "afterRender", function() {
         if (msg.time < 0) {
             chat.splice(i, 1)
         } else {
-            render.context.fillStyle = pSBC(-0.5, colorTheme.back)
+            render.context.fillStyle = pSBC(-0.8, colorTheme.back)
             render.context.font = "10px Times New Roman"
             render.context.globalAlpha = Matter.Common.clamp((msg.time/100)*10, 0, 1)
             var length = render.context.measureText(msg.text).width
@@ -262,7 +262,9 @@ Matter.Events.on(render, "afterRender", function() {
 
 
     }
-    if (typing) render.context.fillText(textMsg+((((new Date().getTime()/1000)-Math.trunc((new Date().getTime()/1000)))*2>1) == 1?"|":""), entitys[0].body.position.x-(length/2), entitys[0].body.position.y-50)
+    render.context.fillStyle = pSBC(-0.8, colorTheme.back)
+
+    if (typing) {render.context.fillText(textMsg+((((new Date().getTime()/1000)-Math.trunc((new Date().getTime()/1000)))*2>1) == 1?"|":""), entitys[0].body.position.x-(length/2), entitys[0].body.position.y-50)}
 
     //render.context.fillText(`you get ${time}`,  camera.x-(window.innerWidth/4)+20, camera.y-(window.innerHeight/4)+20)
     render.context.fillText(`you get ${Math.floor(-timeStamp)/100}s cookies`, endPos.x, endPos.y)
