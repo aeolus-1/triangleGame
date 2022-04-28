@@ -309,12 +309,7 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.fillText(`Speed: ${Math.abs(Math.round(entitys[0].body.velocity.x * 100) / 100)}`, 10, 120)
     render.context.fillText(`FPS: ${fps}`, 10, 150)
     if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`, 10, 195)
-       var msgAmount = 0
-        var msgDist = 450
-    
-    
-    
-    }
+       
     
     if (completedGame) {
         if (timeStamp < 0) {
