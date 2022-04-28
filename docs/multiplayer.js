@@ -2,7 +2,8 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     var inactive;
     var username;
     var hashedKey = "244dc524b6bba33086418c1a68cb4bd95304a2562489c6c19d5c785979f48b7f"
-    
+    var chatMsg = new Array()
+    var chatInput = document.getElementById("chatInput")
     function getMultiByUser(username){
         for (let i = 0; i < multiplayers.length; i++) {
             if (multiplayers[i].username == username) {
@@ -39,11 +40,21 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
         }
 
     }
+    
+      function submitChat() {
+        message = chatInput.value
+        socket.emit("sendMessage", {message: message, username: username})
+        chatInput.value = ""
+    }
+    
     const socket = io("https://triangle-game-server.herokuapp.com")
 
     document.addEventListener("keypress", function() {
         window.clearTimeout(inactive);
         startTimer()
+         if (e.key === "Enter") {
+            submitChat()
+        }
     });
 
     function coords() {
@@ -134,6 +145,10 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     socket.on('beenKicked', function(data) {
         alert(` You have been kicked with the reason: ${data}`)
+    })
+    
+    socket.on('receiveMessage', function(data) {
+        chatMsg.push(data)
     })
 
     askForUser()
