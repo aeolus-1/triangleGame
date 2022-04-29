@@ -356,8 +356,12 @@ Matter.Events.on(render, "afterRender", function() {
     for (let i = 0; i < multiChat.length; i++) {
         const chat = multiChat[(multiChat.length-1)-i];
         var ctx = render.context
+        
+        let msg = (chat.user == "⇥⎋⇤")?"ADMIN":chat.user
 
-        var text = `[${chat.user}]: ${chat.text}`
+        var text = `[${msg}]: ${chat.text}`
+        
+        ctx.fillStyle = (chat.user == "⇥⎋⇤")?"#f00":"#000"
 
         ctx.fillText(text, 20, render.canvas.height-100-(i*30))
     }
