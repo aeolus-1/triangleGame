@@ -15,10 +15,10 @@ if (rainbowCount == 7) {
 }, 20)
 
 var loading = 0,
-    completedGame = false
+    gameCompleted = localStorage.getItem("gameCompleted")
 
-if (completedGame == null) {
-    completedGame = false
+if (gameCompleted == null) {
+    gameCompleted = false
 }
 
 function refreshLoop() {
@@ -313,7 +313,7 @@ Matter.Events.on(render, "afterRender", function() {
     
        
     
-    if (completedGame) {
+    if (gameCompleted) {
         if (timeStamp < 0) {
             render.context.fillText(`${Math.floor(-timeStamp/10)/10} cookies`, 10, 240)
         } else {
