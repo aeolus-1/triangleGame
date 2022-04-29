@@ -13,7 +13,7 @@ var chat = [],
 document.addEventListener("keydown", function(e){
 
     var k = (e.key).toLowerCase()
-    if (k == "enter") {
+    if (k == "enter" && textMsg.replace(" ", "").length > 0) {
         typing = false
         console.log(textMsg)
         var length = render.context.measureText(textMsg).width,
