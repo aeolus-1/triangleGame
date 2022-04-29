@@ -10,7 +10,7 @@ var textMsg = "",
 var chat = [],
     multiChat = []
 
-document.addEventListener("keydown", function(e){
+document.addEventListener("keyup", function(e){
 
     var k = (e.key).toLowerCase()
     if (k == "enter" && textMsg.replace(" ", "").length > 0) {
