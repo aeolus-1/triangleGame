@@ -309,6 +309,8 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.fillText(`Speed: ${Math.abs(Math.round(entitys[0].body.velocity.x * 100) / 100)}`, 10, 120)
     render.context.fillText(`FPS: ${fps}`, 10, 150)
     if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`, 10, 195)
+    
+    
        
     
     if (completedGame) {
@@ -349,6 +351,15 @@ Matter.Events.on(render, "afterRender", function() {
 
         render.context.fillRect((entitys[0].body.position.x*playerScale)+playerTranslate.x, (entitys[0].body.position.y*playerScale)+playerTranslate.y, 5, 5)
         render.context.restore()
+    }
+    
+    for (let i = 0; i < multiChat.length; i++) {
+        var chat = multiChat[(multiChat.length-1)-i];
+        var ctx = render.context
+
+        var text = `[${chat.user}]: ${chat.text}`
+
+        ctx.fillText(text, 20, render.canvas.height-100-(i*30))
     }
 
     renderButtons()
