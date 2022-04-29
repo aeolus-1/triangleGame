@@ -354,7 +354,7 @@ Matter.Events.on(render, "afterRender", function() {
     }
     
     for (let i = 0; i < multiChat.length; i++) {
-        var chat = multiChat[(multiChat.length-1)-i];
+        const chat = multiChat[(multiChat.length-1)-i];
         var ctx = render.context
 
         var text = `[${chat.user}]: ${chat.text}`
