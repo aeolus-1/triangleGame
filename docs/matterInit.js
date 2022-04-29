@@ -12,7 +12,7 @@ if (rainbowCount == 7) {
 } else {
     rainbowCount++
 }
-}, 200)
+}, 20)
 
 var loading = 0,
     completedGame = localStorage.getItem("completedGame")
@@ -309,6 +309,8 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.fillText(`Speed: ${Math.abs(Math.round(entitys[0].body.velocity.x * 100) / 100)}`, 10, 120)
     render.context.fillText(`FPS: ${fps}`, 10, 150)
     if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`, 10, 195)
+    
+    
        
     
     if (completedGame) {
