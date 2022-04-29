@@ -15,7 +15,7 @@ if (rainbowCount == 7) {
 }, 20)
 
 var loading = 0,
-    completedGame = localStorage.getItem("completedGame")
+    completedGame = false
 
 if (completedGame == null) {
     completedGame = false
