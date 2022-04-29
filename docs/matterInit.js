@@ -358,7 +358,9 @@ Matter.Events.on(render, "afterRender", function() {
         var ctx = render.context
         
         let msg = (chat.user == "⇥⎋⇤")?"ADMIN":chat.user
-
+        if (chat.user.startsWith("<rainbow>")) {
+           let msg = chat.user.replace('<rainbow>', '')
+        }
         var text = `[${msg}]: ${chat.text}`
         
         ctx.fillStyle = (chat.user == "⇥⎋⇤")?"#f00":"#000"
