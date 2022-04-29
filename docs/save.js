@@ -1,7 +1,7 @@
 class Save {
   static saveGame() {
     
-    localStorage.setItem("completedGame", completedGame)
+    localStorage.setItem("gameCompleted", gameCompleted)
 
     
     let spawnsDat = []
