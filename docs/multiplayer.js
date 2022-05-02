@@ -19,8 +19,6 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
                 message = "No reason Given"
             }
             socket.emit('kick', { id: id, message: message, key: modKey })
-        }
-
     }
 
     function askForUser() {
