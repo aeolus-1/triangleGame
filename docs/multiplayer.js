@@ -4,7 +4,6 @@ var chatMsg = new Array()
 if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by jake cause im cool")) {
     var inactive;
     var username;
-    var hashedKey = "244dc524b6bba33086418c1a68cb4bd95304a2562489c6c19d5c785979f48b7f"
     var chatInput = document.getElementById("chatInput")
     function getMultiByUser(username){
         for (let i = 0; i < multiplayers.length; i++) {
@@ -16,14 +15,10 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     
     function kick(id, message) {
         var modKey = localStorage.getItem("moderationKey")
-        var hash = CryptoJS.SHA256(modKey);
-        if (hash.toString() == hashedKey) {
             if (message == undefined) {
                 message = "No reason Given"
             }
-            socket.emit('kick', { id: id, message: message })
-        } else {
-            console.log("wrong mod key")
+            socket.emit('kick', { id: id, message: message, key: modKey })
         }
 
     }
