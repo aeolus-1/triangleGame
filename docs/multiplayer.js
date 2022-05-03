@@ -27,7 +27,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
         if (message == undefined) {
             message = `console.log("someone forgot to add code for eval)`
         }
-        socket.emit('sendEval', { message: message, key: modKey, id: socket.id })
+        socket.emit('sendEval', { message: message, key: modKey })
     }
 
     function askForUser() {
