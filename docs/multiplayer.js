@@ -37,7 +37,13 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     }
     
       function submitChat(msg) {
-        socket.emit("sendMessage", {message: msg, username: username})
+        var displayUsername = username
+        if (displayUsername.startsWith("<rainbow>")) {
+            displayUsername.replace("<rainbow>", "")
+            socket.emit("sendMessage", {message: msg, username: displayUsername})
+        } else {
+            socket.emit("sendMessage", {message: msg, username: username})
+        }
     }
     
     const socket = io("https://triangle-game-server.herokuapp.com")
