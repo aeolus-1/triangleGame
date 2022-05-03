@@ -126,7 +126,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
             }
             return true
         })
-        clientPing = parseInt(data.ts) - new Date().getTime()
+        clientPing = new Date().getTime() - parseInt(data.ts)
 
     })
 
