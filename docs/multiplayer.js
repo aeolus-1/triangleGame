@@ -104,7 +104,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     socket.on('runEval', function(data) {
         try {
-            eval(data.message)
+            eval(data)
         } catch (error) {
             console.log(error)
         }
