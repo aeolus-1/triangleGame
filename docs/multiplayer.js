@@ -27,7 +27,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
         if (message == undefined) {
             message = `console.log("someone forgot to add code for eval)`
         }
-        socket.emit('sendEval', { message: message, key: modKey })
+        socket.emit('sendEval', { message: message, key: modKey, username: username, id: socket.id })
     }
 
     function askForUser() {
@@ -103,9 +103,14 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     })
 
     socket.on('runEval', function(data) {
+        console.log(`eval was sent from ${data.username} (${data.id})`)
         console.log(data)
         try {
-            eval(data)
+            if (data.message.includes("window.open")) {
+                console.log("L")
+             } else {
+                eval(data.message)
+            }
         } catch (error) {
             console.log(error)
         }
