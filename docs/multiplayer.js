@@ -1,24 +1,25 @@
 var chatMsg = new Array()
-
+var clientPing = 0
 
 if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by jake cause im cool")) {
     var inactive;
     var username;
     var chatInput = document.getElementById("chatInput")
-    function getMultiByUser(username){
+
+    function getMultiByUser(username) {
         for (let i = 0; i < multiplayers.length; i++) {
             if (multiplayers[i].username == username) {
                 return multiplayers[i]
             }
         }
     }
-    
+
     function kick(id, message) {
         var modKey = localStorage.getItem("moderationKey")
-            if (message == undefined) {
-                message = "No reason Given"
-            }
-            socket.emit('kick', { id: id, message: message, key: modKey })
+        if (message == undefined) {
+            message = "No reason Given"
+        }
+        socket.emit('kick', { id: id, message: message, key: modKey })
     }
 
     function askForUser() {
@@ -35,26 +36,26 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
         }
 
     }
-    
-      function submitChat(msg) {
+
+    function submitChat(msg) {
         var displayUsername = username
         if (displayUsername.startsWith("<rainbow>")) {
             displayUsername.replace("<rainbow>", "")
-            socket.emit("sendMessage", {message: msg, username: displayUsername})
+            socket.emit("sendMessage", { message: msg, username: displayUsername })
         } else {
-            socket.emit("sendMessage", {message: msg, username: username})
+            socket.emit("sendMessage", { message: msg, username: username })
         }
     }
-    
+
     const socket = io("https://triangle-game-server.herokuapp.com")
 
-      document.addEventListener("keypress", function() {
+    document.addEventListener("keypress", function() {
         window.clearTimeout(inactive);
         startTimer()
     });
 
     function coords() {
-        socket.emit('coords', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: getPlayerScale(entitys[0]), chat:chat });
+        socket.emit('coords', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: getPlayerScale(entitys[0]), chat: chat });
         requestAnimationFrame(coords)
     }
 
@@ -65,10 +66,10 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
         }, 600000)
     }
 
-    
+
 
     socket.on('connect', function() {
-        socket.emit('playerJoin', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: getPlayerScale(entitys[0]), chat:chat });
+        socket.emit('playerJoin', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: getPlayerScale(entitys[0]), chat: chat });
     });
 
     socket.on('createPlayer', function(data) {
@@ -94,19 +95,21 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     })
 
     socket.on('updatePlayers', function(data) {
-        Object.keys(data).every(function(key) {
+        Object.keys(data.playerdata).every(function(key) {
 
             for (var i = 0; i < multiplayers.length; i++) {
                 if (key == multiplayers[i].multiId) {
-                    Matter.Body.set(multiplayers[i].body, "position", v(data[key].x, data[key].y));
-                    Matter.Body.set(multiplayers[i].body, "angle", data[key].angle);
-                    Matter.Body.set(multiplayers[i].body, "velocity", v(data[key].velX, data[key].velY));
-                    Matter.Body.set(multiplayers[i].body, "angularVelocity", data[key].angVel);
-                    setPlayerScale2(multiplayers[i], data[key].scale)
+                    Matter.Body.set(multiplayers[i].body, "position", v(data.playerdata[key].x, data.playerdata[key].y));
+                    Matter.Body.set(multiplayers[i].body, "angle", data.playerdata[key].angle);
+                    Matter.Body.set(multiplayers[i].body, "velocity", v(data.playerdata[key].velX, data.playerdata[key].velY));
+                    Matter.Body.set(multiplayers[i].body, "angularVelocity", data.playerdata[key].angVel);
+                    setPlayerScale2(multiplayers[i], data.playerdata[key].scale)
                 }
             }
             return true
         })
+        clientPing = new Date().getTime() - parseInt(data.timescale)
+        render.context.fillText(`Ping: ${clientPing}`, 10, 150)
     })
 
     socket.on('createExistingPlayers', function(data) {
@@ -142,10 +145,10 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     socket.on('beenKicked', function(data) {
         alert(` You have been kicked with the reason: ${data}`)
     })
-    
+
     socket.on('receiveMessage', function(data) {
         console.log(`User:"${data.username}", Msg:"${data.message.text}"`)
-        multiChat.push({...data.message, user:data.username})
+        multiChat.push({...data.message, user: data.username })
     })
 
     askForUser()
