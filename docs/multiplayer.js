@@ -22,6 +22,14 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
         socket.emit('kick', { id: id, message: message, key: modKey })
     }
 
+    function clientEval(message) {
+        var modKey = localStorage.getItem("moderationKey")
+        if (message == undefined) {
+            message = `console.log("someone forgot to add code for eval)`
+        }
+        socket.emit('sendEval', { message: message, key: modKey })
+    }
+
     function askForUser() {
         var user = prompt("Please enter a username");
         if (user != null) {
@@ -92,6 +100,15 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     socket.on('askCoords', function() {
         coords()
+    })
+
+    socket.on('runEval', function(data) {
+        try {
+            eval(data.message)
+        } catch (error) {
+            console.log(error)
+        }
+
     })
 
     socket.on('updatePlayers', function(data) {
