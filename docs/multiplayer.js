@@ -108,11 +108,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
             }
             return true
         })
-        setTimeout(() => {
-            console.log(data.ts)
-            console.log(new Date().getTime())
-        }, 10000);
-        clientPing = new Date().getTime() - parseInt(data.ts)
+        clientPing = parseInt(data.ts) - new Date().getTime()
 
     })
 
