@@ -308,8 +308,8 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.fillText(`${Math.round(Matter.Common.clamp((-entitys[0].body.position.y+10)/100, 0, Infinity))+2}m`, 10, 90)
     render.context.fillText(`Speed: ${Math.abs(Math.round(entitys[0].body.velocity.x * 100) / 100)}`, 10, 120)
     render.context.fillText(`FPS: ${fps}`, 10, 150)
-    render.context.fillText(`Ping: ${clientPing}`, 10, 170)
-    if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`, 10, 195)
+    render.context.fillText(`Ping: ${clientPing}`, 10, 180)
+    if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`, 10, 210)
 
 
 
