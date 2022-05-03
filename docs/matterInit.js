@@ -7,11 +7,11 @@ let fps;
 var rainbowCount = 1
 
 setInterval(() => {
-if (rainbowCount == 7) {
-    rainbowCount = 1
-} else {
-    rainbowCount++
-}
+    if (rainbowCount == 7) {
+        rainbowCount = 1
+    } else {
+        rainbowCount++
+    }
 }, 20)
 
 var loading = 0,
@@ -201,14 +201,14 @@ Matter.Events.on(render, "afterRender", function() {
 
     for (var i = 0; i < multiplayers.length; i++) {
         var text = String(multiplayers[i].username)
-        
-        var turn = (Math.floor(new Date().getTime()/500) % 2) == 0
 
-        
-        
+        var turn = (Math.floor(new Date().getTime() / 500) % 2) == 0
+
+
+
         render.context.fillStyle = "#000"
-        
-          if (text.startsWith("<rainbow>")) {
+
+        if (text.startsWith("<rainbow>")) {
             if (rainbowCount == 1) {
                 render.context.fillStyle = "#9400D3"
             } else if (rainbowCount == 2) {
@@ -222,19 +222,19 @@ Matter.Events.on(render, "afterRender", function() {
             } else if (rainbowCount == 6) {
                 render.context.fillStyle = "#FF7F00"
             } else if (rainbowCount == 7) {
-                 render.context.fillStyle = "#FF0000"    
+                render.context.fillStyle = "#FF0000"
             }
-                text = text.replace('<rainbow>','');
-                }
-        
+            text = text.replace('<rainbow>', '');
+        }
+
         var length = render.context.measureText(text).width
 
-        
+
         if (text == "⇥⎋⇤") {
-            text = ((turn)?"☆★":"★☆")+ "ADMIN" + ((turn)?"★☆":"☆★")
+            text = ((turn) ? "☆★" : "★☆") + "ADMIN" + ((turn) ? "★☆" : "☆★")
             render.context.fillStyle = "#f00"
         }
-        render.context.fillText(text, parseInt(multiplayers[i].body.position.x)-(length/2), parseInt(multiplayers[i].body.position.y)-30)
+        render.context.fillText(text, parseInt(multiplayers[i].body.position.x) - (length / 2), parseInt(multiplayers[i].body.position.y) - 30)
     }
 
     var testPos = v(-446.0919022968253, 124.92979674760744)
@@ -254,35 +254,35 @@ Matter.Events.on(render, "afterRender", function() {
             render.context.save()
             render.context.fillStyle = pSBC(-0.8, colorTheme.back)
             render.context.font = "10px Times New Roman"
-            render.context.globalAlpha = Matter.Common.clamp((msg.time/100)*10, 0, 1)
+            render.context.globalAlpha = Matter.Common.clamp((msg.time / 100) * 10, 0, 1)
             var length = render.context.measureText(msg.text).width
-            render.context.fillText(msg.text, msg.pos.x+(length/2), msg.pos.y)
+            render.context.fillText(msg.text, msg.pos.x + (length / 2), msg.pos.y)
             render.context.globalAlpha = 1
             render.context.restore()
         }
 
 
-            msg.time -= 0.25
+        msg.time -= 0.25
 
 
     }
     for (let i = 0; i < multiChat.length; i++) {
         const msg = multiChat[i];
-        
+
         if (msg.time < 0) {
             multiChat.splice(i, 1)
         } else {
             render.context.save()
             render.context.fillStyle = pSBC(-0.8, colorTheme.back)
             render.context.font = "10px Times New Roman"
-            render.context.globalAlpha = Matter.Common.clamp((msg.time/100)*10, 0, 1)
+            render.context.globalAlpha = Matter.Common.clamp((msg.time / 100) * 10, 0, 1)
             var length = render.context.measureText(msg.text).width
-            render.context.fillText(msg.text, msg.pos.x+(length/2), msg.pos.y)
+            render.context.fillText(msg.text, msg.pos.x + (length / 2), msg.pos.y)
             render.context.globalAlpha = 1
             render.context.restore()
         }
         msg.time -= 0.25
-        
+
 
 
     }
@@ -291,11 +291,11 @@ Matter.Events.on(render, "afterRender", function() {
     if (typing) {
         var text = textMsg,
             length = render.context.measureText(textMsg).width
-        
+
         render.context.save()
 
         render.context.font = "10px Times New Roman"
-        render.context.fillText(textMsg+((((new Date().getTime()/1000)-Math.trunc((new Date().getTime()/1000)))*2>1) == 1?"|":""), entitys[0].body.position.x-(length/2), entitys[0].body.position.y-50)
+        render.context.fillText(textMsg + ((((new Date().getTime() / 1000) - Math.trunc((new Date().getTime() / 1000))) * 2 > 1) == 1 ? "|" : ""), entitys[0].body.position.x - (length / 2), entitys[0].body.position.y - 50)
         render.context.restore()
 
     }
@@ -308,11 +308,12 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.fillText(`${Math.round(Matter.Common.clamp((-entitys[0].body.position.y+10)/100, 0, Infinity))+2}m`, 10, 90)
     render.context.fillText(`Speed: ${Math.abs(Math.round(entitys[0].body.velocity.x * 100) / 100)}`, 10, 120)
     render.context.fillText(`FPS: ${fps}`, 10, 150)
+    render.context.fillText(`Ping: ${clientPing}`, 10, 170)
     if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`, 10, 195)
-    
-    
-       
-    
+
+
+
+
     if (gameCompleted) {
         if (timeStamp < 0) {
             render.context.fillText(`${Math.floor(-timeStamp/10)/10} cookies`, 10, 240)
@@ -326,9 +327,9 @@ Matter.Events.on(render, "afterRender", function() {
         var scale = 0.63,
             playerScale = 0.05
 
-            render.context.translate(500, 752.5)
+        render.context.translate(500, 752.5)
         render.context.scale(scale, scale)
-        
+
         var mapImg = document.createElement("img")
         mapImg.src = "gameMap.png"
         render.context.globalAlpha = 0.75
@@ -345,27 +346,27 @@ Matter.Events.on(render, "afterRender", function() {
         for (let i = 0; i < multiplayers.length; i++) {
             const player = multiplayers[i];
             render.context.fillStyle = "#000"
-            render.context.fillRect((player.body.position.x*playerScale)+playerTranslate.x, (player.body.position.y*playerScale)+playerTranslate.y, 5, 5)
+            render.context.fillRect((player.body.position.x * playerScale) + playerTranslate.x, (player.body.position.y * playerScale) + playerTranslate.y, 5, 5)
         }
         render.context.fillStyle = "#f00"
 
-        render.context.fillRect((entitys[0].body.position.x*playerScale)+playerTranslate.x, (entitys[0].body.position.y*playerScale)+playerTranslate.y, 5, 5)
+        render.context.fillRect((entitys[0].body.position.x * playerScale) + playerTranslate.x, (entitys[0].body.position.y * playerScale) + playerTranslate.y, 5, 5)
         render.context.restore()
     }
-    
+
     for (let i = 0; i < multiChat.length; i++) {
-        const chat = multiChat[(multiChat.length-1)-i];
+        const chat = multiChat[(multiChat.length - 1) - i];
         var ctx = render.context
-        
-        let msg = (chat.user == "⇥⎋⇤")?"ADMIN":chat.user
+
+        let msg = (chat.user == "⇥⎋⇤") ? "ADMIN" : chat.user
         if (chat.user.startsWith("<rainbow>")) {
-           let msg = chat.user.replace('<rainbow>', '')
+            let msg = chat.user.replace('<rainbow>', '')
         }
         var text = `[${msg}]: ${chat.text}`
-        
-        ctx.fillStyle = (chat.user == "⇥⎋⇤")?"#f00":"#000"
 
-        ctx.fillText(text, 20, render.canvas.height-100-(i*30))
+        ctx.fillStyle = (chat.user == "⇥⎋⇤") ? "#f00" : "#000"
+
+        ctx.fillText(text, 20, render.canvas.height - 100 - (i * 30))
     }
 
     renderButtons()

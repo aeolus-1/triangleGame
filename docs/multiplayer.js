@@ -109,7 +109,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
             return true
         })
         clientPing = new Date().getTime() - parseInt(data.timescale)
-        render.context.fillText(`Ping: ${clientPing}`, 10, 150)
+
     })
 
     socket.on('createExistingPlayers', function(data) {
