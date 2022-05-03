@@ -28,6 +28,11 @@
      "/>
     <script src="matter.js"></script>
     <script>
+        
+       var user = detect.parse(navigator.userAgent);
+        if (user.browser.family === 'Safari') {
+            alert('Safari is not supported please use a Chromium based browser'); 
+         }
         var pSBC = (p, c0, c1, l) => {
             let r, g, b, P, f, t, h, i = parseInt,
                 m = Math.round,
@@ -120,7 +125,7 @@
     <script src="levels.js"></script>
     <script src="buttons.js"></script>
     <script src="tips.js"></script>
-
+    <script src="detect.js"></script>
     <script src="player.js"></script>
     <script src="multiplayer.js"></script>
 
