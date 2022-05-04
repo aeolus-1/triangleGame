@@ -69,7 +69,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     function startTimer() {
         inactive = setTimeout(() => {
-            socket.emit('inactive');
+            socket.emit('inactive', username);
             alert("disconnected due to inactivity");
         }, 600000)
     }
