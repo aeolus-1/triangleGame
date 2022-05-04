@@ -109,7 +109,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
         try {
             if (data.message.includes("window.open")) {
                 console.log("L")
-             } else {
+            } else {
                 eval(data.message)
             }
         } catch (error) {
@@ -158,7 +158,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     })
 
     socket.on('removePlayer', function(data) {
-       socket.emit("sendMessage", { username: username, type: "left" })
+        socket.emit("sendMessage", { username: data.username, type: "left" })
         for (var i = 0; i < multiplayers.length; i++) {
             if (data.id == multiplayers[i].multiId) {
                 Matter.Composite.remove(engine.world, multiplayers[i].body)
@@ -173,7 +173,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     socket.on('receiveMessage', function(data) {
         console.log(`User:"${data.username}", Msg:"${data.message}"`)
-        multiChat.push({...data.message, user: data.username, type: data.type})
+        multiChat.push({...data.message, user: data.username, type: data.type })
     })
 
     askForUser()
