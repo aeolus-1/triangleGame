@@ -78,7 +78,8 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     socket.on('connect', function() {
         socket.emit('playerJoin', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: getPlayerScale(entitys[0]), chat: chat });
-        socket.emit("sendMessage", { message: " ", username: username, type: "join" })
+
+        socket.emit("sendMessage", { time: 100, message: " ", username: username, type: "join" })
     });
 
     socket.on('createPlayer', function(data) {
