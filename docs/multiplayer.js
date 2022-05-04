@@ -332,7 +332,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     })
 
     socket.on('receiveMessage', function(data) {
-        console.log(`User:"${data.username}", Msg:"${data.message.text}"`)
+        console.log(`User:"${data.username}", Msg:"${data.message}"`)
         multiChat.push({...data.message, user: data.username, type: data.type })
     })
 
@@ -340,23 +340,3 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     startTimer()
 }
 
-        for (var i = 0; i < multiplayers.length; i++) {
-            if (data == multiplayers[i].multiId) {
-                Matter.Composite.remove(engine.world, multiplayers[i].body)
-                multiplayers.splice(i, 1);
-            }
-        }
-    })
-
-    socket.on('beenKicked', function(data) {
-        alert(` You have been kicked with the reason: ${data}`)
-    })
-
-    socket.on('receiveMessage', function(data) {
-        console.log(`User:"${data.username}", Msg:"${data.message.text}"`)
-        multiChat.push({...data.message, user: data.username })
-    })
-
-    askForUser()
-    startTimer()
-}
