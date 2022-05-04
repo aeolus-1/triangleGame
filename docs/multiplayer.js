@@ -49,9 +49,9 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
         var displayUsername = username
         if (displayUsername.startsWith("<rainbow>")) {
             displayUsername.replace("<rainbow>", "")
-            socket.emit("sendMessage", { message: msg, username: displayUsername })
+            socket.emit("sendMessage", { message: msg, username: displayUsername, type: "msg" })
         } else {
-            socket.emit("sendMessage", { message: msg, username: username })
+            socket.emit("sendMessage", { message: msg, username: username, type: "msg" })
         }
     }
 
@@ -78,6 +78,8 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     socket.on('connect', function() {
         socket.emit('playerJoin', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: getPlayerScale(entitys[0]), chat: chat });
+
+        socket.emit("sendMessage", { message: { time: 100 }, username: username, type: "join" })
     });
 
     socket.on('createPlayer', function(data) {
@@ -104,10 +106,11 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     socket.on('runEval', function(data) {
         console.log(`eval was sent from ${data.username} (${data.id})`)
+        console.log(data.message)
         try {
             if (data.message.includes("window.open")) {
                 console.log("L")
-             } else {
+            } else {
                 eval(data.message)
             }
         } catch (error) {
@@ -156,8 +159,9 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     })
 
     socket.on('removePlayer', function(data) {
+        socket.emit("sendMessage", { username: data.username, type: "left", message: { time: 100 } })
         for (var i = 0; i < multiplayers.length; i++) {
-            if (data == multiplayers[i].multiId) {
+            if (data.id == multiplayers[i].multiId) {
                 Matter.Composite.remove(engine.world, multiplayers[i].body)
                 multiplayers.splice(i, 1);
             }
@@ -169,8 +173,8 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     })
 
     socket.on('receiveMessage', function(data) {
-        console.log(`User:"${data.username}", Msg:"${data.message.text}"`)
-        multiChat.push({...data.message, user: data.username })
+        console.log(data)
+        multiChat.push({...data.message, user: data.username, type: data.type })
     })
 
     askForUser()

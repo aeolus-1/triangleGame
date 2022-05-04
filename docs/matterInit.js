@@ -272,14 +272,16 @@ Matter.Events.on(render, "afterRender", function() {
         if (msg.time < 0) {
             multiChat.splice(i, 1)
         } else {
-            render.context.save()
-            render.context.fillStyle = pSBC(-0.8, colorTheme.back)
-            render.context.font = "10px Times New Roman"
-            render.context.globalAlpha = Matter.Common.clamp((msg.time / 100) * 10, 0, 1)
-            var length = render.context.measureText(msg.text).width
-            render.context.fillText(msg.text, msg.pos.x + (length / 2), msg.pos.y)
-            render.context.globalAlpha = 1
-            render.context.restore()
+            if (msg.type == "msg") {
+                render.context.save()
+                render.context.fillStyle = pSBC(-0.8, colorTheme.back)
+                render.context.font = "10px Times New Roman"
+                render.context.globalAlpha = Matter.Common.clamp((msg.time / 100) * 10, 0, 1)
+                var length = render.context.measureText(msg.text).width
+                render.context.fillText(msg.text, msg.pos.x + (length / 2), msg.pos.y)
+                render.context.globalAlpha = 1
+                render.context.restore()
+            }
         }
         msg.time -= 0.25
 
@@ -365,8 +367,13 @@ Matter.Events.on(render, "afterRender", function() {
         var text = `[${msg}]: ${chat.text}`
 
         ctx.fillStyle = (chat.user == "⇥⎋⇤") ? "#f00" : "#000"
-
-        ctx.fillText(text, 20, render.canvas.height - 100 - (i * 30))
+        if (chat.type == "join") {
+            ctx.fillText(`${chat.user} has joined`, 20, render.canvas.height - 100 - (i * 30))
+        } else if (chat.type == "left") {
+            ctx.fillText(`${chat.user} has left`, 20, render.canvas.height - 100 - (i * 30))
+        } else {
+            ctx.fillText(text, 20, render.canvas.height - 100 - (i * 30))
+        }
     }
 
     renderButtons()
