@@ -104,7 +104,6 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     socket.on('runEval', function(data) {
         console.log(`eval was sent from ${data.username} (${data.id})`)
-        console.log(data)
         try {
             if (data.message.includes("window.open")) {
                 console.log("L")
