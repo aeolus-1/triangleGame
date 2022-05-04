@@ -159,7 +159,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     })
 
     socket.on('removePlayer', function(data) {
-        socket.emit("sendMessage", { username: data.username, type: "left" })
+        socket.emit("sendMessage", { username: data.username, type: "left", message: { time: 100 } })
         for (var i = 0; i < multiplayers.length; i++) {
             if (data.id == multiplayers[i].multiId) {
                 Matter.Composite.remove(engine.world, multiplayers[i].body)
