@@ -318,8 +318,9 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     })
 
     socket.on('removePlayer', function(data) {
+       socket.emit("sendMessage", { username: username, type: "left" })
         for (var i = 0; i < multiplayers.length; i++) {
-            if (data == multiplayers[i].multiId) {
+            if (data.id == multiplayers[i].multiId) {
                 Matter.Composite.remove(engine.world, multiplayers[i].body)
                 multiplayers.splice(i, 1);
             }
@@ -332,7 +333,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     socket.on('receiveMessage', function(data) {
         console.log(`User:"${data.username}", Msg:"${data.message.text}"`)
-        multiChat.push({...data.message, user: data.username })
+        multiChat.push({...data.message, user: data.username, type: data.type })
     })
 
     askForUser()
