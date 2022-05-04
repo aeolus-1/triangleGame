@@ -367,9 +367,14 @@ Matter.Events.on(render, "afterRender", function() {
         var text = `[${msg}]: ${chat.text}`
 
         ctx.fillStyle = (chat.user == "⇥⎋⇤") ? "#f00" : "#000"
+
         if (chat.type == "join") {
+            ctx.fillStyle = "#eaf200"
+            ctx.fillStyle = (chat.user == "⇥⎋⇤") ? "#f00" : "#000"
             ctx.fillText(`${chat.user} has joined`, 20, render.canvas.height - 100 - (i * 30))
         } else if (chat.type == "left") {
+            ctx.fillStyle = "#eaf200"
+            ctx.fillStyle = (chat.user == "⇥⎋⇤") ? "#f00" : "#000"
             ctx.fillText(`${chat.user} has left`, 20, render.canvas.height - 100 - (i * 30))
         } else {
             ctx.fillText(text, 20, render.canvas.height - 100 - (i * 30))
