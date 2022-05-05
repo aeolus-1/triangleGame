@@ -69,7 +69,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     function startTimer() {
         inactive = setTimeout(() => {
-            socket.emit('inactive');
+            socket.emit('inactive', username);
             alert("disconnected due to inactivity");
         }, 600000)
     }
@@ -159,7 +159,6 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     })
 
     socket.on('removePlayer', function(data) {
-        socket.emit("sendMessage", { username: data.username, type: "left", message: { time: 100 } })
         for (var i = 0; i < multiplayers.length; i++) {
             if (data.id == multiplayers[i].multiId) {
                 Matter.Composite.remove(engine.world, multiplayers[i].body)
