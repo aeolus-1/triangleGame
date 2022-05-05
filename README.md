@@ -16,11 +16,11 @@ w, Space, ArrowUp = Jump
 s, ArrowDown = Duck  
 
 Editor:  
-click + drag = Draw block
-<, > = Rotate Block
-Arrow Keys = Move camera
-Shift + Arrow Keys = move selected block
-Digits (1, 2, 3...) = switch block type
+click + drag = Draw block  
+<, > = Rotate Block  
+Arrow Keys = Move camera  
+Shift + Arrow Keys = move selected block  
+Digits (1, 2, 3...) = switch block type  
 
 
 Music by nokia
