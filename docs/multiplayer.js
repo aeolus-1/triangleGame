@@ -4,7 +4,6 @@ var clientPing = 0
 if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by jake cause im cool")) {
     var inactive;
     var username;
-    var chatInput = document.getElementById("chatInput")
 
     function getMultiByUser(username) {
         for (let i = 0; i < multiplayers.length; i++) {
