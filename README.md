@@ -1,6 +1,6 @@
-# untitled triangle game
+# Pink, Diamond, Ace, Star
 
-idk what to call it
+ik what to call it
 
 put it on github so friends can see it
 
