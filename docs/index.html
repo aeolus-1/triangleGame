@@ -188,6 +188,28 @@
             return entitys[0].body.position
         }
     </script>
+    <script>
+        
+        var pissDrops = new Array()
+function updatePissDrops() {
+    for (let i = 0; i < pissDrops.length; i++) {
+        const drop = pissDrops[i];
+        drop.halfLife -= 1
+        if (drop.halfLife < 0) {
+            Matter.Composite.remove(engine.world, drop)
+            pissDrops.splice(i, 1)
+        }
+    }
+}
+
+setInterval(updatePissDrops, 50)
+function createPissDrop() {
+    let drop = Matter.Bodies.circle(entitys[0].body.position.x, entitys[0].body.position.y, 5, {render:{fillStyle:"#ffff00"}})
+    drop.halfLife = 10
+    pissDrops.push(drop)
+    Matter.Composite.add(engine.world, drop)
+}
+    </script>
 </body>
 
 </html>
