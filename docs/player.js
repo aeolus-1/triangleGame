@@ -294,7 +294,7 @@ class Multiplayer extends Entity {
 
                 }
 
-                wallJumpT = (Math.abs(coll.normal.x) > 0.5) ? Math.sign(coll.normal.x) : wallJumpT
+                this.wallJump = (coll.normal.x > 0.5)?1:(coll.normal.x < -0.5)?-1:0
 
 
                 if (
