@@ -10,19 +10,58 @@ var tagFormats = {
       "#FF0000",
     ][(new Date().getTime() / 250) & 7];
   },
-  RED: function (ctx) {
-    ctx.fillStyle = "#f00";
-  },
-  BLUE: function (ctx) {
-    ctx.fillStyle = "#00f";
+  GREEN:function(ctx) {
+    ctx.fillStyle = [
 
+        "#00FF00",
+        "#12c915",
+        "#208021",
+        "#55ed58",
+        "#255426",
+        "#8bad8b",
+        "#013802",
+
+      ][(new Date().getTime() / 250) & 7];
+  },
+  FLASHING:function(ctx) {
+    ctx.fillStyle = [
+
+      "#ff0",
+      "#000"
+      
+
+    ][(new Date().getTime() / 100) & 2];
+  },
+  GREY:function(ctx) {
+      ctx.fillStyle = "#696969"
+  },
+  BOLD:function(ctx) {
+    ctx.font = "bold 20px Times New Roman";
+  },
+  ITALIC:function(ctx) {
+    ctx.font = "italic 20px Times New Roman";
   }
 };
 
 var width = 0,
   usernameWidth = 0;
 
-function drawTagText(ctx, text, pos, centered = true) {
+  function measureTextTags(ctx, text) {
+    var el = document.createElement("html");
+    el.innerHTML = `<html>${text}</html>`;
+
+    usernameWidth = 0
+  
+    var tag = el.children[1];
+    ctx.save();
+    runTagFormatWidth(ctx, tag);
+    ctx.restore();
+
+    return usernameWidth
+  
+  }
+
+function drawTagText(ctx, text, pos) {
   var el = document.createElement("html");
   el.innerHTML = `<html>${text}</html>`;
 
@@ -30,16 +69,9 @@ function drawTagText(ctx, text, pos, centered = true) {
   //console.log(tags, text)
 
   ctx.fillStyle = "#000";
+  ctx.font = "20px Times New Roman"
   step = 0;
   width = 0;
-  usernameWidth = 0;
-  if (centered) {
-    ctx.save();
-    runTagFormatWidth(ctx, tag);
-    ctx.restore();
-
-    width = -usernameWidth / 2;
-  }
 
   runTagFormat(ctx, tag, pos);
 
