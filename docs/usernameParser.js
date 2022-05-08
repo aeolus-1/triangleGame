@@ -35,6 +35,9 @@ var tagFormats = {
   GREY:function(ctx) {
       ctx.fillStyle = "#696969"
   },
+  GOLD:function(ctx) {
+    ctx.fillStyle = "#c4912b"
+  },
   BOLD:function(ctx) {
     ctx.font = "bold 20px Times New Roman";
   },
