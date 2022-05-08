@@ -31,9 +31,18 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     function askForUser() {
         var user = prompt("Please enter a username");
+
+        if (!gameCompleted2) {
+            user = user.replace("<gold>", "<null>")
+            user = user.replace("</gold>", "</null>")
+            console.log(user)
+        }
         if (user != null) {
             var el = document.createElement("html");
             el.innerHTML = `<html>${user}</html>`;
+            
+
+            
 
             if (((el.textContent).replace(" ", "")).length > 30) {
                 alert("Username is too long or invaild")
