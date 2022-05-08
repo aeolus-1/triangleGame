@@ -348,13 +348,22 @@ Matter.Events.on(render, "afterRender", function() {
 
         if (chat.type == "join") {
             ctx.fillStyle = "#eaf200"
-            drawTagText(ctx, `${msg} has joined`, v(20, render.canvas.height - 100 - (i * 30)), false)
+            let length = measureTextTags(ctx, `${msg} `)
+
+            drawTagText(ctx, `${msg}`, v(20, render.canvas.height - 100 - (i * 30)), false)
+            drawTagText(ctx, `has joined`, v(20+length, render.canvas.height - 100 - (i * 30)), false)
         } else if (chat.type == "left") {
             ctx.fillStyle = "#eaf200"
-            drawTagText(ctx, `${msg} has left`, v(20, render.canvas.height - 100 - (i * 30)), false)
+            let length = measureTextTags(ctx, `${msg} `)
+
+            drawTagText(ctx, `${msg}`, v(20, render.canvas.height - 100 - (i * 30)), false)
+            drawTagText(ctx, `has left`, v(20+length, render.canvas.height - 100 - (i * 30)), false)
         } else {
             //ctx.fillText(text, 20, render.canvas.height - 100 - (i * 30))
-            drawTagText(ctx, `[${msg}] : ${chat.text}`, v(20, render.canvas.height - 100 - (i * 30)), false)
+            let length = measureTextTags(ctx, `${msg} `)
+
+            drawTagText(ctx, `[${msg}`, v(20, render.canvas.height - 100 - (i * 30)), false)
+            drawTagText(ctx, `] : ${chat.text}`, v(20+length, render.canvas.height - 100 - (i * 30)), false)
 
         }
     }
