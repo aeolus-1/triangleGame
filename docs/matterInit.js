@@ -14,7 +14,7 @@ setInterval(() => {
     }
 }, 20)
 
-var loading = 0,
+var loading = 1,
     gameCompleted = localStorage.getItem("gameCompleted")
 
 if (gameCompleted == null) {
@@ -208,33 +208,10 @@ Matter.Events.on(render, "afterRender", function() {
 
         render.context.fillStyle = "#000"
 
-        if (text.startsWith("<rainbow>")) {
-            if (rainbowCount == 1) {
-                render.context.fillStyle = "#9400D3"
-            } else if (rainbowCount == 2) {
-                render.context.fillStyle = "#4B0082"
-            } else if (rainbowCount == 3) {
-                render.context.fillStyle = "#0000FF"
-            } else if (rainbowCount == 4) {
-                render.context.fillStyle = "#00FF00"
-            } else if (rainbowCount == 5) {
-                render.context.fillStyle = "#FFFF00"
-            } else if (rainbowCount == 6) {
-                render.context.fillStyle = "#FF7F00"
-            } else if (rainbowCount == 7) {
-                render.context.fillStyle = "#FF0000"
-            }
-            text = text.replace('<rainbow>', '');
-        }
+        
+        drawTagText(render.context, text, v(parseInt(multiplayers[i].body.position.x), parseInt(multiplayers[i].body.position.y)-30))
 
-        var length = render.context.measureText(text).width
-
-
-        if (text == "⇥⎋⇤") {
-            text = ((turn) ? "☆★" : "★☆") + "ADMIN" + ((turn) ? "★☆" : "☆★")
-            render.context.fillStyle = "#f00"
-        }
-        render.context.fillText(text, parseInt(multiplayers[i].body.position.x) - (length / 2), parseInt(multiplayers[i].body.position.y) - 30)
+        //render.context.fillText(text, parseInt(multiplayers[i].body.position.x) - (length / 2), parseInt(multiplayers[i].body.position.y) - 30)
     }
 
     var testPos = v(-446.0919022968253, 124.92979674760744)
@@ -370,14 +347,14 @@ Matter.Events.on(render, "afterRender", function() {
 
         if (chat.type == "join") {
             ctx.fillStyle = "#eaf200"
-            ctx.fillStyle = (chat.user == "⇥⎋⇤") ? "#f00" : "#000"
-            ctx.fillText(`${chat.user} has joined`, 20, render.canvas.height - 100 - (i * 30))
+            drawTagText(ctx, `${msg} has joined`, v(20, render.canvas.height - 100 - (i * 30)), false)
         } else if (chat.type == "left") {
             ctx.fillStyle = "#eaf200"
-            ctx.fillStyle = (chat.user == "⇥⎋⇤") ? "#f00" : "#000"
-            ctx.fillText(`${chat.user} has left`, 20, render.canvas.height - 100 - (i * 30))
+            drawTagText(ctx, `${msg} has left`, v(20, render.canvas.height - 100 - (i * 30)), false)
         } else {
-            ctx.fillText(text, 20, render.canvas.height - 100 - (i * 30))
+            //ctx.fillText(text, 20, render.canvas.height - 100 - (i * 30))
+            drawTagText(ctx, `[${msg}] : ${chat.text}`, v(20, render.canvas.height - 100 - (i * 30)), false)
+
         }
     }
 
