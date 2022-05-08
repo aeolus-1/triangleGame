@@ -210,9 +210,6 @@ Matter.Events.on(render, "afterRender", function() {
             length = measureTextTags(render.context, text)
 
 
-        render.context.translate(pos.x-(length/2), pos.y)
-        render.context.scale(0.75, 0.75)
-        render.context.translate(-(pos.x-(length/2*0.75)), -(pos.y))
         drawTagText(render.context, text, v(pos.x-((length/2)), pos.y))
 
         //render.context.fillText(text, parseInt(multiplayers[i].body.position.x) - (length / 2), parseInt(multiplayers[i].body.position.y) - 30)
