@@ -350,13 +350,13 @@ Matter.Events.on(render, "afterRender", function() {
             ctx.fillStyle = "#eaf200"
             let length = measureTextTags(ctx, `${msg} `)
 
-            drawTagText(ctx, `${msg}`, v(20, render.canvas.height - 100 - (i * 30)), false)
+            drawTagText(ctx, `${msg} `, v(20, render.canvas.height - 100 - (i * 30)), false)
             drawTagText(ctx, `has joined`, v(20+length, render.canvas.height - 100 - (i * 30)), false)
         } else if (chat.type == "left") {
             ctx.fillStyle = "#eaf200"
             let length = measureTextTags(ctx, `${msg} `)
 
-            drawTagText(ctx, `${msg}`, v(20, render.canvas.height - 100 - (i * 30)), false)
+            drawTagText(ctx, `${msg} `, v(20, render.canvas.height - 100 - (i * 30)), false)
             drawTagText(ctx, `has left`, v(20+length, render.canvas.height - 100 - (i * 30)), false)
         } else {
             //ctx.fillText(text, 20, render.canvas.height - 100 - (i * 30))
