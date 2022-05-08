@@ -202,14 +202,18 @@ Matter.Events.on(render, "afterRender", function() {
     for (var i = 0; i < multiplayers.length; i++) {
         var text = String(multiplayers[i].username)
 
-        var turn = (Math.floor(new Date().getTime() / 500) % 2) == 0
 
 
 
         render.context.fillStyle = "#000"
+        var pos = v(parseInt(multiplayers[i].body.position.x), parseInt(multiplayers[i].body.position.y)-30),
+            length = measureTextTags(render.context, text)
 
-        
-        drawTagText(render.context, text, v(parseInt(multiplayers[i].body.position.x), parseInt(multiplayers[i].body.position.y)-30))
+
+        render.context.translate(pos.x-(length/2), pos.y)
+        render.context.scale(0.75, 0.75)
+        render.context.translate(-(pos.x-(length/2*0.75)), -(pos.y))
+        drawTagText(render.context, text, v(pos.x-((length/2)), pos.y))
 
         //render.context.fillText(text, parseInt(multiplayers[i].body.position.x) - (length / 2), parseInt(multiplayers[i].body.position.y) - 30)
     }
