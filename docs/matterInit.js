@@ -15,10 +15,10 @@ setInterval(() => {
 }, 20)
 
 var loading = 1,
-    gameCompleted = localStorage.getItem("gameCompleted")
+    gameCompleted2 = JSON.parse(localStorage.getItem("gameCompleted2"))
 
-if (gameCompleted == null) {
-    gameCompleted = false
+if (gameCompleted2 == null) {
+    gameCompleted2 = false
 }
 
 function refreshLoop() {
@@ -294,7 +294,7 @@ Matter.Events.on(render, "afterRender", function() {
 
 
 
-    if (gameCompleted) {
+    if (gameCompleted2) {
         if (timeStamp < 0) {
             render.context.fillText(`${Math.floor(-timeStamp/10)/10} cookies`, 10, 240)
         } else {
@@ -350,13 +350,13 @@ Matter.Events.on(render, "afterRender", function() {
             ctx.fillStyle = "#eaf200"
             let length = measureTextTags(ctx, `${msg} `)
 
-            drawTagText(ctx, `${msg} `, v(20, render.canvas.height - 100 - (i * 30)), false)
+            drawTagText(ctx, `${msg}`, v(20, render.canvas.height - 100 - (i * 30)), false)
             drawTagText(ctx, `has joined`, v(20+length, render.canvas.height - 100 - (i * 30)), false)
         } else if (chat.type == "left") {
             ctx.fillStyle = "#eaf200"
             let length = measureTextTags(ctx, `${msg} `)
 
-            drawTagText(ctx, `${msg} `, v(20, render.canvas.height - 100 - (i * 30)), false)
+            drawTagText(ctx, `${msg}`, v(20, render.canvas.height - 100 - (i * 30)), false)
             drawTagText(ctx, `has left`, v(20+length, render.canvas.height - 100 - (i * 30)), false)
         } else {
             //ctx.fillText(text, 20, render.canvas.height - 100 - (i * 30))
