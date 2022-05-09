@@ -29,15 +29,26 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
         socket.emit('sendEval', { message: message, key: modKey, username: username, id: socket.id })
     }
 
-    function askForUser() {
+    while(true) {
+
         var user = prompt("Please enter a username");
+
+
+        var profaneWord = function() {
+            for (let word of profaneWords) {
+                if (user.includes(word)) {
+                    return word
+                }
+            }
+        }()
 
         if (!gameCompleted2) {
             user = user.replace("<gold>", "<null>")
             user = user.replace("</gold>", "</null>")
             console.log(user)
         }
-        if (user != null) {
+
+        if (user != null && user != "") {
             var el = document.createElement("html");
             el.innerHTML = `<html>${user}</html>`;
             
@@ -47,12 +58,13 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
             if (((el.textContent).replace(" ", "")).length > 30) {
                 alert("Username is too long or invaild")
                 askForUser();
+            } else if (profaneWord != undefined) {
+                alert("Profane Name")
             } else {
                 username = user;
+                break
             }
-        } else {
-            askForUser()
-        }
+        } 
 
     }
 
