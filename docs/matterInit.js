@@ -196,6 +196,7 @@ Matter.Events.on(render, "afterRender", function() {
 
     if (getDst(entitys[0].body.position, endPos) < 400 && timeStamp > 0) {
         timeStamp = -timeStamp
+        gameCompleted2 = true
         console.log("yys")
     }
 
