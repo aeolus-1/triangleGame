@@ -386,7 +386,7 @@ class Multiplayer extends Entity {
             //Matter.Body.translate(this.body, v(0,-5))
             this.jumpTime = 0
 
-            if (sfxButton.on) new Audio("assets/sfx/jump.wav").play()
+            if (sfxButton.on) new Audio("assets/sfx/jump.flacc").play()
         }
         if (testKey(this.keyset["jump"], keys) && this.jumpTime > -15 && Math.abs(this.body.velocity.y) > 4.5) {
             this.applyForce(v(0, -(jump * 0.025)))
