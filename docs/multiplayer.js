@@ -199,6 +199,5 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
         multiChat.push({...data.message, user: data.username, type: data.type })
     })
 
-    askForUser()
     startTimer()
 }
