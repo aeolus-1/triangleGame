@@ -17,7 +17,7 @@ function setPlayerScale2(player, scale) {
 
 class Entity {
     constructor(pos, scale) {
-        this.body = Matter.Bodies.polygon(pos.x, pos.y, (new Date().getDay()%3)+3, scale*0.75, {
+        this.body = Matter.Bodies.polygon(pos.x, pos.y, 4, scale*0.75, {
             frictionAir: 0,
             restitution: 0.15,
             friction: 0.7,
