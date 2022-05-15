@@ -27,6 +27,11 @@ document.addEventListener("keydown", function(e){
         textMsg = ""
     }
 
+    if (k == "o") {
+        var sides = parseInt(prompt("Sides: ") || "4") 
+        setEntityBody(entitys[0], sides)
+    }
+
     if (!typing) {
          keys[(e.key).toLowerCase()]=true;
 
