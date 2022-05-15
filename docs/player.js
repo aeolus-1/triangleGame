@@ -14,6 +14,20 @@ function setPlayerScale2(player, scale) {
     Matter.Body.scale(player.body, targetScale, targetScale)
 }
 
+function setEntityBody(entity, sides) {
+    Matter.Composite.remove(engine.world, entity.body)
+    entity.body = Matter.Bodies.polygon(entity.body.position.x, entity.body.position.y, sides, 30*0.75, {
+        frictionAir: 0,
+        restitution: 0.15,
+        friction: 0.7,
+        frictionStatic: 0,
+        render: {
+            fillStyle: colorTheme.player
+        }
+    })
+    Matter.Composite.add(engine.world, entity.body)
+
+}
 
 class Entity {
     constructor(pos, scale) {
