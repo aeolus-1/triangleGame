@@ -27,7 +27,7 @@ document.addEventListener("keydown", function(e){
         textMsg = ""
     }
 
-    if (k == "o") {
+    if (k == "o" && online) {
         var sides = parseInt(prompt("Sides: ") || "4") 
         setEntityBody(entitys[0], sides)
     }
