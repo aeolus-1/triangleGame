@@ -29,7 +29,10 @@ document.addEventListener("keydown", function(e){
 
     if (k == "o" && !online) {
         var sides = parseInt(prompt("Sides: ") || "4") 
-        setEntityBody(entitys[0], sides)
+        if (confirm("Changing side will reset you. Are you sure you want to do this????")) {
+            setEntityBody(entitys[0], sides)
+            resetGame()
+        }
     }
 
     if (!typing) {
