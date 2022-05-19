@@ -124,7 +124,7 @@
 
     <script>
    Chunks.loadLevelDat(levelDat["start"]);
-        async(() => {
+        async function spawnPlayer() {
         var browserId = await  biri()
         var newPl = new Player(v(120, 100), {
             moveLeft: ["arrowleft", "a"],
@@ -134,7 +134,8 @@
         }, browserId)
         newPl.body.render.fillStyle = pSBC(-0.3, colorTheme.player);
         entitys.push(newPl)
-        })()
+        })
+        spawnPlayer()
 
 
         setInterval(() => {
