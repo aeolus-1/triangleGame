@@ -123,16 +123,18 @@
     <script src="multiplayer.js"></script>
 
     <script>
-        //Levels.loadData(levelDat["basic"])
-        Chunks.loadLevelDat(levelDat["start"]);
+   Chunks.loadLevelDat(levelDat["start"]);
+        async(() => {
+        var browserId = await  biri()
         var newPl = new Player(v(120, 100), {
             moveLeft: ["arrowleft", "a"],
             moveRight: ["arrowright", "d"],
             jump: ["arrowup", "w"],
             duck: ["arrowdown", "s"],
-        })
+        }, browserId)
         newPl.body.render.fillStyle = pSBC(-0.3, colorTheme.player);
         entitys.push(newPl)
+        })()
 
 
         setInterval(() => {
