@@ -1,4 +1,8 @@
 var infinJump = false
+var browserId
+async(() => {
+   browserId = await biri()
+})()
 
 function getPlayerScale(player) {
     var vt1 = player.body.vertices[0],
@@ -49,8 +53,7 @@ class Entity {
 }
 
 class Player extends Entity {
-    async constructor(pos, keyset) {
-        browserId = await biri()
+    constructor(pos, keyset) {
         var scale = 1
         super(pos, scale * 30)
         this.scale = scale
