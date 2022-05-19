@@ -1,11 +1,10 @@
 var chatMsg = new Array()
 var clientPing = 0,
     online = false
-
 if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by jake cause im cool")) {
     var inactive;
     var username;
-    
+
     online = true
 
     function getMultiByUser(username) {
@@ -89,7 +88,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     });
 
     function coords() {
-        socket.emit('coords', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: getPlayerScale(entitys[0]), chat: chat });
+        socket.emit('coords', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: getPlayerScale(entitys[0]), chat: chat, browserId: entitys[0].browserId});
         requestAnimationFrame(coords)
     }
 
@@ -103,7 +102,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
 
     socket.on('connect', function() {
-        socket.emit('playerJoin', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: getPlayerScale(entitys[0]), chat: chat });
+        socket.emit('playerJoin', { id: socket.id, x: entitys[0].body.position.x, y: entitys[0].body.position.y, velX: entitys[0].body.velocity.x, velY: entitys[0].body.velocity.y, angle: entitys[0].body.angle, angVel: entitys[0].body.angularVelocity, username: username, scale: getPlayerScale(entitys[0]), chat: chat, browserId: entitys[0].browserId });
 
         socket.emit("sendMessage", { message: { time: 100 }, username: username, type: "join" })
     });
@@ -117,7 +116,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
                         moveRight: [""],
                         jump: [""],
                         duck: [""],
-                    }, data.id, data.username)
+                    }, data.id, data.username, data.browserId)
                 )
                 multiplayers.push(newpl)
 
@@ -173,7 +172,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
                             moveRight: [""],
                             jump: [""],
                             duck: [""],
-                        }, key, data[key].username)
+                        }, key, data[key].username, data[key].browserId)
                     )
                     multiplayers.push(newpl)
 

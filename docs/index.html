@@ -101,7 +101,7 @@
         if (localStorage.getItem("gameTime") != null) timeStamp = localStorage.getItem("gameTime")
     </script>
     <script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/biri/dist/biri.min.js"></script>
     <script src="assetCache.js"></script>
     <script src="imgs.js"></script>
     <script src="usernameParser.js"></script>
@@ -123,16 +123,19 @@
     <script src="multiplayer.js"></script>
 
     <script>
-        //Levels.loadData(levelDat["basic"])
-        Chunks.loadLevelDat(levelDat["start"]);
+   Chunks.loadLevelDat(levelDat["start"]);
+        async function spawnPlayer() {
+        var browserId = await  biri()
         var newPl = new Player(v(120, 100), {
             moveLeft: ["arrowleft", "a"],
             moveRight: ["arrowright", "d"],
             jump: ["arrowup", "w"],
             duck: ["arrowdown", "s"],
-        })
+        }, browserId)
         newPl.body.render.fillStyle = pSBC(-0.3, colorTheme.player);
         entitys.push(newPl)
+        }
+        spawnPlayer()
 
 
         setInterval(() => {

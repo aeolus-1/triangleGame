@@ -1,5 +1,4 @@
 var infinJump = false
-
 function getPlayerScale(player) {
     var vt1 = player.body.vertices[0],
         vt2 = player.body.vertices[1]
@@ -49,14 +48,14 @@ class Entity {
 }
 
 class Player extends Entity {
-    constructor(pos, keyset) {
+    constructor(pos, keyset, browserId) {
         var scale = 1
         super(pos, scale * 30)
         this.scale = scale
         this.keyset = keyset
         this.jumpTime = 0
-
         this.wallJump = 0
+        this.browserId = browserId
 
 
     }
@@ -238,7 +237,7 @@ class Player extends Entity {
 }
 
 class Multiplayer extends Entity {
-    constructor(pos, keyset, multiId, username) {
+    constructor(pos, keyset, multiId, username, browserId) {
         var scale = 1
         super(pos, scale * 30)
         this.scale = scale
@@ -247,7 +246,7 @@ class Multiplayer extends Entity {
         this.multiId = multiId
         this.keyset = keyset
         this.jumpTime = 0
-
+        this.browserId = browserId
         this.wallJump = 0
 
 
