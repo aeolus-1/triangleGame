@@ -1,3 +1,5 @@
+(async() => {
+const uniqueId = await biri()
 var chatMsg = new Array()
 var clientPing = 0,
     online = false
@@ -5,9 +7,7 @@ var clientPing = 0,
 if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by jake cause im cool")) {
     var inactive;
     var username;
-    (async() => {
-    const uniqueId = await biri()
-    })()
+    
     console.log(uniqueId)
     online = true
 
@@ -207,3 +207,4 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
 
     startTimer()
 }
+    })()
