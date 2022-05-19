@@ -1,9 +1,4 @@
 var infinJump = false
-var browserId
-async(() => {
-   browserId = await biri()
-})()
-
 function getPlayerScale(player) {
     var vt1 = player.body.vertices[0],
         vt2 = player.body.vertices[1]
@@ -59,7 +54,6 @@ class Player extends Entity {
         this.scale = scale
         this.keyset = keyset
         this.jumpTime = 0
-        this.browserId = browserId
         this.wallJump = 0
 
 
