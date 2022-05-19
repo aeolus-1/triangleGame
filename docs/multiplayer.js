@@ -8,6 +8,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     (async() => {
     const uniqueId = await biri()
     })()
+    console.log(uniqueId)
     online = true
 
     function getMultiByUser(username) {
