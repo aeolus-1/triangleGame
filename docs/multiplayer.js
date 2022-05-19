@@ -1,16 +1,16 @@
 var chatMsg = new Array()
 var clientPing = 0,
     online = false
- const uniqueId = async () => {
+ var uniqueId = async () => {
   return await biri()
 };
-console.log(uniqueId)
+console.log(uniqueId())
 
 if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by jake cause im cool")) {
     var inactive;
     var username;
     
-    console.log(uniqueId)
+    console.log(uniqueId())
     online = true
 
     function getMultiByUser(username) {
