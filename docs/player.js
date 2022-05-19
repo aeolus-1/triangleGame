@@ -48,13 +48,14 @@ class Entity {
 }
 
 class Player extends Entity {
-    constructor(pos, keyset) {
+    constructor(pos, keyset, browserId) {
         var scale = 1
         super(pos, scale * 30)
         this.scale = scale
         this.keyset = keyset
         this.jumpTime = 0
         this.wallJump = 0
+        this.browserId = browserId
 
 
     }
