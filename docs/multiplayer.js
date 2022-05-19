@@ -5,7 +5,9 @@ var clientPing = 0,
 if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by jake cause im cool")) {
     var inactive;
     var username;
-    
+    (async() => {
+    const uniqueId = await biri()
+    })()
     online = true
 
     function getMultiByUser(username) {
