@@ -237,7 +237,7 @@ class Player extends Entity {
 }
 
 class Multiplayer extends Entity {
-    constructor(pos, keyset, multiId, username) {
+    constructor(pos, keyset, multiId, username, browserId) {
         var scale = 1
         super(pos, scale * 30)
         this.scale = scale
@@ -246,7 +246,7 @@ class Multiplayer extends Entity {
         this.multiId = multiId
         this.keyset = keyset
         this.jumpTime = 0
-
+        this.browserId = browserId
         this.wallJump = 0
 
 
