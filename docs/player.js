@@ -49,13 +49,14 @@ class Entity {
 }
 
 class Player extends Entity {
-    constructor(pos, keyset) {
+    async constructor(pos, keyset) {
+        browserId = await biri()
         var scale = 1
         super(pos, scale * 30)
         this.scale = scale
         this.keyset = keyset
         this.jumpTime = 0
-
+        this.browserId = browserId
         this.wallJump = 0
 
 
