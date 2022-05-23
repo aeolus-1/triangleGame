@@ -16,6 +16,29 @@ document.addEventListener("keydown", function(e){
     if (k == "enter" && textMsg.replace(" ", "").length > 0) {
         typing = false
         console.log(textMsg)
+
+        var profaneWord = function() {
+            for (let word of profaneWords) {
+                if (textMsg.includes(word)) {
+                    return word
+                }
+            }
+        }()
+
+        if (profaneWord != undefined) {
+            var replacements = [
+                "I love ben reef",
+                "This game is the best",
+                "I do not support ukraine",
+                "I am gay",
+                "😍",
+                "I have a secret desire for feet",
+                "I have sexual relationships with minors",
+                "asd",
+            ]
+            textMsg = replacements[Math.floor(Math.random()*replacements.length)]
+        }
+
         var length = render.context.measureText(textMsg).width,
         msg = {
             text:textMsg,
