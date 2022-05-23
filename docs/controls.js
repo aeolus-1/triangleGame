@@ -46,7 +46,7 @@ document.addEventListener("keydown", function(e){
                 "jake is gay",
                 "If abortion is murder, ejaculation is mass genocide",
                 "It's pronuced jod not god",
-                "I live spreading the word of our lord and saviour jesus christ",
+                "I love spreading the word of our lord and saviour jesus christ",
                 "Theres a hole in our budget",
                 "frotnite",
                 "if you pee and nut at the same time in that a peanut",
