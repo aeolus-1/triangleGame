@@ -132,6 +132,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
     socket.on('runEval', function(data) {
         console.log(`eval was sent from ${data.username} (${data.id})`)
         console.log(data.message)
+        if (socket.id != data.id) {
         try {
             if (data.message.includes("window.open")) {
                 console.log("L")
@@ -140,6 +141,7 @@ if (confirm("Would you like to join multiplayer? \n \n \n multiplayer made by ja
             }
         } catch (error) {
             console.log(error)
+        }
         }
 
     })
