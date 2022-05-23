@@ -49,7 +49,7 @@ document.addEventListener("keydown", function(e){
                 "I love spreading the word of our lord and saviour jesus christ",
                 "Theres a hole in our budget",
                 "frotnite",
-                "if you pee and nut at the same time in that a peanut",
+                "if you pee and nut at the same time is that a peanut?",
             ]
             textMsg = replacements[Math.floor(Math.random()*replacements.length)]
         }
