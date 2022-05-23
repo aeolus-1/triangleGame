@@ -5,7 +5,9 @@ function v(x, y) {
 const times = [];
 let fps;
 var rainbowCount = 1
-
+var showMenu = true
+var gameMode
+var startMulti = true
 setInterval(() => {
     if (rainbowCount == 7) {
         rainbowCount = 1
@@ -370,31 +372,69 @@ Matter.Events.on(render, "afterRender", function() {
     }
 
     renderButtons()
+if (showMenu == true) {
 
-    if (loading < 1) {
-        render.context.fillStyle = pSBC(-0.3, colorTheme.back)
+    singleButton = {
+        x: (render.canvas.width / 2) - 100,
+        y: 120,
+        width: 200,
+        height: 50
+    }
+
+    multiButton = {
+        x: (render.canvas.width /2) - 100,
+        y: 225,
+        width: 200,
+        height: 50
+    }
+
+
+
+    render.context.fillStyle = pSBC(-0.3, colorTheme.back)
         render.context.fillRect(0, 0, render.canvas.width, render.canvas.height)
 
         render.context.fillStyle = pSBC(0.8, colorTheme.back)
-        let barPos = v(render.canvas.width / 2, render.canvas.height / 2)
-        render.context.fillRect(barPos.x - 50, barPos.y - 10, 100, 20)
+        render.context.font = '40px Arial'
+        render.context.fillStyle = "#000000"
+        title = "Untitled Triangle Game"
+        render.context.fillText(title, (render.canvas.width /2 - (render.context.measureText(title).width / 2)), 45)
+        render.context.fillStyle = pSBC(-0.7, colorTheme.back)
+        render.context.fillRect(singleButton.x, singleButton.y, singleButton.width, singleButton.height)
+        render.context.fillRect(multiButton.x, multiButton.y, multiButton.width, multiButton.height)
+        render.context.font = '25px Arial'
+        render.context.fillStyle = "#000000"
+        single = "Singleplayer"
+        render.context.fillText("Singleplayer", (render.canvas.width /2 - (render.context.measureText(single).width / 2)), 155)
+        multi = "Multiplayer"
+        render.context.fillText("Multiplayer", (render.canvas.width /2 - (render.context.measureText(multi).width / 2)), 257)
+}
 
-        render.context.fillStyle = pSBC(-0.8, colorTheme.back)
-        render.context.fillRect(barPos.x - 45, barPos.y - 7.5, (loading * 90), 15)
-        loading += 0.01 * Math.random()
-
-
-        render.context.fillStyle = "#000"
-        let text = tip,
-            width = render.context.measureText(text).width
-        render.context.fillText("Tip:", barPos.x - (32.59765625 / 2), barPos.y + 50)
-        render.context.fillText(text, barPos.x - (width / 2), barPos.y + 70)
-    } else if (loading != 2) {
-        Matter.Runner.start(runner, engine);
-        loading = 2
+document.addEventListener("click", (e) => {
+    console.log(e.offsetX, e.offsetY)
+    if (didClick(e.offsetY, e.offsetX, singleButton) ) {
+        showMenu = false
+        gameMode = "singleplayer"
+    } else if (didClick(e.offsetY, e.offsetX, multiButton)) {
+        showMenu = false
+        gameMode = "multiplayer"
+        if (startMulti == true) {
+            console.log("ran")
+            var head= document.getElementsByTagName('head')[0];
+      var script= document.createElement('script');
+      script.src= 'multiplayer.js';
+      head.appendChild(script);
+      startMulti = false
+        }
     }
+})
+        
+function didClick(yVal, xVal, ele) {
+    return yVal > ele.y && yVal < ele.y + ele.height && xVal > ele.x && xVal < ele.x + ele.width
+}
+
 })
 var music = new Audio("assets/sfx/musicTrack1.mp3")
 
 music.volume = 1
 music.loop = true
+Matter.Runner.start(runner, engine);
