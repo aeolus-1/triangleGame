@@ -410,7 +410,6 @@ if (showMenu == true) {
 }
 
 document.addEventListener("click", (e) => {
-    console.log(e.offsetX, e.offsetY)
     if (didClick(e.offsetY, e.offsetX, singleButton) ) {
         showMenu = false
         gameMode = "singleplayer"
@@ -418,7 +417,6 @@ document.addEventListener("click", (e) => {
         showMenu = false
         gameMode = "multiplayer"
         if (startMulti == true) {
-            console.log("ran")
             var head= document.getElementsByTagName('head')[0];
       var script= document.createElement('script');
       script.src= 'multiplayer.js';
