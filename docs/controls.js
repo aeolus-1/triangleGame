@@ -35,6 +35,21 @@ document.addEventListener("keydown", function(e){
                 "I have a secret desire for feet",
                 "I have sexual relationships with minors",
                 "asd",
+                "I love basil feet pics",
+                "I have 14.3 kids in my basement",
+                "I love trignomentry",
+                "Don't ask the minions who they served in 1942",
+                "mayonaise on a escalator",
+                "baby do hurt me",
+                "This message was sponsered by raid shadow legends",
+                "What is sqrt(34/sin(46^-1)^PI)",
+                "jake is gay",
+                "If abortion is murder, ejaculation is mass genocide",
+                "It's pronuced jod not god",
+                "I live spreading the word of our lord and saviour jesus christ",
+                "Theres a hole in our budget",
+                "frotnite",
+                "if you pee and nut at the same time in that a peanut",
             ]
             textMsg = replacements[Math.floor(Math.random()*replacements.length)]
         }
