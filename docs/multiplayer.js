@@ -198,6 +198,7 @@ var clientPing = 0,
 
     socket.on('beenKicked', function(data) {
         alert(` You have been kicked with the reason: ${data}`)
+        location.reload()
     })
 
     socket.on('receiveMessage', function(data) {
