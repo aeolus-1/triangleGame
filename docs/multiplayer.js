@@ -82,7 +82,7 @@ var clientPing = 0,
         }
     }
 
-    const socket = io("wss://69.28.85.117:3000")
+    const socket = io("https://triangleserver.openode.dev")
 
     document.addEventListener("keypress", function() {
         window.clearTimeout(inactive);
