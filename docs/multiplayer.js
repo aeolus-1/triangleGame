@@ -82,7 +82,7 @@ var clientPing = 0,
         }
     }
 
-    const socket = io("https://triangle-game-server.herokuapp.com")
+    const socket = io("69.28.85.117:3000")
 
     document.addEventListener("keypress", function() {
         window.clearTimeout(inactive);
