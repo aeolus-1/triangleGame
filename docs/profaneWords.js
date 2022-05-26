@@ -2807,7 +2807,6 @@ var profaneWords = [
   "willies",
   "williewanker",
   "willy",
-  "wn",
   "wog",
   "wogs",
   "woody",
