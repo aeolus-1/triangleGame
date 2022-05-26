@@ -407,7 +407,30 @@ if (showMenu == true) {
         render.context.fillText("Singleplayer", (render.canvas.width /2 - (render.context.measureText(single).width / 2)), 155)
         multi = "Multiplayer"
         render.context.fillText("Multiplayer", (render.canvas.width /2 - (render.context.measureText(multi).width / 2)), 257)
-}
+}else {
+    if (loading < 1) {
+        render.context.fillStyle = pSBC(-0.3, colorTheme.back)
+        render.context.fillRect(0, 0, render.canvas.width, render.canvas.height)
+
+        render.context.fillStyle = pSBC(0.8, colorTheme.back)
+        let barPos = v(render.canvas.width / 2, render.canvas.height / 2)
+        render.context.fillRect(barPos.x - 50, barPos.y - 10, 100, 20)
+
+        render.context.fillStyle = pSBC(-0.8, colorTheme.back)
+        render.context.fillRect(barPos.x - 45, barPos.y - 7.5, (loading * 90), 15)
+        loading += 0.01 * Math.random()
+
+
+        render.context.fillStyle = "#000"
+        let text = tip,
+            width = render.context.measureText(text).width
+        render.context.fillText("Tip:", barPos.x - (32.59765625 / 2), barPos.y + 50)
+        render.context.fillText(text, barPos.x - (width / 2), barPos.y + 70)
+    } else if (loading != 2) {
+        Matter.Runner.start(runner, engine);
+        loading = 2
+    }
+  }
 
 document.addEventListener("click", (e) => {
     if (didClick(e.offsetY, e.offsetX, singleButton) ) {
