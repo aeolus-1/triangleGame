@@ -458,4 +458,3 @@ var music = new Audio("assets/sfx/musicTrack1.mp3")
 
 music.volume = 1
 music.loop = true
-Matter.Runner.start(runner, engine);
