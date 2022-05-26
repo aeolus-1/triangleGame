@@ -50,6 +50,18 @@ document.addEventListener("keydown", function(e){
                 "Theres a hole in our budget",
                 "frotnite",
                 "if you pee and nut at the same time is that a peanut?",
+                "Lamps in video games use real electricity.",
+                "The syllables in \"on your mark, get set, go\" are a countdown.",
+                "The sentence \"Don't objectify women\" has \"women\" as the object of the sentence.",
+                "Pavlov probably thought about feeding his dogs every time someone rang a bell.",
+                "The tallest person in the world has physically experienced being the exact height of every other person in the world at some point.",
+                "When you say \"forward\" or \"back,\" your lips move in those directions.",
+                "\"Do not touch\" is probably a really unsettling thing to read in braille.",
+                "When Sweden is playing Denmark, it is SWE-DEN. The remaining letters, not used, is DEN-MARK.",
+                "If you had $1 for every year the universe has existed (approximately 13.8 billion years). You wouldn't even make the top 50 on the Forbes list.",
+                "An \"unlimited minutes per month\" phone plan really only gives you 44,640 minutes per month at best.",
+                "Why do people say \"tuna fish\" when they don't say \"beef mammal\" or \"chicken bird\"?",
+                "The object of golf is to play the least amount of golf.",
             ]
             textMsg = replacements[Math.floor(Math.random()*replacements.length)]
         }
