@@ -16,7 +16,7 @@ setInterval(() => {
     }
 }, 20)
 
-var loading = 1,
+var loading = 0,
     gameCompleted2 = JSON.parse(localStorage.getItem("gameCompleted2"))
 
 if (gameCompleted2 == null) {
