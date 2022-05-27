@@ -210,7 +210,7 @@ function updatePissDrops() {
 
 setInterval(updatePissDrops, 50)
 function createPissDrop() {
-    let drop = Matter.Bodies.circle(entitys[0].body.position.x, entitys[0].body.position.y, 5, {render:{fillStyle:"#ffff00"}})
+    let drop = Matter.Bodies.circle(entitys[0].body.position.x, entitys[0].body.position.y, 5, {render:{fillStyle:"#FFFFFF"}})
     drop.halfLife = 10
     pissDrops.push(drop)
     Matter.Composite.add(engine.world, drop)
