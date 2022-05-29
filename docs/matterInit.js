@@ -375,6 +375,21 @@ Matter.Events.on(render, "afterRender", function() {
 
     renderButtons()
 if (showMenu == true) {
+     var singleButton = {
+        x: (render.canvas.width / 2) - 100,
+        y: 120,
+        width: 200,
+        height: 50
+    },
+
+    multiButton = {
+        x: (render.canvas.width /2) - 100,
+        y: 225,
+        width: 200,
+        height: 50
+    }
+    
+    
     render.context.fillStyle = pSBC(-0.3, colorTheme.back)
         render.context.fillRect(0, 0, render.canvas.width, render.canvas.height)
 
