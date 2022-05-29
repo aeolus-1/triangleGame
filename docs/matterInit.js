@@ -8,6 +8,20 @@ var rainbowCount = 1
 var showMenu = true
 var gameMode
 var startMulti = true
+
+    singleButton = {
+        x: (render.canvas.width / 2) - 100,
+        y: 120,
+        width: 200,
+        height: 50
+    }
+
+    multiButton = {
+        x: (render.canvas.width /2) - 100,
+        y: 225,
+        width: 200,
+        height: 50
+    }
 setInterval(() => {
     if (rainbowCount == 7) {
         rainbowCount = 1
@@ -291,7 +305,7 @@ Matter.Events.on(render, "afterRender", function() {
     render.context.fillText(`${Math.round(Matter.Common.clamp((-entitys[0].body.position.y+10)/100, 0, Infinity))+2}m`, 10, 90)
     render.context.fillText(`Speed: ${Math.abs(Math.round(entitys[0].body.velocity.x * 100) / 100)}`, 10, 120)
     render.context.fillText(`FPS: ${fps}`, 10, 150)
-    render.context.fillText(`Ping: ${clientPing}ms`, 10, 180)
+    render.context.fillText(`Ping: ${Math.abs(clientPing)}ms`, 10, 180)
     if (multiplayers.length > 0) render.context.fillText(`players: ${multiplayers.length+1}`, 10, 210)
 
 
@@ -373,23 +387,6 @@ Matter.Events.on(render, "afterRender", function() {
 
     renderButtons()
 if (showMenu == true) {
-
-    singleButton = {
-        x: (render.canvas.width / 2) - 100,
-        y: 120,
-        width: 200,
-        height: 50
-    }
-
-    multiButton = {
-        x: (render.canvas.width /2) - 100,
-        y: 225,
-        width: 200,
-        height: 50
-    }
-
-
-
     render.context.fillStyle = pSBC(-0.3, colorTheme.back)
         render.context.fillRect(0, 0, render.canvas.width, render.canvas.height)
 
