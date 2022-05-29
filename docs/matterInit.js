@@ -9,19 +9,7 @@ var showMenu = true
 var gameMode
 var startMulti = true
 
-    singleButton = {
-        x: (render.canvas.width / 2) - 100,
-        y: 120,
-        width: 200,
-        height: 50
-    }
-
-    multiButton = {
-        x: (render.canvas.width /2) - 100,
-        y: 225,
-        width: 200,
-        height: 50
-    }
+    
 setInterval(() => {
     if (rainbowCount == 7) {
         rainbowCount = 1
