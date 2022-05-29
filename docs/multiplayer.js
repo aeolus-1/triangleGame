@@ -5,9 +5,9 @@ var clientPing = 0,
     var inactive;
     var username;
 
-    online = true
  
     if (gameMode == "multiplayer") {
+    online = true
 
     function getMultiByUser(username) {
         for (let i = 0; i < multiplayers.length; i++) {
