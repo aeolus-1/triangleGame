@@ -2,7 +2,8 @@ var keys = {},
     preKeys = {}
 
 var startTime = false,
-        showMap = false
+        showMap = false,
+        hiding = false
 
 var textMsg = "",
     typing = false
@@ -93,7 +94,9 @@ document.addEventListener("keydown", function(e){
             startTime = new Date().getTime()
         }
         patternDetection.logKey((e.key).toLowerCase())
-        
+        if ((e.key).toLowerCase() == "i") {
+            hiding = !hiding
+        }
         if ((e.key).toLowerCase() == "y") {
                 showMap = !showMap
             }
