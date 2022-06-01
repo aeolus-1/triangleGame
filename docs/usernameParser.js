@@ -39,18 +39,19 @@ var tagFormats = {
     ctx.fillStyle = "#c4912b"
   },
   BOLD:function(ctx) {
-    ctx.font = "bold 20px Times New Roman";
+    ctx.font = `bold {size}px Times New Roman`;
   },
   ITALIC:function(ctx) {
-    ctx.font = "italic 20px Times New Roman";
+    ctx.font = `italic {size}px Times New Roman`;
   }
 };
 
 var width = 0,
   usernameWidth = 0;
 
-  function measureTextTags(ctx, text) {
+  function measureTextTags(ctx, text, fsize=20) {
     var el = document.createElement("html");
+    size = fsize
     el.innerHTML = `<html>${text}</html>`;
 
     usernameWidth = 0
@@ -63,16 +64,17 @@ var width = 0,
     return usernameWidth
   
   }
-
-function drawTagText(ctx, text, pos) {
-  var el = document.createElement("html");
+var size = 20
+function drawTagText(ctx, text, pos, fsize=20) {
+  var el = document.createElement("html")
+    size = fsize
   el.innerHTML = `<html>${text}</html>`;
 
   var tag = el.children[1];
   //console.log(tags, text)
 
   ctx.fillStyle = "#000";
-  ctx.font = "20px Times New Roman"
+  ctx.font = `${size}px Times New Roman`
   step = 0;
   width = 0;
 
