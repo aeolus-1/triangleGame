@@ -138,10 +138,10 @@ Matter.Events.on(render, "beforeRender", function () {
     scale = 1;
   if (entitys.length > 1) {
     let sizeX = Matter.Common.clamp(
-        Math.abs(entitys[0].body.position.x - entitys[1].body.position.x),
-        400,
-        Infinity
-      ),
+      Math.abs(entitys[0].body.position.x - entitys[1].body.position.x),
+      400,
+      Infinity
+    ),
       scaleX = sizeX / 400,
       sizeY = Matter.Common.clamp(
         Math.abs(entitys[0].body.position.y - entitys[1].body.position.y),
@@ -207,9 +207,9 @@ Matter.Events.on(render, "afterRender", function () {
 
     render.context.fillStyle = "#000";
     var pos = v(
-        parseInt(multiplayers[i].body.position.x),
-        parseInt(multiplayers[i].body.position.y) - 30
-      ),
+      parseInt(multiplayers[i].body.position.x),
+      parseInt(multiplayers[i].body.position.y) - 30
+    ),
       length = measureTextTags(render.context, text);
 
     drawTagText(render.context, text, v(pos.x - length / 2, pos.y));
@@ -220,11 +220,7 @@ Matter.Events.on(render, "afterRender", function () {
   var testPos = v(-446.0919022968253, 124.92979674760744);
 
   Levels.texts.forEach((text) => {
-    render.context.fillStyle = "#000";
-    render.context.strokeStyle = "#000";
-    render.context.font = "10px Arial";
-    render.context.fillText(text.text, text.x, text.y);
-    render.context.strokeText(text.text, text.x, text.y);
+    
   });
   for (let i = 0; i < chat.length; i++) {
     const msg = chat[i];
@@ -239,8 +235,6 @@ Matter.Events.on(render, "afterRender", function () {
         0,
         1
       );
-      var length = render.context.measureText(msg.text).width;
-      render.context.fillText(msg.text, msg.pos.x + length / 2, msg.pos.y);
       render.context.globalAlpha = 1;
       render.context.restore();
     }
@@ -255,15 +249,17 @@ Matter.Events.on(render, "afterRender", function () {
     } else {
       if (msg.type == "msg") {
         render.context.save();
-        render.context.fillStyle = pSBC(-0.8, colorTheme.back);
-        render.context.font = "10px Times New Roman";
         render.context.globalAlpha = Matter.Common.clamp(
           (msg.time / 100) * 10,
           0,
           1
         );
-        var length = render.context.measureText(msg.text).width;
-        render.context.fillText(msg.text, msg.pos.x + length / 2, msg.pos.y);
+        var length = measureTextTags(render.context, msg.text, 10);
+        
+        drawTagText(render.context, msg.text, v(msg.pos.x + length / 2, msg.pos.y), 10);
+
+        
+        
         render.context.globalAlpha = 1;
         render.context.restore();
       }
@@ -281,13 +277,13 @@ Matter.Events.on(render, "afterRender", function () {
     render.context.font = "10px Times New Roman";
     render.context.fillText(
       textMsg +
-        ((new Date().getTime() / 1000 -
-          Math.trunc(new Date().getTime() / 1000)) *
-          2 >
-          1 ==
+      ((new Date().getTime() / 1000 -
+        Math.trunc(new Date().getTime() / 1000)) *
+        2 >
+        1 ==
         1
-          ? "|"
-          : ""),
+        ? "|"
+        : ""),
       entitys[0].body.position.x - length / 2,
       entitys[0].body.position.y - 50
     );
@@ -304,14 +300,13 @@ Matter.Events.on(render, "afterRender", function () {
   render.context.font = "20px Arial";
 
   render.context.fillText(
-    `${
-      Math.round(
-        Matter.Common.clamp(
-          (-entitys[0].body.position.y + 10) / 100,
-          0,
-          Infinity
-        )
-      ) + 2
+    `${Math.round(
+      Matter.Common.clamp(
+        (-entitys[0].body.position.y + 10) / 100,
+        0,
+        Infinity
+      )
+    ) + 2
     }m`,
     10,
     90
@@ -451,11 +446,11 @@ Matter.Events.on(render, "afterRender", function () {
 
   if (showMenu == true) {
     var singleButton = {
-        x: render.canvas.width / 2 - 100,
-        y: 120,
-        width: 200,
-        height: 50,
-      },
+      x: render.canvas.width / 2 - 100,
+      y: 120,
+      width: 200,
+      height: 50,
+    },
       multiButton = {
         x: render.canvas.width / 2 - 100,
         y: 225,
@@ -530,28 +525,30 @@ Matter.Events.on(render, "afterRender", function () {
     }
   }
   if (hiding) {
-    render.context.scale(0.5, 0.5)
-    render.context.globalAlpha = 0.975
-    var imgEle = document.createElement("img")
-        imgEle.src = "cover.png"
-        render.context.drawImage(imgEle, 0, 0)
-        render.context.scale(2, 2)
-        render.context.globalAlpha = 1
+    render.context.scale(0.5, 0.5);
+    render.context.globalAlpha = 0.975;
+    var imgEle = document.createElement("img");
+    imgEle.src = "cover.png";
+    render.context.drawImage(imgEle, 0, 0);
+    render.context.scale(2, 2);
+    render.context.globalAlpha = 1;
   }
 
   document.addEventListener("click", (e) => {
-    if (didClick(e.offsetY, e.offsetX, singleButton)) {
-      showMenu = false;
-      gameMode = "singleplayer";
-    } else if (didClick(e.offsetY, e.offsetX, multiButton)) {
-      showMenu = false;
-      gameMode = "multiplayer";
-      if (startMulti == true) {
-        var head = document.getElementsByTagName("head")[0];
-        var script = document.createElement("script");
-        script.src = "multiplayer.js";
-        head.appendChild(script);
-        startMulti = false;
+    if (showMenu) {
+      if (didClick(e.offsetY, e.offsetX, singleButton)) {
+        showMenu = false;
+        gameMode = "singleplayer";
+      } else if (didClick(e.offsetY, e.offsetX, multiButton)) {
+        showMenu = false;
+        gameMode = "multiplayer";
+        if (startMulti == true) {
+          var head = document.getElementsByTagName("head")[0];
+          var script = document.createElement("script");
+          script.src = "multiplayer.js";
+          head.appendChild(script);
+          startMulti = false;
+        }
       }
     }
   });
