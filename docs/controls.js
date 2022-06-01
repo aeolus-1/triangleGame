@@ -2,7 +2,7 @@ var keys = {},
     preKeys = {}
 
 var startTime = false,
-        showMap = false,
+        showMap = true,
         hiding = false
 
 var textMsg = "",
@@ -14,9 +14,9 @@ var chat = [],
 document.addEventListener("keydown", function(e){
 
     var k = (e.key).toLowerCase()
+
     if (k == "enter" && textMsg.replace(" ", "").length > 0) {
         typing = false
-        console.log(textMsg)
 
         var profaneWord = function() {
             for (let word of profaneWords) {
@@ -67,9 +67,8 @@ document.addEventListener("keydown", function(e){
             textMsg = replacements[Math.floor(Math.random()*replacements.length)]
         }
 
-        var length = render.context.measureText(textMsg).width,
-        textMsg = textMsg.replace("<gold>", "<null>")
-        textMsg = textMsg.replace("</gold>", "</null>")
+        var length = render.context.measureText(textMsg).width
+        if (!gameCompleted2) {textMsg = (textMsg).replace("<gold>", "<null>").replace("</gold>", "</null>")}
         msg = {
             text:textMsg,
             pos:v(entitys[0].body.position.x-(length/2), entitys[0].body.position.y-50),
