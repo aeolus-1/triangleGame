@@ -43,8 +43,18 @@ var tagFormats = {
   },
   ITALIC:function(ctx) {
     ctx.font = `italic {size}px Times New Roman`;
-  }
-};
+  },
+  LARGER:function(ctx) {
+    ctx.font = changeFont(ctx.font, 5, false)
+  },
+  CURSIVE:function(ctx) {
+    ctx.font = changeFontFamily(ctx.font, "Cursive")
+  },
+  MONO:function(ctx) {
+    ctx.font = changeFontFamily(ctx.font, "Monospace")
+  },
+  
+}
 
 var width = 0,
   usernameWidth = 0;
@@ -122,3 +132,42 @@ function runTagFormatWidth(ctx, tag) {
   }
   ctx.restore();
 }
+
+
+function changeFont(font, newSize, set=true) {
+//    "bold 30px Arial"
+
+  var pxPos = font.indexOf("px"),
+      size = "",
+      startP = 0,
+      endP = pxPos-1
+  for (let i = pxPos-1; i > 0; i--) {
+    var char = font[i]
+    if (!parseInt(char) && char != "0") {
+      startP = i
+      break
+    }
+    size =  char + size
+
+  }
+
+  size = parseInt(size)
+  return font.slice(0, startP+1) + ((!set)?size+newSize:newSize) + font.slice(endP+1)
+}
+
+function addFeature(font, feature) {
+  var contains = font.split(" ").includes(feature)
+  if (!contains) {
+    return feature + " " + font
+  } else {
+    return font
+  }
+}
+
+function changeFontFamily(font, family) {
+  var pxPos = font.indexOf("px")+2,
+      clearFont = font.slice(0, pxPos+1)
+    return clearFont + family
+}
+
+
