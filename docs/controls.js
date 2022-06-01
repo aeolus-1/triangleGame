@@ -20,7 +20,7 @@ document.addEventListener("keydown", function(e){
 
         var profaneWord = function() {
             for (let word of profaneWords) {
-                if (textMsg.includes(word)) {
+                if (textMsg.includes(word) && word.length > 3) {
                     return word
                 }
             }
@@ -68,6 +68,8 @@ document.addEventListener("keydown", function(e){
         }
 
         var length = render.context.measureText(textMsg).width,
+        textMsg = textMsg.replace("<gold>", "<null>")
+        textMsg = textMsg.replace("</gold>", "</null>")
         msg = {
             text:textMsg,
             pos:v(entitys[0].body.position.x-(length/2), entitys[0].body.position.y-50),
