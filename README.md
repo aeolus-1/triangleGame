@@ -1,4 +1,4 @@
-# Pink, Diamond, Ace, Star
+# Untitled triangle game
 
 ik what to call it
 
