@@ -2,7 +2,7 @@ var keys = {},
     preKeys = {}
 
 var startTime = false,
-        showMap = true,
+        showMap = false,
         hiding = false
 
 var textMsg = "",
