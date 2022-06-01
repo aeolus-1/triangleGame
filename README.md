@@ -16,6 +16,9 @@ demo here - https://aeolus-1.github.io/triangleGame.github.io/
 s,d,ArrowLeft,ArrowRight = Move Left/Right  
 w, Space, ArrowUp = Jump  
 s, ArrowDown = Duck  
+p = chat input (multiplayer only)
+y = open map
+i = chrome overlay
 
 Editor:  
 click + drag = Draw block  
