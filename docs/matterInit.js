@@ -128,7 +128,7 @@ Matter.Events.on(runner, "beforeUpdate", function () {
 var camera = v(0, 0);
 Matter.Events.on(render, "beforeRender", function () {
   render.canvas.width = Matter.Common.clamp(window.innerWidth, 0, 1440);
-  render.canvas.height = Matter.Common.clamp(window.innerHeight, 0, 789);
+  render.canvas.height = Matter.Common.clamp(window.innerHeight, 0, 821);
   render.context.save();
   hero = entitys[0].body.position;
 
