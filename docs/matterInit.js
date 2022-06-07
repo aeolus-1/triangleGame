@@ -17,7 +17,7 @@ setInterval(() => {
   }
 }, 20);
 
-var loading = 0,
+var loading = 1,
   gameCompleted2 = JSON.parse(localStorage.getItem("gameCompleted2"));
 
 if (gameCompleted2 == null) {
@@ -112,6 +112,13 @@ Matter.Events.on(runner, "beforeUpdate", function () {
   }
 
   preKeys = { ...keys };
+
+  var bodies = Matter.Composite.allBodies(engine.world)
+  bodies.forEach(bod => {
+    if (bod.rotating) {
+      Matter.Body.rotate(bod, 1*(Math.PI/180))
+    }
+  });
 
   let distance = getDst(entitys[0].body.position, v(2910, -3190));
   if (distance > 1000) {
