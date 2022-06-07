@@ -33,6 +33,7 @@ class Levels {
                     },
                     angle:ob.angle,
                 })
+                newRect.rotating = ob.rotating
             Matter.Body.set(newRect, "friction", ((ob.type == "slipWall")?0.005:1))
             Matter.Body.set(newRect, "frictionStatic", ((ob.type == "slipWall")?0.005:1))
 
