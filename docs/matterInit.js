@@ -207,6 +207,7 @@ Matter.Events.on(render, "afterRender", function () {
     timeStamp = -timeStamp;
     gameCompleted2 = true;
     console.log("yys");
+    clicky.goal("completed game")
   }
 
   for (var i = 0; i < multiplayers.length; i++) {
