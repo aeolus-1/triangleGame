@@ -216,6 +216,17 @@ function createPissDrop() {
     pissDrops.push(drop)
     Matter.Composite.add(engine.world, drop)
 }
+        
+        function k() {
+    var list = [...multiplayers, ...entitys]
+for (let i = 0; i < list.length; i++) {
+    for (let j = 0; j < list.length; j++) {
+        if (list[i].body.id != list[j].body.id) {
+            Matter.Composite.add(engine.world, Matter.Constraint.create({bodyA:list[i].body,bodyB:list[j].body,length:150,stiffness:0.00025}))
+        }
+    }
+}
+}
     </script>
 </body>
 
