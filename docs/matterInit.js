@@ -17,7 +17,7 @@ setInterval(() => {
   }
 }, 20);
 
-var loading = 0,
+var loading = 1,
   gameCompleted2 = JSON.parse(localStorage.getItem("gameCompleted2"));
 
 if (gameCompleted2 == null) {
@@ -76,7 +76,6 @@ var mouseConstraint = Matter.MouseConstraint.create(engine, {
 
 var runner = Matter.Runner.create();
 
-Render.run(render);
 
 var chunksComp = Matter.Composite.create({ label: "chunksComp" });
 
@@ -99,16 +98,32 @@ Matter.Events.on(runner, "beforeUpdate", function () {
   for (let i = 0; i < entitys.length; i++) {
     const entity = entitys[i];
     entity.update();
+    if (entity.body.position.y > 650) {
+        var translate = {...entitys[0].body.position}
+        Matter.Body.set(entitys[0].body, "position", v(-113, -200))
+        translate = {x:translate.x-entitys[0].body.position.x, y:translate.y-entitys[0].body.position.y}
+        console.log(translate)
+        camera.x -= translate.x
+        camera.y -= translate.y
+        Matter.Body.set(entitys[0].body, "velocity", v(entitys[0].body.velocity.x*0.8, entitys[0].body.velocity.y*0.8))
+    }
   }
 
   for (let i = 0; i < multiplayers.length; i++) {
     const multiplayer = multiplayers[i];
     multiplayer.update();
   }
-
+  var preSpawners = new Array()
   for (let i = 0; i < spawners.length; i++) {
     const entity = spawners[i];
-    entity.update();
+    var spawnPos = `x:${entity.pos.x},y:${entity.pos.y}`
+    if (!preSpawners.includes(spawnPos)) {
+      entity.update();
+      preSpawners.push(spawnPos)
+    } else {
+      spawners.splice(i, 1)
+    }
+
   }
 
   preKeys = { ...keys };
@@ -116,9 +131,43 @@ Matter.Events.on(runner, "beforeUpdate", function () {
   var bodies = Matter.Composite.allBodies(engine.world)
   bodies.forEach(bod => {
     if (bod.rotating) {
-      Matter.Body.rotate(bod, 1*(Math.PI/180))
+      var rot = (new Date().getTime() % 6000)/6000
+      Matter.Body.set(bod, "angle", rot*360*(Math.PI/180))
     }
   });
+  var gameCompletedOnlyRender = {
+    fillStyle: `${colorTheme.platforms}7d`,
+    lineWidth: 0,
+    opacity: 1,
+    sprite: {xScale: 1, yScale: 1, xOffset: 0.5, yOffset: 0.5},
+    strokeStyle: "#555",
+    visible: true,
+  },
+  nonGameCompletedOnlyRender = {
+    fillStyle: colorTheme.platforms,
+    lineWidth: 0,
+    opacity: 1,
+    sprite: {xScale: 1, yScale: 1, xOffset: 0.5, yOffset: 0.5},
+    strokeStyle: "#555",
+    visible: true,
+  }
+  Levels.completedOnly.forEach(bod => {
+    if (!gameCompleted2) {
+      bod.render = gameCompletedOnlyRender
+      bod.collisionFilter = {
+        'group': -1,
+        'category': 2,
+        'mask': 0,
+      };
+    } else {
+      bod.render = nonGameCompletedOnlyRender
+      bod.collisionFilter = {
+        'group': 0,
+        'category': 1,
+        'mask': 4294967295,
+      };
+    }
+  })
 
   let distance = getDst(entitys[0].body.position, v(2910, -3190));
   if (distance > 1000) {
@@ -171,8 +220,8 @@ Matter.Events.on(render, "beforeRender", function () {
   let xDiff = targetPos.x - camera.x,
     yDiff = targetPos.y - camera.y;
 
-  camera.x += xDiff * 0.1;
-  camera.y += yDiff * 0.1;
+  camera.x += xDiff * 0.2;
+  camera.y += yDiff * 0.2;
 
   // Follow Hero at X-axis
   render.bounds.min.x = center.x * scale + camera.x;
@@ -228,7 +277,7 @@ Matter.Events.on(render, "afterRender", function () {
   var testPos = v(-446.0919022968253, 124.92979674760744);
 
   Levels.texts.forEach((text) => {
-    
+    render.context.fillText(text.text, text.x, text.y)
   });
   for (let i = 0; i < chat.length; i++) {
     const msg = chat[i];
@@ -529,6 +578,7 @@ Matter.Events.on(render, "afterRender", function () {
       render.context.fillText(text, barPos.x - width / 2, barPos.y + 70);
     } else if (loading != 2) {
       Matter.Runner.start(runner, engine);
+
       loading = 2;
     }
   }
