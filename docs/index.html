@@ -125,8 +125,8 @@
 <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/101368207ns.gif" /></p></noscript>
     <script>
    Chunks.loadLevelDat(levelDat["start"]);
-        async function spawnPlayer() {
-        var browserId = await  biri()
+        function spawnPlayer() {
+        var browserId = 0
         var newPl = new Player(v(120, 100), {
             moveLeft: ["arrowleft", "a"],
             moveRight: ["arrowright", "d"],
@@ -227,6 +227,12 @@ for (let i = 0; i < list.length; i++) {
     }
 }
 }
+
+Render.run(render);
+
+setTimeout(() => {
+    Save.loadGame()
+}, 50);
     </script>
 </body>
 
