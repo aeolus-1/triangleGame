@@ -95,6 +95,8 @@ Matter.Events.on(runner, "beforeUpdate", function () {
 
   Chunks.updateChunks();
 
+  patternDetection.findPatterns()
+
   for (let i = 0; i < entitys.length; i++) {
     const entity = entitys[i];
     entity.update();
