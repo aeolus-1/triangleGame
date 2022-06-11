@@ -1,15 +1,13 @@
 var infinJump = false
 function getPlayerScale(player) {
-    var vt1 = player.body.vertices[0],
-        vt2 = player.body.vertices[1]
 
-    return Math.floor(getDst(vt1, vt2))/30
+    return player.scale
 }
 
 function setPlayerScale2(player, scale) {
     var ogScale = getPlayerScale(player),
         targetScale = scale/ogScale
-
+    player.scale = scale
     Matter.Body.scale(player.body, targetScale, targetScale)
 }
 
@@ -184,6 +182,7 @@ class Player extends Entity {
             }
             return false
         }
+        var sizeMod = Matter.Common.clamp(1/getPlayerScale(entitys[0]), 0.25, 4)
 
         if (cheating) {
             if (testKey(this.keyset["moveRight"], keys)) {
@@ -209,11 +208,11 @@ class Player extends Entity {
                 if (Math.sign(this.body.angularVelocity) == 1) {
                     Matter.Body.setAngularVelocity(this.body, this.body.angularVelocity * 0.75)
                 }
-                if (this.body.angularVelocity > -0.3) this.applyAngularForce(-speed * (onGround ? 1 : 0.1))
+                if (this.body.angularVelocity > -0.3) this.applyAngularForce(-speed * (onGround ? 1 : 0.1) * sizeMod)
             }
 
             if (testKey(this.keyset["jump"], keys) && (this.jumpTime > 0)) {
-                this.applyForce(v((this.wallJump * 1), -this.body.velocity.y - (jump * (Math.abs(this.wallJump) ? 0.75 : 1))))
+                this.applyForce(v((this.wallJump * 1), (-this.body.velocity.y - (jump * (Math.abs(this.wallJump) ? 0.75 : 1)))*sizeMod))
                 Matter.Body.translate(this.body, v(this.wallJump * 5, 0))
 
 
@@ -223,7 +222,7 @@ class Player extends Entity {
                 if (sfxButton.on) new Audio("assets/sfx/jump.flac").play()
             }
             if (testKey(this.keyset["jump"], keys) && this.jumpTime > -15 && Math.abs(this.body.velocity.y) > 4.5) {
-                this.applyForce(v(0, -(jump * 0.025)))
+                this.applyForce(v(0, -(jump * 0.025)*sizeMod))
             }
 
 
