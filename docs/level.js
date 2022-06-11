@@ -11,6 +11,7 @@ Matter.Composite.add(engine.world, fakeGround)
 
 class Levels {
     static texts = new Array()
+    static completedOnly = new Array()
     static loadData(data, chunkPos) {
         let levelObject = data
 
@@ -39,6 +40,10 @@ class Levels {
 
             Matter.Body.set(newRect, "restitution", ((ob.type == "bounceWall")?1.1:0.01))
             Matter.Composite.add(chunkComp, newRect)
+            
+            if (ob.completedOnly) {
+                Levels.completedOnly.push(newRect)
+            }
         });
         levelObject.spawners.forEach(spawner => {
             let s = new Spawner(v(spawner.x,spawner.y),133,400)
