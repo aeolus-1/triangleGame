@@ -16,7 +16,7 @@ function setPlayerScale2(player, scale) {
 function setEntityBody(entity, sides) {
     Matter.Composite.remove(engine.world, entity.body)
     entity.body = Matter.Bodies.polygon(entity.body.position.x, entity.body.position.y, sides, 30*0.75, {
-        frictionAir: 0,
+        frictionAir: 0.3,
         restitution: 0.15,
         friction: 0.7,
         frictionStatic: 0,
@@ -185,42 +185,56 @@ class Player extends Entity {
             return false
         }
 
-
-        if (testKey(this.keyset["moveRight"], keys)) {
-            if (Math.sign(this.body.angularVelocity) == -1) {
-                Matter.Body.setAngularVelocity(this.body, this.body.angularVelocity * 0.75)
+        if (cheating) {
+            if (testKey(this.keyset["moveRight"], keys)) {
+                Matter.Body.translate(this.body, v(10, 0))
             }
-            if (this.body.angularVelocity < 0.3) this.applyAngularForce(speed * (onGround ? 1 : 0.1))
-        }
-        if (testKey(this.keyset["moveLeft"], keys)) {
-            if (Math.sign(this.body.angularVelocity) == 1) {
-                Matter.Body.setAngularVelocity(this.body, this.body.angularVelocity * 0.75)
+            if (testKey(this.keyset["moveLeft"], keys)) {
+                Matter.Body.translate(this.body, v(-10, 0))
             }
-            if (this.body.angularVelocity > -0.3) this.applyAngularForce(-speed * (onGround ? 1 : 0.1))
+            if (testKey(this.keyset["jump"], keys)) {
+                Matter.Body.translate(this.body, v(0, -10))
+            }
+            if (testKey(this.keyset["duck"], keys)) {
+                Matter.Body.translate(this.body, v(0, 10))
+            }
+        } else {
+            if (testKey(this.keyset["moveRight"], keys)) {
+                if (Math.sign(this.body.angularVelocity) == -1) {
+                    Matter.Body.setAngularVelocity(this.body, this.body.angularVelocity * 0.75)
+                }
+                if (this.body.angularVelocity < 0.3) this.applyAngularForce(speed * (onGround ? 1 : 0.1))
+            }
+            if (testKey(this.keyset["moveLeft"], keys)) {
+                if (Math.sign(this.body.angularVelocity) == 1) {
+                    Matter.Body.setAngularVelocity(this.body, this.body.angularVelocity * 0.75)
+                }
+                if (this.body.angularVelocity > -0.3) this.applyAngularForce(-speed * (onGround ? 1 : 0.1))
+            }
+
+            if (testKey(this.keyset["jump"], keys) && (this.jumpTime > 0)) {
+                this.applyForce(v((this.wallJump * 1), -this.body.velocity.y - (jump * (Math.abs(this.wallJump) ? 0.75 : 1))))
+                Matter.Body.translate(this.body, v(this.wallJump * 5, 0))
+
+
+                //Matter.Body.translate(this.body, v(0,-5))
+                this.jumpTime = 0
+
+                if (sfxButton.on) new Audio("assets/sfx/jump.flac").play()
+            }
+            if (testKey(this.keyset["jump"], keys) && this.jumpTime > -15 && Math.abs(this.body.velocity.y) > 4.5) {
+                this.applyForce(v(0, -(jump * 0.025)))
+            }
+
+
+            if (testKey(this.keyset["duck"], keys) && !testKey(this.keyset["duck"], preKeys)) {
+                scaleBody(this.body, 2 / 3, 2 / 3)
+            }
+            if (!testKey(this.keyset["duck"], keys) && testKey(this.keyset["duck"], preKeys)) {
+                scaleBody(this.body, 1.5, 1.5)
+            }
+            this.jumpTime -= 1 * engine.timing.lastDelta / (1000 / 60)
         }
-
-        if (testKey(this.keyset["jump"], keys) && (this.jumpTime > 0)) {
-            this.applyForce(v((this.wallJump * 1), -this.body.velocity.y - (jump * (Math.abs(this.wallJump) ? 0.75 : 1))))
-            Matter.Body.translate(this.body, v(this.wallJump * 5, 0))
-
-
-            //Matter.Body.translate(this.body, v(0,-5))
-            this.jumpTime = 0
-
-            if (sfxButton.on) new Audio("assets/sfx/jump.flac").play()
-        }
-        if (testKey(this.keyset["jump"], keys) && this.jumpTime > -15 && Math.abs(this.body.velocity.y) > 4.5) {
-            this.applyForce(v(0, -(jump * 0.025)))
-        }
-
-
-        if (testKey(this.keyset["duck"], keys) && !testKey(this.keyset["duck"], preKeys)) {
-            scaleBody(this.body, 2 / 3, 2 / 3)
-        }
-        if (!testKey(this.keyset["duck"], keys) && testKey(this.keyset["duck"], preKeys)) {
-            scaleBody(this.body, 1.5, 1.5)
-        }
-        this.jumpTime -= 1 * engine.timing.lastDelta / (1000 / 60)
     }
     applyForce(vel) {
         let timeScale = engine.timing.lastDelta / (1000 / 60)
