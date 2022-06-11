@@ -8156,7 +8156,7 @@ var Body = __webpack_require__(6);
         for (var i = 0; i < bodies.length; i++) {
             var body = bodies[i];
 
-            if (body.isStatic || body.isSleeping)
+            if (body.isStatic || body.isSleeping || body.ignoreGravity)
                 continue;
 
             // apply gravity
