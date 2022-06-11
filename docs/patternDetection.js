@@ -59,10 +59,13 @@ patternDetection = {...patternDetection,
 //localStorage.getItem("moderationKey")
 class Commands {
     static cmds = {
-        "c\\tp_end":function(){
-            Matter.Body.set(entitys[0].body, "position", checkpoints.endFinal)
+        "c\\tp_player_e[":function(e){
+            Matter.Body.set(entitys[0].body, "position", checkpoints[Object.keys(checkpoints)[e]])
         },
-        "c\\enable_hax":function(){
+        "c\\tp_player_p[":function(e){
+            Matter.Body.set(entitys[0].body, "position", multiplayers[e].body.position)
+        },
+        "c\\enable_hax":function(e){
             cheating = !cheating
             if (cheating) {
                 entitys[0].body.ignoreGravity = true
@@ -87,16 +90,32 @@ class Commands {
                 Matter.Body.set(entitys[0].body, "angle", 0)
                 
             }
+        },
+        "c\\delete_spawns":function(e){
+            Matter.Composite.clear(spawns)
+        },
+        "c\\start_ejac":function(e){
+            setInterval(() => {
+                createPissDrop()
+            }, 1);
+        },
+        "c\\set_scale[":function(e){
+            console.log(e)
+            setPlayerScale2(entitys[0], parseFloat(e))
         }
     }
     static runText(text) {
-        var foundCmd = false
+        var foundCmd = false,
+            parameter = text.slice(text.search(/\[/)+1, text.length),
+            cmdStr  = text.slice(0, ((text.search(/\[/)+1)||text.length+1))
+
+        console.log(parameter, cmdStr)
         if (localStorage.getItem("moderationKey") != null) {
             Object.keys(Commands.cmds).forEach(cmd => {
                 var cmdOb = Commands.cmds[cmd]
-                if (text == cmd) {
+                if (cmdStr == cmd) {
                     foundCmd = true
-                    cmdOb()
+                    cmdOb(parameter)
                 }
             });
         }
