@@ -63,7 +63,8 @@ class Player extends Entity {
 
 
         let speed = (Math.PI * 2) * 0.005,
-            jump = 8.5 * this.scale
+            g = engine.world.gravity.y*0.98,
+            jump = (g * Math.sqrt((2*((45*this.scale)))/g))
         let entityBodies = new Array()
         for (let i = 0; i < entitys.length; i++) {
             const ent = entitys[i];
