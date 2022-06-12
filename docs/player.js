@@ -223,7 +223,7 @@ class Player extends Entity {
                 if (sfxButton.on) new Audio("assets/sfx/jump.flac").play()
             }
             if (testKey(this.keyset["jump"], keys) && this.jumpTime > -15 && Math.abs(this.body.velocity.y) > 4.5) {
-                this.applyForce(v(0, -(jump * 0.025)*sizeMod))
+                this.applyForce(v(0, -(jump * 0.025)))
             }
 
 
