@@ -213,7 +213,7 @@ class Player extends Entity {
             }
 
             if (testKey(this.keyset["jump"], keys) && (this.jumpTime > 0)) {
-                this.applyForce(v((this.wallJump * 1), (-this.body.velocity.y - (jump * (Math.abs(this.wallJump) ? 0.75 : 1)))*sizeMod))
+                this.applyForce(v((this.wallJump * 1), (-this.body.velocity.y - (jump * (Math.abs(this.wallJump) ? 0.75 : 1)))))
                 Matter.Body.translate(this.body, v(this.wallJump * 5, 0))
 
 
