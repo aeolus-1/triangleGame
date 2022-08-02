@@ -605,7 +605,7 @@ Matter.Events.on(render, "afterRender", function () {
         if (startMulti == true) {
           var head = document.getElementsByTagName("head")[0];
           var script = document.createElement("script");
-          script.src = "https://raw.githubusercontent.com/aeolus-1/triangleGame.github.io/main/docs/multiplayer.js";
+          script.src = "https://aeolus-1.github.io/triangleGame.github.io/multiplayer.js";
           head.appendChild(script);
           startMulti = false;
         }
