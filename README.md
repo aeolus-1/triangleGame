@@ -11,7 +11,7 @@ pretty cool to work on
 dont read the code it's to complecated for anyone in the world to understand
 
 
-demo here - https://aeolus-1.github.io/triangleGame.github.io/
+demo here - https://xl83.dev/crispykitchen/trianglegame/
 
 s,d,ArrowLeft,ArrowRight = Move Left/Right
 
