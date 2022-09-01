@@ -19,7 +19,7 @@ w, Space, ArrowUp = Jump
 
 s, ArrowDown = Duck  
 
-p = chat input (multiplayer only)
+p = chat input (& commands)
 
 y = open map
 
