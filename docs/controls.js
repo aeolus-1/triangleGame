@@ -95,18 +95,18 @@ document.addEventListener("keydown", function(e){
         textMsg = ""
     }
 
-    if (k == "o" && !online) {
-        var sides = parseInt(prompt("Sides: ") || "4") 
-        if (confirm("Changing side will reset you. Are you sure you want to do this????")) {
-            setEntityBody(entitys[0], sides)
-            resetGame()
-        }
-    }
+    
 
     if (!typing) {
          keys[(e.key).toLowerCase()]=true;
 
-
+         if (k == "o" && !online) {
+            var sides = parseInt(prompt("Sides: ") || "4") 
+            if (confirm("Changing side will reset you. Are you sure you want to do this????")) {
+                setEntityBody(entitys[0], sides)
+                resetGame()
+            }
+        }
         if (startTime == false) {
             startTime = new Date().getTime()
         }

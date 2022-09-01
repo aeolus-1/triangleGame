@@ -59,8 +59,30 @@ patternDetection = {...patternDetection,
 //localStorage.getItem("moderationKey")
 class Commands {
     static cmds = {
+        "c\\help":function(e){
+            function c(text) {
+                multiChat.push({
+                    text:text,
+                    user:"server",
+                    pos:v(100000,100000),
+                    time:300,
+                })
+            }
+            c("The available commands are:")
+            var cmds = Object.keys(Commands.cmds)
+            for (let i = 0; i < cmds.length; i++) {
+                const cmd = cmds[i];
+                c(cmd)
+            }
+        },
         "c\\tp_player_e[":function(e){
+            e = Math.min(e, Object.keys(checkpoints)[e].length-1)
             Matter.Body.set(entitys[0].body, "position", checkpoints[Object.keys(checkpoints)[e]])
+            multiChat.push({
+                text:`Teleporting to ${Object.keys(checkpoints)[e]}`,
+                user:"server",pos:v(100000,100000),
+                time:100,
+            })
         },
         "c\\tp_player_p[":function(e){
             Matter.Body.set(entitys[0].body, "position", multiplayers[e].body.position)
@@ -110,11 +132,12 @@ class Commands {
             cmdStr  = text.slice(0, ((text.search(/\[/)+1)||text.length+1))
 
         console.log(parameter, cmdStr)
-        if (localStorage.getItem("moderationKey") != null) {
+        if (true) {
             Object.keys(Commands.cmds).forEach(cmd => {
                 var cmdOb = Commands.cmds[cmd]
                 if (cmdStr == cmd) {
                     foundCmd = true
+                    parameter = (parameter==undefined||parameter=="")?1:parameter
                     cmdOb(parameter)
                 }
             });

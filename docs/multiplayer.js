@@ -6,7 +6,13 @@ var inactive;
 var username;
 
 function submitChat(msg) {
-
+  console.log(msg)
+  multiChat.push({
+    text:msg.text,
+    user:"Player",
+    pos:v(100000,100000),
+    time:100,
+})
 }
 
 if (gameMode == "multiplayer") {
@@ -75,20 +81,26 @@ if (gameMode == "multiplayer") {
   }
 
   function submitChat(msg) {
+    console.log("yay")
+
     var displayUsername = username;
-    if (displayUsername.startsWith("<rainbow>")) {
-      displayUsername.replace("<rainbow>", "");
-      socket.emit("sendMessage", {
-        message: msg,
-        username: displayUsername,
-        type: "msg",
-      });
+    if (online) {
+      if (displayUsername.startsWith("<rainbow>")) {
+        displayUsername.replace("<rainbow>", "");
+        socket.emit("sendMessage", {
+          message: msg,
+          username: displayUsername,
+          type: "msg",
+        });
+      } else {
+        socket.emit("sendMessage", {
+          message: msg,
+          username: username,
+          type: "msg",
+        });
+      }
     } else {
-      socket.emit("sendMessage", {
-        message: msg,
-        username: username,
-        type: "msg",
-      });
+      
     }
   }
 

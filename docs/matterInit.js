@@ -17,7 +17,7 @@ setInterval(() => {
   }
 }, 20);
 
-var loading = 0,
+var loading = 1,
   gameCompleted2 = JSON.parse(localStorage.getItem("gameCompleted2"));
 
 if (gameCompleted2 == null) {
@@ -287,6 +287,7 @@ Matter.Events.on(render, "afterRender", function () {
       chat.splice(i, 1);
     } else {
       render.context.save();
+
       render.context.fillStyle = pSBC(-0.8, colorTheme.back);
       render.context.font = "10px Times New Roman";
       render.context.globalAlpha = Matter.Common.clamp(
@@ -580,7 +581,18 @@ Matter.Events.on(render, "afterRender", function () {
       render.context.fillText(text, barPos.x - width / 2, barPos.y + 70);
     } else if (loading != 2) {
       Matter.Runner.start(runner, engine);
-
+      if (true) {
+        multiChat.push({
+          text:"press P to open chat",
+          user:"server",pos:v(100000,100000),
+          time:100,
+      })
+        multiChat.push({
+          text:"type \"c\\help\" for more commands",
+          user:"server",pos:v(100000,100000),
+          time:100,
+      })
+    }
       loading = 2;
     }
   }
