@@ -35,7 +35,8 @@ Digits (1, 2, 3...) = switch block type
 
 Music by nokia
 
-networking by Jake
+controbutions by Serfonium
+networking by Catsoup
 
 
 Game map  
