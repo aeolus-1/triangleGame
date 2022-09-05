@@ -104,7 +104,7 @@ if (gameMode == "multiplayer") {
     }
   }
 
-  const socket = io("https://triangle-game-server.herokuapp.com", {
+  const socket = io("https://new-triangle-game-server.herokuapp.com", {
     reconnection: false,
   });
 
