@@ -72,7 +72,7 @@ var mouseConstraint = Matter.MouseConstraint.create(engine, {
   },
 });
 
-//Matter.Composite.add(engine.world, mouseConstraint);
+Matter.Composite.add(engine.world, mouseConstraint);
 
 var runner = Matter.Runner.create();
 
@@ -259,6 +259,7 @@ Matter.Events.on(render, "afterRender", function () {
     gameCompleted2 = true;
     console.log("yys");
     clicky.goal("completed game")
+    window.top.postMessage("hasWonTheGame", '*')
   }
 
   for (var i = 0; i < multiplayers.length; i++) {
