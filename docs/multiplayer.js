@@ -104,7 +104,7 @@ if (gameMode == "multiplayer") {
     }
   }
 
-  const socket = io("https://10.11.0.58:3000", {
+  const socket = io("https://tri.xl83.dev", {
     reconnection: false,
   });
 
