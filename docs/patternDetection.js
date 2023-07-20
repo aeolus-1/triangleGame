@@ -132,7 +132,7 @@ class Commands {
             cmdStr  = text.slice(0, ((text.search(/\[/)+1)||text.length+1))
 
         console.log(parameter, cmdStr)
-        if (true) {
+        if (false) {
             Object.keys(Commands.cmds).forEach(cmd => {
                 var cmdOb = Commands.cmds[cmd]
                 if (cmdStr == cmd) {
