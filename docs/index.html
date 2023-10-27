@@ -98,6 +98,38 @@
             player: "#9F461F",
             platforms: "#E2C24F"
         }, ][new Date().getDay()];
+
+//stolen code
+        var now = new Date();
+        var start = new Date(now.getFullYear(), 0, 0);
+        var diff = now - start;
+        var oneDay = 1000 * 60 * 60 * 24;
+        var day = Math.floor(diff / oneDay);
+        console.log('Day of year: ' + day);
+
+        if (Math.abs(day-304)<3) {
+            colorTheme = {
+                back: "#ccc5b9",
+                player: "#eb5e28",
+                platforms: "#252422"
+            }
+        }
+        if (Math.abs(day-304)<3) {
+            colorTheme = {
+                back: "#87c38f",
+                player: "#da2c38",
+                platforms: "#226f54"
+            }
+        }
+        if (Math.abs(day-271)<3) {
+            colorTheme = {
+                back: "#6bbeec",
+                player: "#ee7d8f",
+                platforms: "#f0ecb4"
+            }
+        }
+
+
         var timeStamp = 0
         if (localStorage.getItem("gameTime") != null) timeStamp = localStorage.getItem("gameTime")
     </script>

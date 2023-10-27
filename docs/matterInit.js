@@ -63,6 +63,12 @@ var canvas = render.canvas;
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
+
+
+window.addEventListener("resize", ()=>{
+  console.log("resize uwu")
+})
+
 var mouse = Matter.Mouse.create(render.canvas);
 var mouseConstraint = Matter.MouseConstraint.create(engine, {
   mouse: mouse,
@@ -185,8 +191,8 @@ Matter.Events.on(runner, "beforeUpdate", function () {
 });
 var camera = v(0, 0);
 Matter.Events.on(render, "beforeRender", function () {
-  render.canvas.width = Matter.Common.clamp(window.innerWidth, 0, 1440);
-  render.canvas.height = Matter.Common.clamp(window.innerHeight, 0, 821);
+  render.canvas.width = Matter.Common.clamp(window.innerWidth, 0, Infinity*1440);
+  render.canvas.height = Matter.Common.clamp(window.innerHeight, 0, Infinity*821);
   render.context.save();
   hero = entitys[0].body.position;
 
@@ -531,7 +537,7 @@ Matter.Events.on(render, "afterRender", function () {
       render.canvas.width / 2 - render.context.measureText(title).width / 2,
       45
     );
-    render.context.fillStyle = pSBC(-0.7, colorTheme.back);
+    render.context.fillStyle = pSBC(-0.7, colorTheme.player);
     render.context.fillRect(
       singleButton.x,
       singleButton.y,
