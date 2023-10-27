@@ -2,8 +2,6 @@
 
 ik what to call it
 
-put it on github so friends can see it
-
 basic platforming game similar to getting over it  
 pretty cool to work on  
 
@@ -36,7 +34,7 @@ Digits (1, 2, 3...) = switch block type
 Music by nokia
 
 controbutions by Serfonium
-networking by Catsoup
+networking and server by nekoify
 
 
 Game map  
