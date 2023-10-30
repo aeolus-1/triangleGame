@@ -9,7 +9,8 @@ pretty cool to work on
 dont read the code it's to complecated for anyone in the world to understand
 
 
-demo here - https://aeolus-1.github.io/triangleGame
+demo here - https://aeolus-1.github.io/triangleGame   
+if that doesn't work try warmsandybeaches.net
 
 s,d,ArrowLeft,ArrowRight = Move Left/Right
 
