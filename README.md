@@ -1,12 +1,10 @@
 # Untitled triangle game
 
-ik what to call it
-
 basic platforming game similar to getting over it  
 pretty cool to work on  
 
 
-dont read the code it's to complecated for anyone in the world to understand
+dont read the code it's to complicated for anyone in the world to understand
 
 
 demo here - https://aeolus-1.github.io/triangleGame   
@@ -38,8 +36,6 @@ networking and server by nekoify
 
 
 Game map  
-
-
 ![yay](gameMap.png "ur gay now").
 
 
