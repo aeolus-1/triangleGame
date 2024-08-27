@@ -1,13 +1,13 @@
 # Untitled triangle game
 
-basic platforming game similar to getting over it  
-pretty cool to work on  
+Basic platforming game similar to Getting Over It  
+Pretty cool to work on  
 
 
-dont read the code it's to complicated for anyone in the world to understand
+Don't read the code it's too complicated for anyone in the world to understand
 
 
-demo here - https://aeolus-1.github.io/triangleGame   
+Demo here - https://aeolus-1.github.io/triangleGame   
 
 s,d,ArrowLeft,ArrowRight = Move Left/Right
 
@@ -15,23 +15,23 @@ w, Space, ArrowUp = Jump
 
 s, ArrowDown = Duck  
 
-p = chat input (& commands)
+p = Chat input (& Commands)
 
-y = open map
+y = Open map
 
-i = chrome overlay
+i = Chrome overlay
 
 Editor:  
 click + drag = Draw block  
 <, > = Rotate Block  
 Arrow Keys = Move camera  
-Shift + Arrow Keys = move selected block  
-Digits (1, 2, 3...) = switch block type  
+Shift + Arrow Keys = Move selected block  
+Digits (1, 2, 3...) = Switch block type  
 
 
 Music by nokia
 
-controbutions by Serfonium  
+contributions by Serfonium  
 networking and server by nekoify
 
 
